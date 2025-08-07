@@ -1,8 +1,4 @@
-from django.urls import path, include
-
-urlpatterns = [
-    path('api/', include('play_reports.urls')),
-]
+from django.urls import path
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -59,11 +55,6 @@ from play_reports.controllers.client_controller import (
 
 
 urlpatterns = [
-    # Endpoints pour l'authentification JWT
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-
     # Gestion des données GCS
     
     path('data-source-details/', get_data_source_details, name='get_data_source_details'),
@@ -110,7 +101,7 @@ urlpatterns = [
     path('employees/<int:pk>/update/', EmployeeUpdateView.as_view(), name='employee_update'),
     path('employees/<int:pk>/deactivate/', EmployeeDeactivateController.as_view(), name='employee_deactivate'),
     path('employees/<int:pk>/activate/', EmployeeActivateController.as_view(), name='employee_activate'),
-
-    # Looker Studio API endpoint
-
+   
+       
+ 
 ]

@@ -3,7 +3,7 @@ import logging
 from pathlib import Path
 from datetime import timedelta
 from dotenv import load_dotenv
-
+import dj_database_url
 
 # Chemin de base du projet (le dossier BACKEND)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -118,7 +118,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
+# Configuration de la base de données pour la production (Render) et le développement local.
+DATABASES = {
+    'default': dj_database_url.config(
+        # Fallback sur votre configuration locale si DATABASE_URL n'est pas définie.
+        default=f"postgres://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}:{os.getenv('POSTGRES_PORT')}/{os.getenv('POSTGRES_DB')}",
+        conn_max_age=600
+    )
+}
 
 
 # JWT settings
