@@ -2,7 +2,7 @@
 ECHO Nettoyage du projet frontend...
 
 REM Se deplace dans le repertoire du frontend
-cd "c:\Users\halab\OneDrive - ESPRIT\Bureau\projet\play_console_importer\frontend"
+cd /d "%~dp0"
 
 REM Supprime le dossier node_modules s'il existe
 IF EXIST node_modules (
