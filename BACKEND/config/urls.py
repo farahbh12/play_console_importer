@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -107,4 +107,6 @@ urlpatterns = [
     path('employees/<int:pk>/deactivate/', EmployeeDeactivateController.as_view(), name='employee_deactivate'),
     path('employees/<int:pk>/activate/', EmployeeActivateController.as_view(), name='employee_activate'),
 
+    # Looker Studio API endpoint
+    path('api/looker-studio/', include('looker_studio_api.urls')),
 ]

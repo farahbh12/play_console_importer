@@ -23,7 +23,18 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 # Render définit automatiquement la variable d'environnement RENDER.
 DEBUG = os.getenv('RENDER') != 'True'
 
-ALLOWED_HOSTS = []
+# En production, Render (ou Railway) définit la variable d'environnement RENDER_EXTERNAL_HOSTNAME.
+# Nous l'ajoutons aux hôtes autorisés.
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+RAILWAY_STATIC_HOSTNAME = os.getenv('RAILWAY_STATIC_URL')
+if RAILWAY_STATIC_HOSTNAME:
+    ALLOWED_HOSTS.append('.' + RAILWAY_STATIC_HOSTNAME)
+
+# S'assurer que le domaine de base est également autorisé
+RENDER_EXTERNAL_HOSTNAME = os.getenv('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Récupère le nom d'hôte externe fourni par Render.
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
@@ -118,19 +129,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Database configuration using environment variables
+# Configuration de la base de données pour la production (Render) et le développement local.
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DB'),
-        'USER': os.getenv('POSTGRES_USER'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': os.getenv('POSTGRES_HOST'),
-        'PORT': os.getenv('POSTGRES_PORT'),
-    }
+    'default': dj_database_url.config(
+        # Fallback sur votre configuration locale si DATABASE_URL n'est pas définie.
+        default=f"postgres://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}:{os.getenv('POSTGRES_PORT')}/{os.getenv('POSTGRES_DB')}",
+        conn_max_age=600
+    )
 }
-
-
 
 
 # JWT settings
@@ -226,16 +232,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
-# Google Cloud Credentials
-# Set the path to your Google Cloud credentials file
-GOOGLE_APPLICATION_CREDENTIALS = os.path.join(BASE_DIR, 'credentials.json')
-if os.path.exists(GOOGLE_APPLICATION_CREDENTIALS):
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = GOOGLE_APPLICATION_CREDENTIALS
-else:
-    print(f"Fichier de credentials Google Cloud non trouvé à l'emplacement: {GOOGLE_APPLICATION_CREDENTIALS}")
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -251,6 +249,21 @@ GOOGLE_APPLICATION_CREDENTIALS = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 GCS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME', 'pubsite_prod_rev_17712529971520156702')
 GCP_PROJECT_ID = os.getenv('GCP_PROJECT_ID', 'pc-api-4722596725443039036-618')
 
-# Assurez-vous que le fichier de credentials est accessible
-if GOOGLE_APPLICATION_CREDENTIALS and not os.path.exists(GOOGLE_APPLICATION_CREDENTIALS):
-    logger.warning(f"Fichier de credentials Google Cloud non trouvé à l'emplacement: {GOOGLE_APPLICATION_CREDENTIALS}")
+# Logique pour gérer les credentials Google Cloud en production (Railway/Render)
+GOOGLE_CREDENTIALS_JSON = os.getenv('GOOGLE_CREDENTIALS_JSON')
+GOOGLE_APPLICATION_CREDENTIALS_PATH = os.path.join(BASE_DIR, 'credentials.json')
+
+if GOOGLE_CREDENTIALS_JSON:
+    # En production, créer le fichier credentials.json à partir de la variable d'environnement
+    with open(GOOGLE_APPLICATION_CREDENTIALS_PATH, 'w') as f:
+        f.write(GOOGLE_CREDENTIALS_JSON)
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = GOOGLE_APPLICATION_CREDENTIALS_PATH
+
+elif not os.path.exists(GOOGLE_APPLICATION_CREDENTIALS_PATH):
+    # En développement, si le fichier est manquant, afficher un avertissement
+    print("\n!!! ATTENTION : Le fichier 'credentials.json' est manquant. !!!")
+    print("L'application ne pourra pas s'authentifier auprès des services Google Cloud.")
+    print(f"Veuillez le placer dans le répertoire : {BASE_DIR}\n")
+else:
+    # En développement, si le fichier existe, définir la variable d'environnement
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = GOOGLE_APPLICATION_CREDENTIALS_PATH
