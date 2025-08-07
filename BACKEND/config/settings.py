@@ -3,7 +3,7 @@ import logging
 from pathlib import Path
 from datetime import timedelta
 from dotenv import load_dotenv
-import dj_database_url
+
 
 # Chemin de base du projet (le dossier BACKEND)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -118,14 +118,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Configuration de la base de données pour la production (Render) et le développement local.
+# Database configuration using environment variables
 DATABASES = {
-    'default': dj_database_url.config(
-        # Fallback sur votre configuration locale si DATABASE_URL n'est pas définie.
-        default=f"postgres://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}:{os.getenv('POSTGRES_PORT')}/{os.getenv('POSTGRES_DB')}",
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': os.getenv('POSTGRES_HOST'),
+        'PORT': os.getenv('POSTGRES_PORT'),
+    }
 }
+
+
 
 
 # JWT settings
@@ -221,8 +226,16 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
+# Google Cloud Credentials
+# Set the path to your Google Cloud credentials file
+GOOGLE_APPLICATION_CREDENTIALS = os.path.join(BASE_DIR, 'credentials.json')
+if os.path.exists(GOOGLE_APPLICATION_CREDENTIALS):
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = GOOGLE_APPLICATION_CREDENTIALS
+else:
+    print(f"Fichier de credentials Google Cloud non trouvé à l'emplacement: {GOOGLE_APPLICATION_CREDENTIALS}")
+
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
+# https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
