@@ -1,0 +1,218 @@
+// Layout principal
+.main-content {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  
+  // Contenu principal avec sidebar
+  .content-with-sidebar {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    transition: all 0.3s ease;
+    
+    @media (max-width: 991.98px) {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+  
+  // Contenu principal sans sidebar
+  .content-without-sidebar {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  // Contenu principal
+  .content {
+    padding: 2rem 0;
+    flex: 1;
+    background-color: #f8f9fe;
+    
+    @media (max-width: 767.98px) {
+      padding: 1rem 0;
+    }
+  }
+}
+
+// Sidebar
+.navbar-vertical {
+  width: 250px;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1030;
+  transition: all 0.3s ease;
+  
+  .navbar-brand {
+    padding: 1.5rem 1rem;
+    text-align: center;
+    
+    img {
+      max-height: 40px;
+    }
+  }
+  
+  .navbar-nav {
+    flex-direction: column;
+    width: 100%;
+    
+    .nav-item {
+      .nav-link {
+        padding: 0.75rem 1.5rem;
+        color: #525f7f;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        
+        i {
+          margin-right: 0.75rem;
+          font-size: 1.25rem;
+          width: 20px;
+          text-align: center;
+        }
+        
+        &:hover, &.active {
+          color: #5e72e4;
+          background-color: rgba(94, 114, 228, 0.1);
+        }
+      }
+    }
+  }
+  
+  // Version réduite de la sidebar
+  &.sidebar-collapsed {
+    width: 80px;
+    
+    .navbar-brand {
+      padding: 1rem 0.5rem;
+      
+      img {
+        max-height: 30px;
+      }
+    }
+    
+    .nav-link {
+      padding: 0.75rem 0.5rem !important;
+      justify-content: center;
+      
+      span {
+        display: none;
+      }
+      
+      i {
+        margin-right: 0;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+// Header
+.header {
+  background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%) !important;
+  padding: 6rem 0 2rem;
+  position: relative;
+  z-index: 1;
+  
+  .header-body {
+    margin-top: -3.5rem;
+  }
+  
+  .card-stats {
+    .card-body {
+      padding: 1.5rem;
+      
+      .icon {
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        
+        i {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+}
+
+// Cartes de statistiques
+.card-stats {
+  .card-body {
+    position: relative;
+    
+    .icon {
+      position: absolute;
+      top: -15px;
+      right: 15px;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      
+      i {
+        font-size: 1.75rem;
+        color: white;
+      }
+    }
+    
+    .card-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    
+    .h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 991.98px) {
+  .navbar-vertical {
+    transform: translateX(-100%);
+    
+    &.show {
+      transform: translateX(0);
+    }
+  }
+  
+  .main-content .content-with-sidebar {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+// Animation de transition de page
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 300ms, transform 300ms;
+}

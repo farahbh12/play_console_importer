@@ -1,0 +1,115 @@
+.connector-card {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  width: 320px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid #e0e0e0;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #e3f2fd; /* Bleu clair pour l'icône */
+  border-radius: 50%;
+  /* Ici, vous mettriez une image ou une icône SVG */
+}
+
+.card-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #202124;
+  margin: 0;
+}
+
+.card-subtitle {
+  font-size: 14px;
+  color: #5f6368;
+  margin: 0;
+}
+
+.card-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 4px; /* Pour aligner avec le texte du header */
+}
+
+.status-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.status-indicator.active {
+  background-color: #34a853; /* Vert */
+}
+
+.status-indicator.inactive {
+  background-color: #ea4335; /* Rouge */
+}
+
+.card-status p {
+  margin: 0;
+  font-size: 14px;
+  color: #3c4043;
+}
+
+.card-actions {
+  display: flex;
+  border-top: 1px solid #e0e0e0;
+  margin: 0 -20px -20px; /* S'étend pour toucher les bords */
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.action-button {
+  flex: 1;
+  background-color: transparent;
+  border: none;
+  padding: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #5f6368;
+  transition: background-color 0.2s ease;
+}
+
+.action-button:hover {
+  background-color: #f1f3f4;
+}
+
+.action-button:first-child {
+  border-right: 1px solid #e0e0e0;
+  border-bottom-left-radius: 16px;
+}
+
+.action-button:last-child {
+  border-bottom-right-radius: 16px;
+}
+
+.action-button.revoke span {
+  color: #d93025; /* Rouge pour le texte de révocation */
+}
+
+.action-button.revoke svg {
+  stroke: #d93025;
+}
