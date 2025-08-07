@@ -1,0 +1,1072 @@
+DEBUG 2025-02-12 08:30:07,169 _opentelemetry_tracing 8 139847902726952 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 08:30:07,207 urls 8 139847902726952 ==================================================
+INFO 2025-02-12 08:30:07,207 urls 8 139847902726952 REGISTERED URLS:
+INFO 2025-02-12 08:30:07,208 urls 8 139847902726952 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 08:30:07,209 urls 8 139847902726952 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 08:30:07,209 urls 8 139847902726952 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 08:30:07,209 urls 8 139847902726952 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 08:30:07,210 urls 8 139847902726952 ==================================================
+INFO 2025-02-12 08:30:08,837 autoreload 10 140411406859048 Watching for file changes with StatReloader
+DEBUG 2025-02-12 08:30:09,073 _opentelemetry_tracing 10 140411406859048 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 08:30:09,094 urls 10 140411406859048 ==================================================
+INFO 2025-02-12 08:30:09,095 urls 10 140411406859048 REGISTERED URLS:
+INFO 2025-02-12 08:30:09,095 urls 10 140411406859048 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 08:30:09,096 urls 10 140411406859048 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 08:30:09,096 urls 10 140411406859048 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 08:30:09,096 urls 10 140411406859048 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 08:30:09,096 urls 10 140411406859048 ==================================================
+INFO 2025-02-12 08:31:26,899 autoreload 10 140411406859048 /app/play_reports/views.py changed, reloading.
+INFO 2025-02-12 08:31:27,916 autoreload 12 140546547780392 Watching for file changes with StatReloader
+DEBUG 2025-02-12 08:31:28,204 _opentelemetry_tracing 12 140546547780392 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 08:31:28,230 urls 12 140546547780392 ==================================================
+INFO 2025-02-12 08:31:28,231 urls 12 140546547780392 REGISTERED URLS:
+INFO 2025-02-12 08:31:28,231 urls 12 140546547780392 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 08:31:28,231 urls 12 140546547780392 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 08:31:28,232 urls 12 140546547780392 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 08:31:28,233 urls 12 140546547780392 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 08:31:28,233 urls 12 140546547780392 ==================================================
+DEBUG 2025-02-12 08:35:39,957 _opentelemetry_tracing 8 140535409584936 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 08:35:39,996 urls 8 140535409584936 ==================================================
+INFO 2025-02-12 08:35:39,997 urls 8 140535409584936 REGISTERED URLS:
+INFO 2025-02-12 08:35:39,998 urls 8 140535409584936 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 08:35:39,998 urls 8 140535409584936 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 08:35:39,998 urls 8 140535409584936 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 08:35:39,999 urls 8 140535409584936 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 08:35:39,999 urls 8 140535409584936 ==================================================
+INFO 2025-02-12 08:35:41,479 autoreload 10 140439916354344 Watching for file changes with StatReloader
+DEBUG 2025-02-12 08:35:41,754 _opentelemetry_tracing 10 140439916354344 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 08:35:41,784 urls 10 140439916354344 ==================================================
+INFO 2025-02-12 08:35:41,785 urls 10 140439916354344 REGISTERED URLS:
+INFO 2025-02-12 08:35:41,786 urls 10 140439916354344 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 08:35:41,787 urls 10 140439916354344 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 08:35:41,787 urls 10 140439916354344 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 08:35:41,787 urls 10 140439916354344 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 08:35:41,788 urls 10 140439916354344 ==================================================
+INFO 2025-02-12 08:35:59,955 autoreload 10 140439916354344 /app/play_reports/urls.py changed, reloading.
+INFO 2025-02-12 08:36:00,909 autoreload 12 140471390481192 Watching for file changes with StatReloader
+DEBUG 2025-02-12 08:36:01,209 _opentelemetry_tracing 12 140471390481192 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 08:36:01,232 urls 12 140471390481192 ==================================================
+INFO 2025-02-12 08:36:01,232 urls 12 140471390481192 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 08:36:01,233 urls 12 140471390481192 <URLPattern '' [name='index']>
+INFO 2025-02-12 08:36:01,233 urls 12 140471390481192 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 08:36:01,234 urls 12 140471390481192 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 08:36:01,234 urls 12 140471390481192 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 08:36:01,235 urls 12 140471390481192 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 08:36:01,235 urls 12 140471390481192 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 08:36:01,236 urls 12 140471390481192 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 08:36:01,236 urls 12 140471390481192 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 08:36:01,237 urls 12 140471390481192 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 08:36:01,238 urls 12 140471390481192 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 08:36:01,238 urls 12 140471390481192 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 08:36:01,238 urls 12 140471390481192 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 08:36:01,239 urls 12 140471390481192 ==================================================
+INFO 2025-02-12 08:36:01,239 urls 12 140471390481192 ==================================================
+INFO 2025-02-12 08:36:01,240 urls 12 140471390481192 REGISTERED URLS:
+INFO 2025-02-12 08:36:01,240 urls 12 140471390481192 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 08:36:01,240 urls 12 140471390481192 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 08:36:01,240 urls 12 140471390481192 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 08:36:01,241 urls 12 140471390481192 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 08:36:01,241 urls 12 140471390481192 ==================================================
+DEBUG 2025-02-12 08:37:00,959 _opentelemetry_tracing 8 140311696861992 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 08:37:01,004 urls 8 140311696861992 ==================================================
+INFO 2025-02-12 08:37:01,004 urls 8 140311696861992 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 08:37:01,005 urls 8 140311696861992 <URLPattern '' [name='index']>
+INFO 2025-02-12 08:37:01,005 urls 8 140311696861992 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 08:37:01,005 urls 8 140311696861992 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 08:37:01,006 urls 8 140311696861992 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 08:37:01,006 urls 8 140311696861992 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 08:37:01,006 urls 8 140311696861992 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 08:37:01,007 urls 8 140311696861992 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 08:37:01,007 urls 8 140311696861992 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 08:37:01,007 urls 8 140311696861992 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 08:37:01,008 urls 8 140311696861992 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 08:37:01,008 urls 8 140311696861992 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 08:37:01,008 urls 8 140311696861992 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 08:37:01,008 urls 8 140311696861992 ==================================================
+INFO 2025-02-12 08:37:01,009 urls 8 140311696861992 ==================================================
+INFO 2025-02-12 08:37:01,009 urls 8 140311696861992 REGISTERED URLS:
+INFO 2025-02-12 08:37:01,009 urls 8 140311696861992 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 08:37:01,010 urls 8 140311696861992 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 08:37:01,010 urls 8 140311696861992 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 08:37:01,010 urls 8 140311696861992 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 08:37:01,010 urls 8 140311696861992 ==================================================
+INFO 2025-02-12 08:37:02,478 autoreload 10 140506046384936 Watching for file changes with StatReloader
+DEBUG 2025-02-12 08:37:02,714 _opentelemetry_tracing 10 140506046384936 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 08:37:02,737 urls 10 140506046384936 ==================================================
+INFO 2025-02-12 08:37:02,738 urls 10 140506046384936 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 08:37:02,738 urls 10 140506046384936 <URLPattern '' [name='index']>
+INFO 2025-02-12 08:37:02,738 urls 10 140506046384936 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 08:37:02,739 urls 10 140506046384936 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 08:37:02,739 urls 10 140506046384936 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 08:37:02,740 urls 10 140506046384936 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 08:37:02,740 urls 10 140506046384936 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 08:37:02,741 urls 10 140506046384936 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 08:37:02,741 urls 10 140506046384936 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 08:37:02,741 urls 10 140506046384936 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 08:37:02,742 urls 10 140506046384936 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 08:37:02,742 urls 10 140506046384936 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 08:37:02,742 urls 10 140506046384936 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 08:37:02,743 urls 10 140506046384936 ==================================================
+INFO 2025-02-12 08:37:02,743 urls 10 140506046384936 ==================================================
+INFO 2025-02-12 08:37:02,744 urls 10 140506046384936 REGISTERED URLS:
+INFO 2025-02-12 08:37:02,744 urls 10 140506046384936 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 08:37:02,744 urls 10 140506046384936 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 08:37:02,744 urls 10 140506046384936 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 08:37:02,745 urls 10 140506046384936 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 08:37:02,745 urls 10 140506046384936 ==================================================
+INFO 2025-02-12 08:39:24,141 basehttp 10 140505956072248 "GET / HTTP/1.1" 200 7642
+INFO 2025-02-12 08:39:28,926 views 10 140505956072248 ==================================================
+INFO 2025-02-12 08:39:28,927 views 10 140505956072248 GET_REPORTS VIEW CALLED
+INFO 2025-02-12 08:39:28,927 views 10 140505956072248 Request Method: GET
+INFO 2025-02-12 08:39:28,928 views 10 140505956072248 Request Path: /get_reports/
+INFO 2025-02-12 08:39:28,928 views 10 140505956072248 Request GET Full Path: /get_reports/?uri=gs%3A%2F%2Fpubsite_prod_rev_17712529971520156702%2F
+INFO 2025-02-12 08:39:28,929 views 10 140505956072248 Request GET Parameters: {'uri': ['gs://pubsite_prod_rev_17712529971520156702/']}
+INFO 2025-02-12 08:39:28,929 views 10 140505956072248 Request Headers: {'Content-Length': '', 'Content-Type': 'text/plain', 'Host': 'localhost:8000', 'Connection': 'keep-alive', 'Sec-Ch-Ua-Platform': '"Windows"', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'Accept': 'application/json', 'Sec-Ch-Ua': '"Not(A:Brand";v="99", "Google Chrome";v="133", "Chromium";v="133"', 'Sec-Ch-Ua-Mobile': '?0', 'Sec-Fetch-Site': 'same-origin', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://localhost:8000/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7', 'Cookie': 'jenkins-timestamper-offset=-3600000; csrftoken=EceC3S9rQM3j14CX0M36JdaoysLuLXOV'}
+INFO 2025-02-12 08:39:28,930 views 10 140505956072248 ==================================================
+INFO 2025-02-12 08:39:28,930 views 10 140505956072248 Extracted URI: gs://pubsite_prod_rev_17712529971520156702/
+INFO 2025-02-12 08:39:28,930 views 10 140505956072248 Attempting to load GCS credentials from: /app/credentials.json
+INFO 2025-02-12 08:39:28,936 views 10 140505956072248 Extracted bucket name: pubsite_prod_rev_17712529971520156702
+DEBUG 2025-02-12 08:39:28,937 retry 10 140505956072248 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG 2025-02-12 08:39:28,966 requests 10 140505956072248 Making request: POST https://oauth2.googleapis.com/token
+DEBUG 2025-02-12 08:39:28,971 connectionpool 10 140505956072248 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+DEBUG 2025-02-12 08:39:29,087 connectionpool 10 140505956072248 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+DEBUG 2025-02-12 08:39:29,089 connectionpool 10 140505956072248 Starting new HTTPS connection (1): storage.googleapis.com:443
+DEBUG 2025-02-12 08:39:29,303 connectionpool 10 140505956072248 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702?projection=noAcl&prettyPrint=false HTTP/1.1" 200 672
+INFO 2025-02-12 08:39:29,305 views 10 140505956072248 Successfully validated GCS bucket: pubsite_prod_rev_17712529971520156702
+DEBUG 2025-02-12 08:39:29,310 retry 10 140505956072248 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG 2025-02-12 08:39:29,334 requests 10 140505956072248 Making request: POST https://oauth2.googleapis.com/token
+DEBUG 2025-02-12 08:39:29,336 connectionpool 10 140505956072248 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+DEBUG 2025-02-12 08:39:29,431 connectionpool 10 140505956072248 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+DEBUG 2025-02-12 08:39:29,432 connectionpool 10 140505956072248 Starting new HTTPS connection (1): storage.googleapis.com:443
+DEBUG 2025-02-12 08:39:29,636 connectionpool 10 140505956072248 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702?projection=noAcl&prettyPrint=false HTTP/1.1" 200 672
+DEBUG 2025-02-12 08:39:29,840 connectionpool 10 140505956072248 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1090896
+DEBUG 2025-02-12 08:39:30,663 connectionpool 10 140505956072248 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CkdzdGF0cy9pbnN0YWxscy9pbnN0YWxsc19iaWdkZWFsLnRuLmJpZ2RlYWxjb2RlcHJvbW9fMjAxOTA2X2xhbmd1YWdlLmNzdg%3D%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1079567
+DEBUG 2025-02-12 08:39:31,496 connectionpool 10 140505956072248 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=Cj1zdGF0cy9pbnN0YWxscy9pbnN0YWxsc19jb20uYmlnZGVhbHNjYW5uZXJfMjAyMTA5X2NvdW50cnkuY3N2&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1068191
+DEBUG 2025-02-12 08:39:32,203 connectionpool 10 140505956072248 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CkBzdGF0cy9pbnN0YWxscy9pbnN0YWxsc19jb20uY2x1YnByaXZpbGVnZXNwcm9fMjAyMDEwX2NhcnJpZXIuY3N2&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1060310
+DEBUG 2025-02-12 08:39:33,143 connectionpool 10 140505956072248 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=Cj5zdGF0cy9pbnN0YWxscy9pbnN0YWxsc19jb20uaWRhY3Rpdi5CaWdEZWFsXzIwMTUxMl9jb3VudHJ5LmNzdg%3D%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1077959
+DEBUG 2025-02-12 08:39:33,966 connectionpool 10 140505956072248 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CkNzdGF0cy9pbnN0YWxscy9pbnN0YWxsc19zeWQuYmlnZGVhbGNpLmNvZGVzcHJvbW9fMjAyMDAxX2NvdW50cnkuY3N2&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1078325
+DEBUG 2025-02-12 08:39:34,580 connectionpool 10 140505956072248 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CjxzdGF0cy9yYXRpbmdzL3JhdGluZ3NfY29tLmJpZ2RlYWxzY2FubmVyXzIwMTkwMl9vdmVydmlldy5jc3Y%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1054020
+DEBUG 2025-02-12 08:39:35,434 connectionpool 10 140505956072248 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=Cj5zdGF0cy9yYXRpbmdzL3JhdGluZ3NfY29tLmNsdWJwcml2aWxlZ2VzXzIwMjUwMl9vc192ZXJzaW9uLmNzdg%3D%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1043696
+DEBUG 2025-02-12 08:39:36,268 connectionpool 10 140505956072248 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=Cj9zdGF0cy9yYXRpbmdzL3JhdGluZ3NfY29tLmlkYWN0aXYuQmlnRGVhbF8yMDE2MDdfb3NfdmVyc2lvbi5jc3Y%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1065563
+INFO 2025-02-12 08:39:36,330 basehttp 10 140505957133112 "GET / HTTP/1.1" 200 7642
+DEBUG 2025-02-12 08:39:37,124 connectionpool 10 140505956072248 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CjpzdGF0cy9yYXRpbmdzL3JhdGluZ3NfY29tLm1lZGlhbmV0LmVtbV8yMDIzMTJfbGFuZ3VhZ2UuY3N2&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 911816
+INFO 2025-02-12 08:39:37,776 gcs_utils 10 140505956072248 Found 9804 CSV files in bucket pubsite_prod_rev_17712529971520156702
+INFO 2025-02-12 08:39:37,776 views 10 140505956072248 Retrieved 9804 CSV files
+INFO 2025-02-12 08:39:40,961 views 10 140505957133112 ==================================================
+INFO 2025-02-12 08:39:40,961 views 10 140505957133112 GET_REPORTS VIEW CALLED
+INFO 2025-02-12 08:39:40,961 views 10 140505957133112 Request Method: GET
+INFO 2025-02-12 08:39:40,962 views 10 140505957133112 Request Path: /get_reports/
+INFO 2025-02-12 08:39:40,962 views 10 140505957133112 Request GET Full Path: /get_reports/?uri=gs%3A%2F%2Fpubsite_prod_rev_17712529971520156702%2F
+INFO 2025-02-12 08:39:40,963 views 10 140505957133112 Request GET Parameters: {'uri': ['gs://pubsite_prod_rev_17712529971520156702/']}
+INFO 2025-02-12 08:39:40,963 views 10 140505957133112 Request Headers: {'Content-Length': '', 'Content-Type': 'text/plain', 'Host': 'localhost:8000', 'Connection': 'keep-alive', 'Sec-Ch-Ua-Platform': '"Windows"', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'Accept': 'application/json', 'Sec-Ch-Ua': '"Not(A:Brand";v="99", "Google Chrome";v="133", "Chromium";v="133"', 'Sec-Ch-Ua-Mobile': '?0', 'Sec-Fetch-Site': 'same-origin', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://localhost:8000/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7', 'Cookie': 'jenkins-timestamper-offset=-3600000; csrftoken=EceC3S9rQM3j14CX0M36JdaoysLuLXOV'}
+INFO 2025-02-12 08:39:40,964 views 10 140505957133112 ==================================================
+INFO 2025-02-12 08:39:40,964 views 10 140505957133112 Extracted URI: gs://pubsite_prod_rev_17712529971520156702/
+INFO 2025-02-12 08:39:40,964 views 10 140505957133112 Attempting to load GCS credentials from: /app/credentials.json
+INFO 2025-02-12 08:39:40,970 views 10 140505957133112 Extracted bucket name: pubsite_prod_rev_17712529971520156702
+DEBUG 2025-02-12 08:39:40,971 retry 10 140505957133112 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG 2025-02-12 08:39:40,999 requests 10 140505957133112 Making request: POST https://oauth2.googleapis.com/token
+DEBUG 2025-02-12 08:39:41,000 connectionpool 10 140505957133112 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+DEBUG 2025-02-12 08:39:41,096 connectionpool 10 140505957133112 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+DEBUG 2025-02-12 08:39:41,098 connectionpool 10 140505957133112 Starting new HTTPS connection (1): storage.googleapis.com:443
+DEBUG 2025-02-12 08:39:41,301 connectionpool 10 140505957133112 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702?projection=noAcl&prettyPrint=false HTTP/1.1" 200 672
+INFO 2025-02-12 08:39:41,302 views 10 140505957133112 Successfully validated GCS bucket: pubsite_prod_rev_17712529971520156702
+DEBUG 2025-02-12 08:39:41,306 retry 10 140505957133112 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG 2025-02-12 08:39:41,330 requests 10 140505957133112 Making request: POST https://oauth2.googleapis.com/token
+DEBUG 2025-02-12 08:39:41,332 connectionpool 10 140505957133112 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+DEBUG 2025-02-12 08:39:41,429 connectionpool 10 140505957133112 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+DEBUG 2025-02-12 08:39:41,431 connectionpool 10 140505957133112 Starting new HTTPS connection (1): storage.googleapis.com:443
+DEBUG 2025-02-12 08:39:41,622 connectionpool 10 140505957133112 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702?projection=noAcl&prettyPrint=false HTTP/1.1" 200 672
+DEBUG 2025-02-12 08:39:41,813 connectionpool 10 140505957133112 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1090896
+DEBUG 2025-02-12 08:39:42,677 connectionpool 10 140505957133112 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CkdzdGF0cy9pbnN0YWxscy9pbnN0YWxsc19iaWdkZWFsLnRuLmJpZ2RlYWxjb2RlcHJvbW9fMjAxOTA2X2xhbmd1YWdlLmNzdg%3D%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1079567
+DEBUG 2025-02-12 08:39:43,509 connectionpool 10 140505957133112 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=Cj1zdGF0cy9pbnN0YWxscy9pbnN0YWxsc19jb20uYmlnZGVhbHNjYW5uZXJfMjAyMTA5X2NvdW50cnkuY3N2&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1068191
+DEBUG 2025-02-12 08:39:43,956 connectionpool 10 140505957133112 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CkBzdGF0cy9pbnN0YWxscy9pbnN0YWxsc19jb20uY2x1YnByaXZpbGVnZXNwcm9fMjAyMDEwX2NhcnJpZXIuY3N2&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1060310
+DEBUG 2025-02-12 08:39:44,714 connectionpool 10 140505957133112 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=Cj5zdGF0cy9pbnN0YWxscy9pbnN0YWxsc19jb20uaWRhY3Rpdi5CaWdEZWFsXzIwMTUxMl9jb3VudHJ5LmNzdg%3D%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1077959
+DEBUG 2025-02-12 08:39:45,570 connectionpool 10 140505957133112 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CkNzdGF0cy9pbnN0YWxscy9pbnN0YWxsc19zeWQuYmlnZGVhbGNpLmNvZGVzcHJvbW9fMjAyMDAxX2NvdW50cnkuY3N2&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1078325
+DEBUG 2025-02-12 08:39:46,440 connectionpool 10 140505957133112 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CjxzdGF0cy9yYXRpbmdzL3JhdGluZ3NfY29tLmJpZ2RlYWxzY2FubmVyXzIwMTkwMl9vdmVydmlldy5jc3Y%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1054020
+DEBUG 2025-02-12 08:39:47,246 connectionpool 10 140505957133112 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=Cj5zdGF0cy9yYXRpbmdzL3JhdGluZ3NfY29tLmNsdWJwcml2aWxlZ2VzXzIwMjUwMl9vc192ZXJzaW9uLmNzdg%3D%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1043696
+DEBUG 2025-02-12 08:39:48,101 connectionpool 10 140505957133112 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=Cj9zdGF0cy9yYXRpbmdzL3JhdGluZ3NfY29tLmlkYWN0aXYuQmlnRGVhbF8yMDE2MDdfb3NfdmVyc2lvbi5jc3Y%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1065563
+DEBUG 2025-02-12 08:39:48,967 connectionpool 10 140505957133112 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CjpzdGF0cy9yYXRpbmdzL3JhdGluZ3NfY29tLm1lZGlhbmV0LmVtbV8yMDIzMTJfbGFuZ3VhZ2UuY3N2&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 911816
+INFO 2025-02-12 08:39:49,601 gcs_utils 10 140505957133112 Found 9804 CSV files in bucket pubsite_prod_rev_17712529971520156702
+INFO 2025-02-12 08:39:49,602 views 10 140505957133112 Retrieved 9804 CSV files
+INFO 2025-02-12 08:39:49,635 basehttp 10 140505957133112 "GET /get_reports/?uri=gs%3A%2F%2Fpubsite_prod_rev_17712529971520156702%2F HTTP/1.1" 200 3266825
+INFO 2025-02-12 08:41:03,840 basehttp 10 140505957133112 "GET /validate-gcs-uri HTTP/1.1" 301 0
+WARNING 2025-02-12 08:41:03,846 log 10 140505957137208 Bad Request: /validate-gcs-uri/
+WARNING 2025-02-12 08:41:03,847 basehttp 10 140505957137208 "GET /validate-gcs-uri/ HTTP/1.1" 400 109
+WARNING 2025-02-12 08:41:11,170 log 10 140505957137208 Bad Request: /validate-gcs-uri/
+WARNING 2025-02-12 08:41:11,172 basehttp 10 140505957137208 "GET /validate-gcs-uri/ HTTP/1.1" 400 109
+INFO 2025-02-12 08:41:24,435 basehttp 10 140505957137208 "GET /list-gcs-files HTTP/1.1" 301 0
+WARNING 2025-02-12 08:41:24,440 log 10 140505949190968 Bad Request: /list-gcs-files/
+WARNING 2025-02-12 08:41:24,441 basehttp 10 140505949190968 "GET /list-gcs-files/ HTTP/1.1" 400 92
+WARNING 2025-02-12 08:41:26,323 log 10 140505949190968 Bad Request: /list-gcs-files/
+WARNING 2025-02-12 08:41:26,324 basehttp 10 140505949190968 "GET /list-gcs-files/ HTTP/1.1" 400 92
+WARNING 2025-02-12 08:41:26,997 log 10 140505949190968 Bad Request: /list-gcs-files/
+WARNING 2025-02-12 08:41:26,999 basehttp 10 140505949190968 "GET /list-gcs-files/ HTTP/1.1" 400 92
+INFO 2025-02-12 08:41:44,237 basehttp 10 140505948130104 "GET /get-play-console-reports HTTP/1.1" 301 0
+INFO 2025-02-12 08:41:44,241 views 10 140505938377528 Attempting to load credentials from: /app/credentials.json
+INFO 2025-02-12 08:41:44,249 __init__ 10 140505938377528 file_cache is only supported with oauth2client<4.0.0
+WARNING 2025-02-12 08:41:44,253 log 10 140505938377528 Bad Request: /get-play-console-reports/
+WARNING 2025-02-12 08:41:44,253 basehttp 10 140505938377528 "GET /get-play-console-reports/ HTTP/1.1" 400 58
+INFO 2025-02-12 08:42:02,471 basehttp 10 140505949190968 "GET /get-play-console-reports HTTP/1.1" 301 0
+INFO 2025-02-12 08:42:02,475 views 10 140505957137208 Attempting to load credentials from: /app/credentials.json
+INFO 2025-02-12 08:42:02,481 __init__ 10 140505957137208 file_cache is only supported with oauth2client<4.0.0
+WARNING 2025-02-12 08:42:02,484 log 10 140505957137208 Bad Request: /get-play-console-reports/
+WARNING 2025-02-12 08:42:02,485 basehttp 10 140505957137208 "GET /get-play-console-reports/ HTTP/1.1" 400 58
+DEBUG 2025-02-12 08:56:55,744 _opentelemetry_tracing 8 139853234547496 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 08:56:55,782 urls 8 139853234547496 ==================================================
+INFO 2025-02-12 08:56:55,782 urls 8 139853234547496 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 08:56:55,782 urls 8 139853234547496 <URLPattern '' [name='index']>
+INFO 2025-02-12 08:56:55,783 urls 8 139853234547496 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 08:56:55,783 urls 8 139853234547496 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 08:56:55,783 urls 8 139853234547496 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 08:56:55,783 urls 8 139853234547496 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 08:56:55,783 urls 8 139853234547496 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 08:56:55,784 urls 8 139853234547496 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 08:56:55,784 urls 8 139853234547496 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 08:56:55,784 urls 8 139853234547496 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 08:56:55,784 urls 8 139853234547496 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 08:56:55,784 urls 8 139853234547496 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 08:56:55,785 urls 8 139853234547496 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 08:56:55,785 urls 8 139853234547496 ==================================================
+INFO 2025-02-12 08:56:55,785 urls 8 139853234547496 ==================================================
+INFO 2025-02-12 08:56:55,785 urls 8 139853234547496 REGISTERED URLS:
+INFO 2025-02-12 08:56:55,786 urls 8 139853234547496 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 08:56:55,786 urls 8 139853234547496 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 08:56:55,786 urls 8 139853234547496 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 08:56:55,787 urls 8 139853234547496 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 08:56:55,787 urls 8 139853234547496 ==================================================
+INFO 2025-02-12 08:56:57,061 autoreload 10 139833366453032 Watching for file changes with StatReloader
+DEBUG 2025-02-12 08:56:57,246 _opentelemetry_tracing 10 139833366453032 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 08:56:57,266 urls 10 139833366453032 ==================================================
+INFO 2025-02-12 08:56:57,267 urls 10 139833366453032 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 08:56:57,267 urls 10 139833366453032 <URLPattern '' [name='index']>
+INFO 2025-02-12 08:56:57,267 urls 10 139833366453032 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 08:56:57,267 urls 10 139833366453032 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 08:56:57,268 urls 10 139833366453032 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 08:56:57,268 urls 10 139833366453032 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 08:56:57,268 urls 10 139833366453032 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 08:56:57,268 urls 10 139833366453032 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 08:56:57,269 urls 10 139833366453032 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 08:56:57,269 urls 10 139833366453032 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 08:56:57,269 urls 10 139833366453032 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 08:56:57,269 urls 10 139833366453032 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 08:56:57,269 urls 10 139833366453032 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 08:56:57,270 urls 10 139833366453032 ==================================================
+INFO 2025-02-12 08:56:57,270 urls 10 139833366453032 ==================================================
+INFO 2025-02-12 08:56:57,270 urls 10 139833366453032 REGISTERED URLS:
+INFO 2025-02-12 08:56:57,270 urls 10 139833366453032 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 08:56:57,271 urls 10 139833366453032 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 08:56:57,271 urls 10 139833366453032 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 08:56:57,271 urls 10 139833366453032 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 08:56:57,271 urls 10 139833366453032 ==================================================
+DEBUG 2025-02-12 08:57:11,609 _opentelemetry_tracing 12 139968559942440 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 08:57:11,628 urls 12 139968559942440 ==================================================
+INFO 2025-02-12 08:57:11,629 urls 12 139968559942440 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 08:57:11,629 urls 12 139968559942440 <URLPattern '' [name='index']>
+INFO 2025-02-12 08:57:11,629 urls 12 139968559942440 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 08:57:11,630 urls 12 139968559942440 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 08:57:11,630 urls 12 139968559942440 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 08:57:11,630 urls 12 139968559942440 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 08:57:11,630 urls 12 139968559942440 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 08:57:11,631 urls 12 139968559942440 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 08:57:11,631 urls 12 139968559942440 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 08:57:11,631 urls 12 139968559942440 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 08:57:11,632 urls 12 139968559942440 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 08:57:11,632 urls 12 139968559942440 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 08:57:11,632 urls 12 139968559942440 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 08:57:11,632 urls 12 139968559942440 ==================================================
+INFO 2025-02-12 08:57:11,633 urls 12 139968559942440 ==================================================
+INFO 2025-02-12 08:57:11,633 urls 12 139968559942440 REGISTERED URLS:
+INFO 2025-02-12 08:57:11,633 urls 12 139968559942440 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 08:57:11,634 urls 12 139968559942440 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 08:57:11,634 urls 12 139968559942440 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 08:57:11,634 urls 12 139968559942440 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 08:57:11,634 urls 12 139968559942440 ==================================================
+DEBUG 2025-02-12 08:57:17,454 _opentelemetry_tracing 18 140131741698856 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 08:57:17,471 urls 18 140131741698856 ==================================================
+INFO 2025-02-12 08:57:17,471 urls 18 140131741698856 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 08:57:17,472 urls 18 140131741698856 <URLPattern '' [name='index']>
+INFO 2025-02-12 08:57:17,472 urls 18 140131741698856 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 08:57:17,472 urls 18 140131741698856 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 08:57:17,473 urls 18 140131741698856 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 08:57:17,473 urls 18 140131741698856 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 08:57:17,473 urls 18 140131741698856 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 08:57:17,474 urls 18 140131741698856 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 08:57:17,474 urls 18 140131741698856 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 08:57:17,474 urls 18 140131741698856 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 08:57:17,475 urls 18 140131741698856 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 08:57:17,475 urls 18 140131741698856 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 08:57:17,475 urls 18 140131741698856 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 08:57:17,476 urls 18 140131741698856 ==================================================
+INFO 2025-02-12 08:57:17,476 urls 18 140131741698856 ==================================================
+INFO 2025-02-12 08:57:17,476 urls 18 140131741698856 REGISTERED URLS:
+INFO 2025-02-12 08:57:17,477 urls 18 140131741698856 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 08:57:17,477 urls 18 140131741698856 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 08:57:17,478 urls 18 140131741698856 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 08:57:17,478 urls 18 140131741698856 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 08:57:17,478 urls 18 140131741698856 ==================================================
+DEBUG 2025-02-12 08:57:23,863 _opentelemetry_tracing 25 140465670224680 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 08:57:23,883 urls 25 140465670224680 ==================================================
+INFO 2025-02-12 08:57:23,883 urls 25 140465670224680 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 08:57:23,883 urls 25 140465670224680 <URLPattern '' [name='index']>
+INFO 2025-02-12 08:57:23,884 urls 25 140465670224680 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 08:57:23,884 urls 25 140465670224680 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 08:57:23,884 urls 25 140465670224680 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 08:57:23,885 urls 25 140465670224680 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 08:57:23,885 urls 25 140465670224680 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 08:57:23,886 urls 25 140465670224680 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 08:57:23,886 urls 25 140465670224680 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 08:57:23,886 urls 25 140465670224680 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 08:57:23,886 urls 25 140465670224680 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 08:57:23,887 urls 25 140465670224680 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 08:57:23,887 urls 25 140465670224680 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 08:57:23,887 urls 25 140465670224680 ==================================================
+INFO 2025-02-12 08:57:23,888 urls 25 140465670224680 ==================================================
+INFO 2025-02-12 08:57:23,888 urls 25 140465670224680 REGISTERED URLS:
+INFO 2025-02-12 08:57:23,888 urls 25 140465670224680 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 08:57:23,889 urls 25 140465670224680 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 08:57:23,889 urls 25 140465670224680 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 08:57:23,889 urls 25 140465670224680 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 08:57:23,890 urls 25 140465670224680 ==================================================
+DEBUG 2025-02-12 16:09:52,583 _opentelemetry_tracing 23672 19420 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 16:09:52,651 urls 23672 19420 ==================================================
+INFO 2025-02-12 16:09:52,652 urls 23672 19420 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 16:09:52,652 urls 23672 19420 <URLPattern '' [name='index']>
+INFO 2025-02-12 16:09:52,653 urls 23672 19420 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 16:09:52,653 urls 23672 19420 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 16:09:52,654 urls 23672 19420 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 16:09:52,654 urls 23672 19420 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 16:09:52,654 urls 23672 19420 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 16:09:52,655 urls 23672 19420 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 16:09:52,656 urls 23672 19420 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 16:09:52,656 urls 23672 19420 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 16:09:52,657 urls 23672 19420 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 16:09:52,657 urls 23672 19420 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 16:09:52,658 urls 23672 19420 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 16:09:52,659 urls 23672 19420 ==================================================
+INFO 2025-02-12 16:09:52,659 urls 23672 19420 ==================================================
+INFO 2025-02-12 16:09:52,660 urls 23672 19420 REGISTERED URLS:
+INFO 2025-02-12 16:09:52,660 urls 23672 19420 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 16:09:52,661 urls 23672 19420 <URLResolver <module 'play_reports.urls' from 'C:\\Users\\halab\\OneDrive - ESPRIT\\Bureau\\projet\\play_console_importer\\play_reports\\urls.py'> (None:None) ''>
+INFO 2025-02-12 16:09:52,662 urls 23672 19420 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 16:09:52,662 urls 23672 19420 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 16:09:52,663 urls 23672 19420 ==================================================
+INFO 2025-02-12 16:09:56,145 autoreload 5252 14816 Watching for file changes with StatReloader
+DEBUG 2025-02-12 16:09:57,114 _opentelemetry_tracing 5252 14816 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 16:09:57,152 urls 5252 14816 ==================================================
+INFO 2025-02-12 16:09:57,152 urls 5252 14816 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 16:09:57,152 urls 5252 14816 <URLPattern '' [name='index']>
+INFO 2025-02-12 16:09:57,153 urls 5252 14816 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 16:09:57,153 urls 5252 14816 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 16:09:57,154 urls 5252 14816 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 16:09:57,154 urls 5252 14816 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 16:09:57,155 urls 5252 14816 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 16:09:57,155 urls 5252 14816 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 16:09:57,156 urls 5252 14816 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 16:09:57,157 urls 5252 14816 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 16:09:57,158 urls 5252 14816 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 16:09:57,158 urls 5252 14816 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 16:09:57,159 urls 5252 14816 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 16:09:57,159 urls 5252 14816 ==================================================
+INFO 2025-02-12 16:09:57,160 urls 5252 14816 ==================================================
+INFO 2025-02-12 16:09:57,161 urls 5252 14816 REGISTERED URLS:
+INFO 2025-02-12 16:09:57,161 urls 5252 14816 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 16:09:57,161 urls 5252 14816 <URLResolver <module 'play_reports.urls' from 'C:\\Users\\halab\\OneDrive - ESPRIT\\Bureau\\projet\\play_console_importer\\play_reports\\urls.py'> (None:None) ''>
+INFO 2025-02-12 16:09:57,162 urls 5252 14816 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 16:09:57,163 urls 5252 14816 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 16:09:57,163 urls 5252 14816 ==================================================
+DEBUG 2025-02-12 16:10:07,968 _opentelemetry_tracing 7900 27152 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 16:10:08,012 urls 7900 27152 ==================================================
+INFO 2025-02-12 16:10:08,013 urls 7900 27152 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 16:10:08,013 urls 7900 27152 <URLPattern '' [name='index']>
+INFO 2025-02-12 16:10:08,014 urls 7900 27152 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 16:10:08,015 urls 7900 27152 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 16:10:08,015 urls 7900 27152 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 16:10:08,016 urls 7900 27152 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 16:10:08,016 urls 7900 27152 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 16:10:08,017 urls 7900 27152 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 16:10:08,018 urls 7900 27152 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 16:10:08,018 urls 7900 27152 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 16:10:08,019 urls 7900 27152 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 16:10:08,019 urls 7900 27152 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 16:10:08,020 urls 7900 27152 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 16:10:08,020 urls 7900 27152 ==================================================
+INFO 2025-02-12 16:10:08,021 urls 7900 27152 ==================================================
+INFO 2025-02-12 16:10:08,023 urls 7900 27152 REGISTERED URLS:
+INFO 2025-02-12 16:10:08,023 urls 7900 27152 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 16:10:08,024 urls 7900 27152 <URLResolver <module 'play_reports.urls' from 'C:\\Users\\halab\\OneDrive - ESPRIT\\Bureau\\projet\\play_console_importer\\play_reports\\urls.py'> (None:None) ''>
+INFO 2025-02-12 16:10:08,024 urls 7900 27152 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 16:10:08,025 urls 7900 27152 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 16:10:08,025 urls 7900 27152 ==================================================
+INFO 2025-02-12 16:10:19,174 autoreload 20832 26784 Watching for file changes with StatReloader
+DEBUG 2025-02-12 16:10:20,134 _opentelemetry_tracing 20832 26784 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 16:10:20,192 urls 20832 26784 ==================================================
+INFO 2025-02-12 16:10:20,193 urls 20832 26784 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 16:10:20,193 urls 20832 26784 <URLPattern '' [name='index']>
+INFO 2025-02-12 16:10:20,194 urls 20832 26784 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 16:10:20,194 urls 20832 26784 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 16:10:20,195 urls 20832 26784 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 16:10:20,195 urls 20832 26784 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 16:10:20,196 urls 20832 26784 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 16:10:20,197 urls 20832 26784 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 16:10:20,197 urls 20832 26784 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 16:10:20,198 urls 20832 26784 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 16:10:20,199 urls 20832 26784 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 16:10:20,199 urls 20832 26784 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 16:10:20,200 urls 20832 26784 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 16:10:20,200 urls 20832 26784 ==================================================
+INFO 2025-02-12 16:10:20,201 urls 20832 26784 ==================================================
+INFO 2025-02-12 16:10:20,202 urls 20832 26784 REGISTERED URLS:
+INFO 2025-02-12 16:10:20,202 urls 20832 26784 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 16:10:20,203 urls 20832 26784 <URLResolver <module 'play_reports.urls' from 'C:\\Users\\halab\\OneDrive - ESPRIT\\Bureau\\projet\\play_console_importer\\play_reports\\urls.py'> (None:None) ''>
+INFO 2025-02-12 16:10:20,204 urls 20832 26784 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 16:10:20,205 urls 20832 26784 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 16:10:20,206 urls 20832 26784 ==================================================
+DEBUG 2025-02-12 16:10:31,773 _opentelemetry_tracing 24560 16192 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 16:10:31,826 urls 24560 16192 ==================================================
+INFO 2025-02-12 16:10:31,827 urls 24560 16192 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 16:10:31,828 urls 24560 16192 <URLPattern '' [name='index']>
+INFO 2025-02-12 16:10:31,829 urls 24560 16192 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 16:10:31,830 urls 24560 16192 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 16:10:31,831 urls 24560 16192 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 16:10:31,831 urls 24560 16192 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 16:10:31,833 urls 24560 16192 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 16:10:31,833 urls 24560 16192 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 16:10:31,834 urls 24560 16192 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 16:10:31,835 urls 24560 16192 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 16:10:31,836 urls 24560 16192 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 16:10:31,836 urls 24560 16192 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 16:10:31,837 urls 24560 16192 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 16:10:31,838 urls 24560 16192 ==================================================
+INFO 2025-02-12 16:10:31,839 urls 24560 16192 ==================================================
+INFO 2025-02-12 16:10:31,840 urls 24560 16192 REGISTERED URLS:
+INFO 2025-02-12 16:10:31,841 urls 24560 16192 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 16:10:31,842 urls 24560 16192 <URLResolver <module 'play_reports.urls' from 'C:\\Users\\halab\\OneDrive - ESPRIT\\Bureau\\projet\\play_console_importer\\play_reports\\urls.py'> (None:None) ''>
+INFO 2025-02-12 16:10:31,843 urls 24560 16192 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 16:10:31,843 urls 24560 16192 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 16:10:31,844 urls 24560 16192 ==================================================
+INFO 2025-02-12 16:10:35,443 autoreload 13280 9504 Watching for file changes with StatReloader
+DEBUG 2025-02-12 16:10:36,384 _opentelemetry_tracing 13280 9504 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 16:10:36,433 urls 13280 9504 ==================================================
+INFO 2025-02-12 16:10:36,435 urls 13280 9504 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 16:10:36,435 urls 13280 9504 <URLPattern '' [name='index']>
+INFO 2025-02-12 16:10:36,436 urls 13280 9504 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 16:10:36,436 urls 13280 9504 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 16:10:36,437 urls 13280 9504 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 16:10:36,437 urls 13280 9504 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 16:10:36,438 urls 13280 9504 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 16:10:36,438 urls 13280 9504 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 16:10:36,439 urls 13280 9504 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 16:10:36,439 urls 13280 9504 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 16:10:36,440 urls 13280 9504 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 16:10:36,440 urls 13280 9504 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 16:10:36,441 urls 13280 9504 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 16:10:36,442 urls 13280 9504 ==================================================
+INFO 2025-02-12 16:10:36,443 urls 13280 9504 ==================================================
+INFO 2025-02-12 16:10:36,444 urls 13280 9504 REGISTERED URLS:
+INFO 2025-02-12 16:10:36,444 urls 13280 9504 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 16:10:36,445 urls 13280 9504 <URLResolver <module 'play_reports.urls' from 'C:\\Users\\halab\\OneDrive - ESPRIT\\Bureau\\projet\\play_console_importer\\play_reports\\urls.py'> (None:None) ''>
+INFO 2025-02-12 16:10:36,446 urls 13280 9504 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 16:10:36,446 urls 13280 9504 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 16:10:36,447 urls 13280 9504 ==================================================
+INFO 2025-02-12 09:10:36,882 views 10 139833276148536 Attempting to load credentials from: /app/credentials.json
+INFO 2025-02-12 09:10:36,896 __init__ 10 139833276148536 file_cache is only supported with oauth2client<4.0.0
+WARNING 2025-02-12 09:10:36,904 log 10 139833276148536 Bad Request: /get-play-console-reports/
+WARNING 2025-02-12 09:10:36,905 basehttp 10 139833276148536 "GET /get-play-console-reports/ HTTP/1.1" 400 58
+INFO 2025-02-12 09:10:42,979 basehttp 10 139833276148536 "GET / HTTP/1.1" 200 7642
+INFO 2025-02-12 09:10:46,810 views 10 139833276148536 ==================================================
+INFO 2025-02-12 09:10:46,811 views 10 139833276148536 GET_REPORTS VIEW CALLED
+INFO 2025-02-12 09:10:46,811 views 10 139833276148536 Request Method: GET
+INFO 2025-02-12 09:10:46,812 views 10 139833276148536 Request Path: /get_reports/
+INFO 2025-02-12 09:10:46,812 views 10 139833276148536 Request GET Full Path: /get_reports/?uri=gs%3A%2F%2Fpubsite_prod_rev_17712529971520156702%2F
+INFO 2025-02-12 09:10:46,813 views 10 139833276148536 Request GET Parameters: {'uri': ['gs://pubsite_prod_rev_17712529971520156702/']}
+INFO 2025-02-12 09:10:46,814 views 10 139833276148536 Request Headers: {'Content-Length': '', 'Content-Type': 'text/plain', 'Host': 'localhost:8000', 'Connection': 'keep-alive', 'Sec-Ch-Ua-Platform': '"Windows"', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'Accept': 'application/json', 'Sec-Ch-Ua': '"Not(A:Brand";v="99", "Google Chrome";v="133", "Chromium";v="133"', 'Sec-Ch-Ua-Mobile': '?0', 'Sec-Fetch-Site': 'same-origin', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://localhost:8000/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7', 'Cookie': 'jenkins-timestamper-offset=-3600000; csrftoken=EceC3S9rQM3j14CX0M36JdaoysLuLXOV'}
+INFO 2025-02-12 09:10:46,815 views 10 139833276148536 ==================================================
+INFO 2025-02-12 09:10:46,815 views 10 139833276148536 Extracted URI: gs://pubsite_prod_rev_17712529971520156702/
+INFO 2025-02-12 09:10:46,816 views 10 139833276148536 Attempting to load GCS credentials from: /app/credentials.json
+INFO 2025-02-12 09:10:46,825 views 10 139833276148536 Extracted bucket name: pubsite_prod_rev_17712529971520156702
+DEBUG 2025-02-12 09:10:46,827 retry 10 139833276148536 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG 2025-02-12 09:10:46,859 requests 10 139833276148536 Making request: POST https://oauth2.googleapis.com/token
+DEBUG 2025-02-12 09:10:46,865 connectionpool 10 139833276148536 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+DEBUG 2025-02-12 09:10:47,013 connectionpool 10 139833276148536 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+DEBUG 2025-02-12 09:10:47,018 connectionpool 10 139833276148536 Starting new HTTPS connection (1): storage.googleapis.com:443
+DEBUG 2025-02-12 09:10:47,239 connectionpool 10 139833276148536 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702?projection=noAcl&prettyPrint=false HTTP/1.1" 200 672
+INFO 2025-02-12 09:10:47,241 views 10 139833276148536 Successfully validated GCS bucket: pubsite_prod_rev_17712529971520156702
+DEBUG 2025-02-12 09:10:47,252 retry 10 139833276148536 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG 2025-02-12 09:10:47,278 requests 10 139833276148536 Making request: POST https://oauth2.googleapis.com/token
+DEBUG 2025-02-12 09:10:47,280 connectionpool 10 139833276148536 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+DEBUG 2025-02-12 09:10:47,398 connectionpool 10 139833276148536 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+DEBUG 2025-02-12 09:10:47,402 connectionpool 10 139833276148536 Starting new HTTPS connection (1): storage.googleapis.com:443
+DEBUG 2025-02-12 09:10:47,609 connectionpool 10 139833276148536 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702?projection=noAcl&prettyPrint=false HTTP/1.1" 200 672
+DEBUG 2025-02-12 09:10:47,812 connectionpool 10 139833276148536 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1090896
+DEBUG 2025-02-12 09:10:48,661 connectionpool 10 139833276148536 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CkdzdGF0cy9pbnN0YWxscy9pbnN0YWxsc19iaWdkZWFsLnRuLmJpZ2RlYWxjb2RlcHJvbW9fMjAxOTA2X2xhbmd1YWdlLmNzdg%3D%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1079567
+DEBUG 2025-02-12 09:10:49,131 connectionpool 10 139833276148536 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=Cj1zdGF0cy9pbnN0YWxscy9pbnN0YWxsc19jb20uYmlnZGVhbHNjYW5uZXJfMjAyMTA5X2NvdW50cnkuY3N2&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1068191
+DEBUG 2025-02-12 09:10:50,022 connectionpool 10 139833276148536 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CkBzdGF0cy9pbnN0YWxscy9pbnN0YWxsc19jb20uY2x1YnByaXZpbGVnZXNwcm9fMjAyMDEwX2NhcnJpZXIuY3N2&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1060310
+DEBUG 2025-02-12 09:10:50,889 connectionpool 10 139833276148536 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=Cj5zdGF0cy9pbnN0YWxscy9pbnN0YWxsc19jb20uaWRhY3Rpdi5CaWdEZWFsXzIwMTUxMl9jb3VudHJ5LmNzdg%3D%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1077959
+DEBUG 2025-02-12 09:10:51,727 connectionpool 10 139833276148536 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CkNzdGF0cy9pbnN0YWxscy9pbnN0YWxsc19zeWQuYmlnZGVhbGNpLmNvZGVzcHJvbW9fMjAyMDAxX2NvdW50cnkuY3N2&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1078325
+DEBUG 2025-02-12 09:10:52,572 connectionpool 10 139833276148536 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CjxzdGF0cy9yYXRpbmdzL3JhdGluZ3NfY29tLmJpZ2RlYWxzY2FubmVyXzIwMTkwMl9vdmVydmlldy5jc3Y%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1054020
+DEBUG 2025-02-12 09:10:53,444 connectionpool 10 139833276148536 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=Cj5zdGF0cy9yYXRpbmdzL3JhdGluZ3NfY29tLmNsdWJwcml2aWxlZ2VzXzIwMjUwMl9vc192ZXJzaW9uLmNzdg%3D%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1043696
+DEBUG 2025-02-12 09:10:54,253 connectionpool 10 139833276148536 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=Cj9zdGF0cy9yYXRpbmdzL3JhdGluZ3NfY29tLmlkYWN0aXYuQmlnRGVhbF8yMDE2MDdfb3NfdmVyc2lvbi5jc3Y%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1065563
+DEBUG 2025-02-12 09:10:54,852 connectionpool 10 139833276148536 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CjpzdGF0cy9yYXRpbmdzL3JhdGluZ3NfY29tLm1lZGlhbmV0LmVtbV8yMDIzMTJfbGFuZ3VhZ2UuY3N2&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 911816
+INFO 2025-02-12 09:10:55,447 gcs_utils 10 139833276148536 Found 9804 CSV files in bucket pubsite_prod_rev_17712529971520156702
+INFO 2025-02-12 09:10:55,449 views 10 139833276148536 Retrieved 9804 CSV files
+INFO 2025-02-12 09:10:55,489 basehttp 10 139833276148536 "GET /get_reports/?uri=gs%3A%2F%2Fpubsite_prod_rev_17712529971520156702%2F HTTP/1.1" 200 3266825
+DEBUG 2025-02-12 09:24:59,215 _opentelemetry_tracing 8 140121829100328 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 09:24:59,314 urls 8 140121829100328 ==================================================
+INFO 2025-02-12 09:24:59,315 urls 8 140121829100328 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 09:24:59,317 urls 8 140121829100328 <URLPattern '' [name='index']>
+INFO 2025-02-12 09:24:59,319 urls 8 140121829100328 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 09:24:59,319 urls 8 140121829100328 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 09:24:59,320 urls 8 140121829100328 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 09:24:59,321 urls 8 140121829100328 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 09:24:59,321 urls 8 140121829100328 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 09:24:59,322 urls 8 140121829100328 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 09:24:59,323 urls 8 140121829100328 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 09:24:59,324 urls 8 140121829100328 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 09:24:59,325 urls 8 140121829100328 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 09:24:59,326 urls 8 140121829100328 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 09:24:59,327 urls 8 140121829100328 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 09:24:59,327 urls 8 140121829100328 ==================================================
+INFO 2025-02-12 09:24:59,329 urls 8 140121829100328 ==================================================
+INFO 2025-02-12 09:24:59,329 urls 8 140121829100328 REGISTERED URLS:
+INFO 2025-02-12 09:24:59,330 urls 8 140121829100328 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 09:24:59,331 urls 8 140121829100328 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 09:24:59,332 urls 8 140121829100328 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 09:24:59,333 urls 8 140121829100328 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 09:24:59,334 urls 8 140121829100328 ==================================================
+INFO 2025-02-12 09:25:02,265 autoreload 10 140106875513640 Watching for file changes with StatReloader
+DEBUG 2025-02-12 09:25:02,597 _opentelemetry_tracing 10 140106875513640 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 09:25:02,656 urls 10 140106875513640 ==================================================
+INFO 2025-02-12 09:25:02,657 urls 10 140106875513640 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 09:25:02,658 urls 10 140106875513640 <URLPattern '' [name='index']>
+INFO 2025-02-12 09:25:02,659 urls 10 140106875513640 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 09:25:02,660 urls 10 140106875513640 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 09:25:02,661 urls 10 140106875513640 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 09:25:02,663 urls 10 140106875513640 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 09:25:02,664 urls 10 140106875513640 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 09:25:02,664 urls 10 140106875513640 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 09:25:02,665 urls 10 140106875513640 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 09:25:02,666 urls 10 140106875513640 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 09:25:02,666 urls 10 140106875513640 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 09:25:02,667 urls 10 140106875513640 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 09:25:02,669 urls 10 140106875513640 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 09:25:02,670 urls 10 140106875513640 ==================================================
+INFO 2025-02-12 09:25:02,671 urls 10 140106875513640 ==================================================
+INFO 2025-02-12 09:25:02,672 urls 10 140106875513640 REGISTERED URLS:
+INFO 2025-02-12 09:25:02,672 urls 10 140106875513640 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 09:25:02,673 urls 10 140106875513640 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 09:25:02,673 urls 10 140106875513640 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 09:25:02,674 urls 10 140106875513640 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 09:25:02,675 urls 10 140106875513640 ==================================================
+DEBUG 2025-02-12 09:30:32,807 _opentelemetry_tracing 8 140678068140840 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 09:30:32,886 urls 8 140678068140840 ==================================================
+INFO 2025-02-12 09:30:32,887 urls 8 140678068140840 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 09:30:32,888 urls 8 140678068140840 <URLPattern '' [name='index']>
+INFO 2025-02-12 09:30:32,889 urls 8 140678068140840 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 09:30:32,890 urls 8 140678068140840 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 09:30:32,890 urls 8 140678068140840 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 09:30:32,891 urls 8 140678068140840 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 09:30:32,892 urls 8 140678068140840 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 09:30:32,892 urls 8 140678068140840 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 09:30:32,893 urls 8 140678068140840 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 09:30:32,894 urls 8 140678068140840 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 09:30:32,894 urls 8 140678068140840 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 09:30:32,895 urls 8 140678068140840 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 09:30:32,895 urls 8 140678068140840 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 09:30:32,896 urls 8 140678068140840 ==================================================
+INFO 2025-02-12 09:30:32,897 urls 8 140678068140840 ==================================================
+INFO 2025-02-12 09:30:32,897 urls 8 140678068140840 REGISTERED URLS:
+INFO 2025-02-12 09:30:32,898 urls 8 140678068140840 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 09:30:32,898 urls 8 140678068140840 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 09:30:32,899 urls 8 140678068140840 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 09:30:32,899 urls 8 140678068140840 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 09:30:32,900 urls 8 140678068140840 ==================================================
+INFO 2025-02-12 09:30:35,489 autoreload 10 139888250821416 Watching for file changes with StatReloader
+DEBUG 2025-02-12 09:30:35,829 _opentelemetry_tracing 10 139888250821416 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 09:30:35,882 urls 10 139888250821416 ==================================================
+INFO 2025-02-12 09:30:35,883 urls 10 139888250821416 PLAY_REPORTS URL PATTERNS:
+INFO 2025-02-12 09:30:35,884 urls 10 139888250821416 <URLPattern '' [name='index']>
+INFO 2025-02-12 09:30:35,884 urls 10 139888250821416 <URLPattern 'validate-gcs-uri/' [name='validate_gcs_uri']>
+INFO 2025-02-12 09:30:35,885 urls 10 139888250821416 <URLPattern 'list-gcs-files/' [name='list_gcs_files']>
+INFO 2025-02-12 09:30:35,886 urls 10 139888250821416 <URLPattern 'display-gcs-files/' [name='display_gcs_files']>
+INFO 2025-02-12 09:30:35,887 urls 10 139888250821416 <URLPattern 'validate-gcs-uri-page/' [name='validate_gcs_uri_page']>
+INFO 2025-02-12 09:30:35,888 urls 10 139888250821416 <URLPattern 'list-csv-files/' [name='list_csv_files']>
+INFO 2025-02-12 09:30:35,888 urls 10 139888250821416 <URLPattern 'validate-play-store/' [name='validate_play_store']>
+INFO 2025-02-12 09:30:35,889 urls 10 139888250821416 <URLPattern 'get-play-console-reports/' [name='get_play_console_reports']>
+INFO 2025-02-12 09:30:35,889 urls 10 139888250821416 <URLPattern 'get_reports/' [name='get_reports']>
+INFO 2025-02-12 09:30:35,890 urls 10 139888250821416 <URLPattern 'get-reports/' [name='get_reports_alt']>
+INFO 2025-02-12 09:30:35,890 urls 10 139888250821416 <URLPattern 'list-all-csv-files/' [name='list_all_csv_files']>
+INFO 2025-02-12 09:30:35,891 urls 10 139888250821416 <URLPattern 'get-gcs-uris/' [name='get_gcs_uris']>
+INFO 2025-02-12 09:30:35,891 urls 10 139888250821416 ==================================================
+INFO 2025-02-12 09:30:35,892 urls 10 139888250821416 ==================================================
+INFO 2025-02-12 09:30:35,893 urls 10 139888250821416 REGISTERED URLS:
+INFO 2025-02-12 09:30:35,893 urls 10 139888250821416 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 09:30:35,894 urls 10 139888250821416 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 09:30:35,894 urls 10 139888250821416 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 09:30:35,895 urls 10 139888250821416 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 09:30:35,896 urls 10 139888250821416 ==================================================
+INFO 2025-02-12 09:30:40,844 basehttp 10 139888161594168 "GET / HTTP/1.1" 200 7642
+INFO 2025-02-12 09:30:45,790 views 10 139888161594168 ==================================================
+INFO 2025-02-12 09:30:45,791 views 10 139888161594168 GET_REPORTS VIEW CALLED
+INFO 2025-02-12 09:30:45,792 views 10 139888161594168 Request Method: GET
+INFO 2025-02-12 09:30:45,792 views 10 139888161594168 Request Path: /get_reports/
+INFO 2025-02-12 09:30:45,793 views 10 139888161594168 Request GET Full Path: /get_reports/?uri=gs%3A%2F%2Fpubsite_prod_rev_17712529971520156702%2F
+INFO 2025-02-12 09:30:45,794 views 10 139888161594168 Request GET Parameters: {'uri': ['gs://pubsite_prod_rev_17712529971520156702/']}
+INFO 2025-02-12 09:30:45,795 views 10 139888161594168 Request Headers: {'Content-Length': '', 'Content-Type': 'text/plain', 'Host': 'localhost:8000', 'Connection': 'keep-alive', 'Sec-Ch-Ua-Platform': '"Windows"', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'Accept': 'application/json', 'Sec-Ch-Ua': '"Not(A:Brand";v="99", "Google Chrome";v="133", "Chromium";v="133"', 'Sec-Ch-Ua-Mobile': '?0', 'Sec-Fetch-Site': 'same-origin', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://localhost:8000/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7', 'Cookie': 'jenkins-timestamper-offset=-3600000; csrftoken=EceC3S9rQM3j14CX0M36JdaoysLuLXOV'}
+INFO 2025-02-12 09:30:45,796 views 10 139888161594168 ==================================================
+INFO 2025-02-12 09:30:45,797 views 10 139888161594168 Extracted URI: gs://pubsite_prod_rev_17712529971520156702/
+INFO 2025-02-12 09:30:45,797 views 10 139888161594168 Attempting to load GCS credentials from: /app/credentials.json
+INFO 2025-02-12 09:30:45,810 views 10 139888161594168 Extracted bucket name: pubsite_prod_rev_17712529971520156702
+DEBUG 2025-02-12 09:30:45,811 retry 10 139888161594168 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG 2025-02-12 09:30:45,844 requests 10 139888161594168 Making request: POST https://oauth2.googleapis.com/token
+DEBUG 2025-02-12 09:30:45,849 connectionpool 10 139888161594168 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+DEBUG 2025-02-12 09:30:45,967 connectionpool 10 139888161594168 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+DEBUG 2025-02-12 09:30:45,971 connectionpool 10 139888161594168 Starting new HTTPS connection (1): storage.googleapis.com:443
+DEBUG 2025-02-12 09:30:46,201 connectionpool 10 139888161594168 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702?projection=noAcl&prettyPrint=false HTTP/1.1" 200 672
+INFO 2025-02-12 09:30:46,202 views 10 139888161594168 Successfully validated GCS bucket: pubsite_prod_rev_17712529971520156702
+DEBUG 2025-02-12 09:30:46,214 retry 10 139888161594168 Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+DEBUG 2025-02-12 09:30:46,241 requests 10 139888161594168 Making request: POST https://oauth2.googleapis.com/token
+DEBUG 2025-02-12 09:30:46,243 connectionpool 10 139888161594168 Starting new HTTPS connection (1): oauth2.googleapis.com:443
+DEBUG 2025-02-12 09:30:46,345 connectionpool 10 139888161594168 https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+DEBUG 2025-02-12 09:30:46,349 connectionpool 10 139888161594168 Starting new HTTPS connection (1): storage.googleapis.com:443
+DEBUG 2025-02-12 09:30:46,554 connectionpool 10 139888161594168 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702?projection=noAcl&prettyPrint=false HTTP/1.1" 200 672
+DEBUG 2025-02-12 09:30:46,763 connectionpool 10 139888161594168 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1090896
+DEBUG 2025-02-12 09:30:47,612 connectionpool 10 139888161594168 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CkdzdGF0cy9pbnN0YWxscy9pbnN0YWxsc19iaWdkZWFsLnRuLmJpZ2RlYWxjb2RlcHJvbW9fMjAxOTA2X2xhbmd1YWdlLmNzdg%3D%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1079567
+DEBUG 2025-02-12 09:30:48,219 connectionpool 10 139888161594168 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=Cj1zdGF0cy9pbnN0YWxscy9pbnN0YWxsc19jb20uYmlnZGVhbHNjYW5uZXJfMjAyMTA5X2NvdW50cnkuY3N2&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1068191
+DEBUG 2025-02-12 09:30:49,017 connectionpool 10 139888161594168 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CkBzdGF0cy9pbnN0YWxscy9pbnN0YWxsc19jb20uY2x1YnByaXZpbGVnZXNwcm9fMjAyMDEwX2NhcnJpZXIuY3N2&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1060310
+DEBUG 2025-02-12 09:30:49,810 connectionpool 10 139888161594168 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=Cj5zdGF0cy9pbnN0YWxscy9pbnN0YWxsc19jb20uaWRhY3Rpdi5CaWdEZWFsXzIwMTUxMl9jb3VudHJ5LmNzdg%3D%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1077959
+DEBUG 2025-02-12 09:30:50,627 connectionpool 10 139888161594168 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CkNzdGF0cy9pbnN0YWxscy9pbnN0YWxsc19zeWQuYmlnZGVhbGNpLmNvZGVzcHJvbW9fMjAyMDAxX2NvdW50cnkuY3N2&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1078325
+DEBUG 2025-02-12 09:30:51,507 connectionpool 10 139888161594168 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CjxzdGF0cy9yYXRpbmdzL3JhdGluZ3NfY29tLmJpZ2RlYWxzY2FubmVyXzIwMTkwMl9vdmVydmlldy5jc3Y%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1054020
+DEBUG 2025-02-12 09:30:52,378 connectionpool 10 139888161594168 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=Cj5zdGF0cy9yYXRpbmdzL3JhdGluZ3NfY29tLmNsdWJwcml2aWxlZ2VzXzIwMjUwMl9vc192ZXJzaW9uLmNzdg%3D%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1043696
+DEBUG 2025-02-12 09:30:53,238 connectionpool 10 139888161594168 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=Cj9zdGF0cy9yYXRpbmdzL3JhdGluZ3NfY29tLmlkYWN0aXYuQmlnRGVhbF8yMDE2MDdfb3NfdmVyc2lvbi5jc3Y%3D&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 1065563
+DEBUG 2025-02-12 09:30:54,058 connectionpool 10 139888161594168 https://storage.googleapis.com:443 "GET /storage/v1/b/pubsite_prod_rev_17712529971520156702/o?pageToken=CjpzdGF0cy9yYXRpbmdzL3JhdGluZ3NfY29tLm1lZGlhbmV0LmVtbV8yMDIzMTJfbGFuZ3VhZ2UuY3N2&projection=noAcl&prefix=&prettyPrint=false HTTP/1.1" 200 911816
+INFO 2025-02-12 09:30:54,636 gcs_utils 10 139888161594168 Found 9804 CSV files in bucket pubsite_prod_rev_17712529971520156702
+INFO 2025-02-12 09:30:54,637 views 10 139888161594168 Retrieved 9804 CSV files
+INFO 2025-02-12 09:30:54,682 basehttp 10 139888161594168 "GET /get_reports/?uri=gs%3A%2F%2Fpubsite_prod_rev_17712529971520156702%2F HTTP/1.1" 200 3266825
+INFO 2025-02-12 09:33:17,164 autoreload 10 139888250821416 /app/play_reports/urls.py changed, reloading.
+INFO 2025-02-12 16:33:17,192 autoreload 20832 26784 C:\Users\halab\OneDrive - ESPRIT\Bureau\projet\play_console_importer\play_reports\urls.py changed, reloading.
+INFO 2025-02-12 16:33:17,217 autoreload 5252 14816 C:\Users\halab\OneDrive - ESPRIT\Bureau\projet\play_console_importer\play_reports\urls.py changed, reloading.
+INFO 2025-02-12 16:33:17,246 autoreload 13280 9504 C:\Users\halab\OneDrive - ESPRIT\Bureau\projet\play_console_importer\play_reports\urls.py changed, reloading.
+INFO 2025-02-12 09:33:19,155 autoreload 13 139976861657896 Watching for file changes with StatReloader
+INFO 2025-02-12 16:33:19,208 autoreload 30596 11132 Watching for file changes with StatReloader
+INFO 2025-02-12 16:33:19,215 autoreload 29036 16516 Watching for file changes with StatReloader
+INFO 2025-02-12 16:33:19,226 autoreload 18192 11436 Watching for file changes with StatReloader
+DEBUG 2025-02-12 09:33:19,714 _opentelemetry_tracing 13 139976861657896 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 09:33:19,768 urls 13 139976861657896 ==================================================
+INFO 2025-02-12 09:33:19,769 urls 13 139976861657896 REGISTERED URLS:
+INFO 2025-02-12 09:33:19,770 urls 13 139976861657896 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 09:33:19,770 urls 13 139976861657896 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-12 09:33:19,771 urls 13 139976861657896 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 09:33:19,771 urls 13 139976861657896 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 09:33:19,772 urls 13 139976861657896 ==================================================
+DEBUG 2025-02-12 16:33:20,980 _opentelemetry_tracing 30596 11132 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 16:33:20,997 _opentelemetry_tracing 18192 11436 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 16:33:21,022 _opentelemetry_tracing 29036 16516 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 16:33:21,043 urls 30596 11132 ==================================================
+INFO 2025-02-12 16:33:21,044 urls 30596 11132 REGISTERED URLS:
+INFO 2025-02-12 16:33:21,045 urls 30596 11132 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 16:33:21,046 urls 30596 11132 <URLResolver <module 'play_reports.urls' from 'C:\\Users\\halab\\OneDrive - ESPRIT\\Bureau\\projet\\play_console_importer\\play_reports\\urls.py'> (None:None) ''>
+INFO 2025-02-12 16:33:21,047 urls 30596 11132 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 16:33:21,048 urls 30596 11132 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 16:33:21,049 urls 30596 11132 ==================================================
+INFO 2025-02-12 16:33:21,059 urls 18192 11436 ==================================================
+INFO 2025-02-12 16:33:21,061 urls 18192 11436 REGISTERED URLS:
+INFO 2025-02-12 16:33:21,061 urls 18192 11436 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 16:33:21,062 urls 18192 11436 <URLResolver <module 'play_reports.urls' from 'C:\\Users\\halab\\OneDrive - ESPRIT\\Bureau\\projet\\play_console_importer\\play_reports\\urls.py'> (None:None) ''>
+INFO 2025-02-12 16:33:21,063 urls 18192 11436 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 16:33:21,064 urls 18192 11436 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 16:33:21,065 urls 18192 11436 ==================================================
+INFO 2025-02-12 16:33:21,081 urls 29036 16516 ==================================================
+INFO 2025-02-12 16:33:21,082 urls 29036 16516 REGISTERED URLS:
+INFO 2025-02-12 16:33:21,083 urls 29036 16516 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-12 16:33:21,084 urls 29036 16516 <URLResolver <module 'play_reports.urls' from 'C:\\Users\\halab\\OneDrive - ESPRIT\\Bureau\\projet\\play_console_importer\\play_reports\\urls.py'> (None:None) ''>
+INFO 2025-02-12 16:33:21,085 urls 29036 16516 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-12 16:33:21,085 urls 29036 16516 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-12 16:33:21,086 urls 29036 16516 ==================================================
+INFO 2025-02-12 09:34:10,732 basehttp 13 139976772438840 "GET /validate-gcs-uri-page/ HTTP/1.1" 200 5727
+WARNING 2025-02-12 09:34:15,066 log 13 139976772438840 Bad Request: /validate-gcs-uri/
+WARNING 2025-02-12 09:34:15,068 basehttp 13 139976772438840 "POST /validate-gcs-uri/ HTTP/1.1" 400 109
+INFO 2025-02-12 09:34:54,732 basehttp 13 139976772438840 "GET /display-gcs-files/ HTTP/1.1" 302 0
+INFO 2025-02-12 09:34:54,742 basehttp 13 139976772438840 "GET /validate-gcs-uri-page/ HTTP/1.1" 200 5727
+INFO 2025-02-12 09:35:12,599 basehttp 13 139976772438840 "GET /display-gcs-files/ HTTP/1.1" 302 0
+INFO 2025-02-12 09:35:12,609 basehttp 13 139976772438840 "GET /validate-gcs-uri-page/ HTTP/1.1" 200 5727
+INFO 2025-02-12 09:35:21,480 basehttp 13 139976772438840 "GET /display-gcs-files/ HTTP/1.1" 302 0
+INFO 2025-02-12 09:35:21,490 basehttp 13 139976772438840 "GET /validate-gcs-uri-page/ HTTP/1.1" 200 5727
+WARNING 2025-02-12 09:35:26,700 log 13 139976772438840 Bad Request: /validate-gcs-uri/
+WARNING 2025-02-12 09:35:26,702 basehttp 13 139976772438840 "POST /validate-gcs-uri/ HTTP/1.1" 400 109
+WARNING 2025-02-12 09:35:37,789 log 13 139976772438840 Bad Request: /validate-gcs-uri/
+WARNING 2025-02-12 09:35:37,791 basehttp 13 139976772438840 "POST /validate-gcs-uri/ HTTP/1.1" 400 109
+WARNING 2025-02-12 09:35:47,527 log 13 139976772438840 Bad Request: /validate-gcs-uri/
+WARNING 2025-02-12 09:35:47,528 basehttp 13 139976772438840 "POST /validate-gcs-uri/ HTTP/1.1" 400 109
+WARNING 2025-02-12 09:35:48,307 log 13 139976772438840 Bad Request: /validate-gcs-uri/
+WARNING 2025-02-12 09:35:48,309 basehttp 13 139976772438840 "POST /validate-gcs-uri/ HTTP/1.1" 400 109
+WARNING 2025-02-12 09:36:09,574 log 13 139976772438840 Bad Request: /validate-play-store/
+WARNING 2025-02-12 09:36:09,575 basehttp 13 139976772438840 "GET /validate-play-store/ HTTP/1.1" 400 58
+WARNING 2025-02-12 09:36:27,727 log 13 139976772438840 Not Found: /
+WARNING 2025-02-12 09:36:27,729 basehttp 13 139976772438840 "GET / HTTP/1.1" 404 4716
+WARNING 2025-02-12 09:36:28,388 log 13 139976772438840 Not Found: /
+WARNING 2025-02-12 09:36:28,391 basehttp 13 139976772438840 "GET / HTTP/1.1" 404 4716
+WARNING 2025-02-12 09:36:30,364 log 13 139976772438840 Not Found: /
+WARNING 2025-02-12 09:36:30,365 basehttp 13 139976772438840 "GET / HTTP/1.1" 404 4716
+INFO 2025-02-12 09:36:40,591 basehttp 13 139976772438840 "GET /validate-gcs-uri-page/ HTTP/1.1" 200 856
+INFO 2025-02-12 09:36:44,388 basehttp 13 139976772438840 "POST /validate-gcs-uri-page/ HTTP/1.1" 200 598
+INFO 2025-02-12 09:36:47,905 basehttp 13 139976772438840 "POST /validate-gcs-uri-page/ HTTP/1.1" 200 598
+INFO 2025-02-12 09:36:50,341 basehttp 13 139976772438840 "POST /validate-gcs-uri-page/ HTTP/1.1" 200 598
+INFO 2025-02-12 09:36:52,807 basehttp 13 139976772438840 "GET /validate-gcs-uri-page/ HTTP/1.1" 200 598
+INFO 2025-02-12 16:36:56,128 autoreload 29036 16516 C:\Users\halab\OneDrive - ESPRIT\Bureau\projet\play_console_importer\play_reports\views.py changed, reloading.
+INFO 2025-02-12 16:36:56,597 autoreload 18192 11436 C:\Users\halab\OneDrive - ESPRIT\Bureau\projet\play_console_importer\play_reports\views.py changed, reloading.
+INFO 2025-02-12 16:36:56,633 autoreload 30596 11132 C:\Users\halab\OneDrive - ESPRIT\Bureau\projet\play_console_importer\play_reports\views.py changed, reloading.
+INFO 2025-02-12 09:36:57,179 autoreload 13 139976861657896 /app/play_reports/views.py changed, reloading.
+INFO 2025-02-12 16:36:57,992 autoreload 16204 30664 Watching for file changes with StatReloader
+INFO 2025-02-12 16:36:58,380 autoreload 15784 12600 Watching for file changes with StatReloader
+INFO 2025-02-12 16:36:58,411 autoreload 17568 18924 Watching for file changes with StatReloader
+INFO 2025-02-12 09:36:59,004 autoreload 19 140126628215592 Watching for file changes with StatReloader
+DEBUG 2025-02-12 16:36:59,181 _opentelemetry_tracing 16204 30664 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 09:36:59,460 _opentelemetry_tracing 19 140126628215592 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 16:36:59,953 _opentelemetry_tracing 15784 12600 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 16:37:00,021 _opentelemetry_tracing 17568 18924 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 16:38:39,591 autoreload 17568 18924 C:\Users\halab\OneDrive - ESPRIT\Bureau\projet\play_console_importer\play_reports\views.py changed, reloading.
+INFO 2025-02-12 09:38:39,744 autoreload 19 140126628215592 /app/play_reports/views.py changed, reloading.
+INFO 2025-02-12 16:38:39,951 autoreload 15784 12600 C:\Users\halab\OneDrive - ESPRIT\Bureau\projet\play_console_importer\play_reports\views.py changed, reloading.
+INFO 2025-02-12 16:38:39,971 autoreload 16204 30664 C:\Users\halab\OneDrive - ESPRIT\Bureau\projet\play_console_importer\play_reports\views.py changed, reloading.
+INFO 2025-02-12 09:38:40,907 autoreload 21 140474288184104 Watching for file changes with StatReloader
+DEBUG 2025-02-12 09:38:41,245 _opentelemetry_tracing 21 140474288184104 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 16:38:41,324 autoreload 8520 14404 Watching for file changes with StatReloader
+INFO 2025-02-12 16:38:41,735 autoreload 19776 25036 Watching for file changes with StatReloader
+INFO 2025-02-12 16:38:41,753 autoreload 25556 30644 Watching for file changes with StatReloader
+DEBUG 2025-02-12 16:38:42,825 _opentelemetry_tracing 8520 14404 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 16:38:43,345 _opentelemetry_tracing 25556 30644 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 16:38:43,360 _opentelemetry_tracing 19776 25036 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 09:42:42,257 _opentelemetry_tracing 8 140432189983528 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 09:42:44,662 autoreload 10 139896388619048 Watching for file changes with StatReloader
+DEBUG 2025-02-12 09:42:44,923 _opentelemetry_tracing 10 139896388619048 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 09:44:31,592 _opentelemetry_tracing 8 140434881710888 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 09:44:33,727 autoreload 10 140393152936744 Watching for file changes with StatReloader
+DEBUG 2025-02-12 09:44:34,008 _opentelemetry_tracing 10 140393152936744 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 09:47:45,629 _opentelemetry_tracing 8 140084818459432 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 09:47:47,830 autoreload 10 140526343277352 Watching for file changes with StatReloader
+DEBUG 2025-02-12 09:47:48,080 _opentelemetry_tracing 10 140526343277352 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 09:50:41,892 _opentelemetry_tracing 8 140569124670248 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 09:50:44,101 autoreload 10 140554595470120 Watching for file changes with StatReloader
+DEBUG 2025-02-12 09:50:44,331 _opentelemetry_tracing 10 140554595470120 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 09:51:29,569 _opentelemetry_tracing 8 139969301891880 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 09:51:32,174 autoreload 10 139948837739304 Watching for file changes with StatReloader
+DEBUG 2025-02-12 09:51:32,504 _opentelemetry_tracing 10 139948837739304 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 09:57:06,653 _opentelemetry_tracing 8 140068549245736 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 09:57:08,964 autoreload 10 140417020508968 Watching for file changes with StatReloader
+DEBUG 2025-02-12 09:57:09,286 _opentelemetry_tracing 10 140417020508968 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 09:59:18,570 _opentelemetry_tracing 8 140446998477608 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 09:59:19,864 autoreload 10 140066731350824 Watching for file changes with StatReloader
+DEBUG 2025-02-12 09:59:20,019 _opentelemetry_tracing 10 140066731350824 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 09:59:46,651 _opentelemetry_tracing 8 140153884302120 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 09:59:47,785 autoreload 10 140099801512744 Watching for file changes with StatReloader
+DEBUG 2025-02-12 09:59:47,938 _opentelemetry_tracing 10 140099801512744 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 10:02:49,560 _opentelemetry_tracing 8 140693245385512 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 10:02:50,714 autoreload 10 140222249081640 Watching for file changes with StatReloader
+DEBUG 2025-02-12 10:02:50,873 _opentelemetry_tracing 10 140222249081640 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 10:06:20,066 _opentelemetry_tracing 8 139621655153448 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 10:06:21,286 autoreload 10 139628770130728 Watching for file changes with StatReloader
+DEBUG 2025-02-12 10:06:21,447 _opentelemetry_tracing 10 139628770130728 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 10:10:03,851 _opentelemetry_tracing 8 140154143501096 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 10:10:04,979 autoreload 10 140169349532456 Watching for file changes with StatReloader
+DEBUG 2025-02-12 10:10:05,120 _opentelemetry_tracing 10 140169349532456 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-12 10:13:03,912 _opentelemetry_tracing 8 140401003367208 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-12 10:13:05,153 autoreload 10 140233793948456 Watching for file changes with StatReloader
+DEBUG 2025-02-12 10:13:05,306 _opentelemetry_tracing 10 140233793948456 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 04:15:01,692 _opentelemetry_tracing 8 140492282252072 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 04:15:07,903 autoreload 10 139958662409000 Watching for file changes with StatReloader
+DEBUG 2025-02-13 04:15:08,769 _opentelemetry_tracing 10 139958662409000 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 04:18:27,198 _opentelemetry_tracing 7 140084097272616 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 04:18:29,429 autoreload 9 140338419559208 Watching for file changes with StatReloader
+DEBUG 2025-02-13 04:18:29,684 _opentelemetry_tracing 9 140338419559208 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 04:55:40,917 _opentelemetry_tracing 8 140189658204968 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 04:55:42,610 autoreload 10 140349820156712 Watching for file changes with StatReloader
+DEBUG 2025-02-13 04:55:42,836 _opentelemetry_tracing 10 140349820156712 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 05:03:07,279 _opentelemetry_tracing 9 140066736425768 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:03:09,118 autoreload 11 140044085046056 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:03:09,333 _opentelemetry_tracing 11 140044085046056 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 05:03:32,463 _opentelemetry_tracing 8 140283447790376 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:03:34,084 autoreload 10 140002265439016 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:03:34,294 _opentelemetry_tracing 10 140002265439016 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:04:08,188 autoreload 10 140002265439016 /app/play_reports/views.py changed, reloading.
+INFO 2025-02-13 05:04:08,969 autoreload 12 139748549118760 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:04:09,167 _opentelemetry_tracing 12 139748549118760 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:04:11,629 autoreload 12 139748549118760 /app/play_reports/views.py changed, reloading.
+INFO 2025-02-13 05:04:12,464 autoreload 14 140368803482408 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:04:12,677 _opentelemetry_tracing 14 140368803482408 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 05:04:53,455 _opentelemetry_tracing 8 139905700260648 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:04:55,002 autoreload 10 140183422552872 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:04:55,184 _opentelemetry_tracing 10 140183422552872 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:05:38,539 autoreload 10 140183422552872 /app/play_reports/views.py changed, reloading.
+INFO 2025-02-13 05:05:40,102 autoreload 12 140350703729448 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:05:40,446 _opentelemetry_tracing 12 140350703729448 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:06:06,299 autoreload 12 140350703729448 /app/play_reports/views.py changed, reloading.
+INFO 2025-02-13 05:06:07,117 autoreload 14 139657467824936 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:06:07,327 _opentelemetry_tracing 14 139657467824936 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 05:06:46,943 _opentelemetry_tracing 8 139851761908520 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:06:48,701 autoreload 10 139677219646248 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:06:48,931 _opentelemetry_tracing 10 139677219646248 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:07:59,133 autoreload 10 139677219646248 /app/play_reports/views.py changed, reloading.
+INFO 2025-02-13 05:08:00,742 autoreload 12 139722021464872 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:08:01,113 _opentelemetry_tracing 12 139722021464872 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 05:08:30,030 _opentelemetry_tracing 8 140609767504680 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:08:31,846 autoreload 10 139993920850728 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:08:32,084 _opentelemetry_tracing 10 139993920850728 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:09:35,696 autoreload 10 139993920850728 /app/play_reports/views.py changed, reloading.
+INFO 2025-02-13 05:09:36,517 autoreload 12 139746715597608 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:09:36,770 _opentelemetry_tracing 12 139746715597608 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 05:10:03,267 _opentelemetry_tracing 8 140699954883368 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:10:05,159 autoreload 10 139829177539368 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:10:05,378 _opentelemetry_tracing 10 139829177539368 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 05:13:00,636 _opentelemetry_tracing 7 139623978126120 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 05:13:00,741 _opentelemetry_tracing 8 139802254138152 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:13:02,601 autoreload 9 139923930389288 Watching for file changes with StatReloader
+INFO 2025-02-13 05:13:02,696 autoreload 10 140338521307944 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:13:02,818 _opentelemetry_tracing 9 139923930389288 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 05:13:02,921 _opentelemetry_tracing 10 140338521307944 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 05:14:14,056 _opentelemetry_tracing 8 140387365059368 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 05:14:14,057 _opentelemetry_tracing 8 139657418267432 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:14:15,616 autoreload 10 140006685694760 Watching for file changes with StatReloader
+INFO 2025-02-13 05:14:15,616 autoreload 10 140485113051944 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:14:15,824 _opentelemetry_tracing 10 140006685694760 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 05:14:15,841 _opentelemetry_tracing 10 140485113051944 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:18:28,559 autoreload 10 140006685694760 /app/play_reports/views.py changed, reloading.
+INFO 2025-02-13 05:18:28,570 autoreload 10 140485113051944 /app/play_reports/views.py changed, reloading.
+INFO 2025-02-13 05:18:29,495 autoreload 12 140690647157544 Watching for file changes with StatReloader
+INFO 2025-02-13 05:18:29,498 autoreload 12 140005419731752 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:18:29,732 _opentelemetry_tracing 12 140005419731752 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 05:18:29,738 _opentelemetry_tracing 12 140690647157544 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:18:29,751 urls 12 140005419731752 ==================================================
+INFO 2025-02-13 05:18:29,752 urls 12 140005419731752 REGISTERED URLS:
+INFO 2025-02-13 05:18:29,753 urls 12 140005419731752 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 05:18:29,753 urls 12 140005419731752 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 05:18:29,754 urls 12 140005419731752 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 05:18:29,754 urls 12 140005419731752 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 05:18:29,754 urls 12 140005419731752 ==================================================
+INFO 2025-02-13 05:18:29,760 urls 12 140690647157544 ==================================================
+INFO 2025-02-13 05:18:29,760 urls 12 140690647157544 REGISTERED URLS:
+INFO 2025-02-13 05:18:29,761 urls 12 140690647157544 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 05:18:29,761 urls 12 140690647157544 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 05:18:29,761 urls 12 140690647157544 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 05:18:29,762 urls 12 140690647157544 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 05:18:29,762 urls 12 140690647157544 ==================================================
+INFO 2025-02-13 05:19:53,424 autoreload 12 140005419731752 /app/play_reports/views.py changed, reloading.
+INFO 2025-02-13 05:19:53,434 autoreload 12 140690647157544 /app/play_reports/views.py changed, reloading.
+INFO 2025-02-13 05:19:54,283 autoreload 14 139793815407400 Watching for file changes with StatReloader
+INFO 2025-02-13 05:19:54,283 autoreload 14 140427151543080 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:19:54,487 _opentelemetry_tracing 14 139793815407400 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 05:19:54,495 _opentelemetry_tracing 14 140427151543080 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:19:54,513 urls 14 139793815407400 ==================================================
+INFO 2025-02-13 05:19:54,514 urls 14 139793815407400 REGISTERED URLS:
+INFO 2025-02-13 05:19:54,515 urls 14 139793815407400 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 05:19:54,516 urls 14 139793815407400 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 05:19:54,516 urls 14 139793815407400 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 05:19:54,516 urls 14 139793815407400 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 05:19:54,517 urls 14 139793815407400 ==================================================
+INFO 2025-02-13 05:19:54,521 urls 14 140427151543080 ==================================================
+INFO 2025-02-13 05:19:54,523 urls 14 140427151543080 REGISTERED URLS:
+INFO 2025-02-13 05:19:54,523 urls 14 140427151543080 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 05:19:54,524 urls 14 140427151543080 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 05:19:54,524 urls 14 140427151543080 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 05:19:54,524 urls 14 140427151543080 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 05:19:54,525 urls 14 140427151543080 ==================================================
+DEBUG 2025-02-13 05:22:21,910 _opentelemetry_tracing 8 139959542795048 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 05:22:21,910 _opentelemetry_tracing 8 140322250734376 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:22:21,951 urls 8 139959542795048 ==================================================
+INFO 2025-02-13 05:22:21,951 urls 8 140322250734376 ==================================================
+INFO 2025-02-13 05:22:21,951 urls 8 139959542795048 REGISTERED URLS:
+INFO 2025-02-13 05:22:21,952 urls 8 140322250734376 REGISTERED URLS:
+INFO 2025-02-13 05:22:21,952 urls 8 139959542795048 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 05:22:21,952 urls 8 139959542795048 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 05:22:21,952 urls 8 140322250734376 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 05:22:21,953 urls 8 139959542795048 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 05:22:21,953 urls 8 139959542795048 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 05:22:21,953 urls 8 140322250734376 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 05:22:21,954 urls 8 139959542795048 ==================================================
+INFO 2025-02-13 05:22:21,954 urls 8 140322250734376 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 05:22:21,954 urls 8 140322250734376 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 05:22:21,954 urls 8 140322250734376 ==================================================
+INFO 2025-02-13 05:22:23,671 autoreload 10 139948005116712 Watching for file changes with StatReloader
+INFO 2025-02-13 05:22:23,672 autoreload 10 140231202536232 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:22:23,869 _opentelemetry_tracing 10 140231202536232 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 05:22:23,881 _opentelemetry_tracing 10 139948005116712 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:22:23,893 urls 10 140231202536232 ==================================================
+INFO 2025-02-13 05:22:23,894 urls 10 140231202536232 REGISTERED URLS:
+INFO 2025-02-13 05:22:23,894 urls 10 140231202536232 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 05:22:23,895 urls 10 140231202536232 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 05:22:23,896 urls 10 140231202536232 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 05:22:23,896 urls 10 140231202536232 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 05:22:23,896 urls 10 140231202536232 ==================================================
+INFO 2025-02-13 05:22:23,903 urls 10 139948005116712 ==================================================
+INFO 2025-02-13 05:22:23,903 urls 10 139948005116712 REGISTERED URLS:
+INFO 2025-02-13 05:22:23,904 urls 10 139948005116712 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 05:22:23,904 urls 10 139948005116712 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 05:22:23,904 urls 10 139948005116712 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 05:22:23,905 urls 10 139948005116712 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 05:22:23,905 urls 10 139948005116712 ==================================================
+WARNING 2025-02-13 05:23:37,508 log 10 139947920403256 Not Found: /
+WARNING 2025-02-13 05:23:37,510 basehttp 10 139947920403256 "GET / HTTP/1.1" 404 4716
+INFO 2025-02-13 05:24:00,320 autoreload 10 139948005116712 /app/play_reports/urls.py changed, reloading.
+INFO 2025-02-13 05:24:00,861 autoreload 10 140231202536232 /app/play_reports/urls.py changed, reloading.
+INFO 2025-02-13 05:24:01,693 autoreload 13 140479640025896 Watching for file changes with StatReloader
+INFO 2025-02-13 05:24:01,702 autoreload 12 140350734846760 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:24:01,969 _opentelemetry_tracing 12 140350734846760 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 05:24:01,969 _opentelemetry_tracing 13 140479640025896 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:24:01,997 urls 12 140350734846760 ==================================================
+INFO 2025-02-13 05:24:01,997 urls 13 140479640025896 ==================================================
+INFO 2025-02-13 05:24:01,998 urls 12 140350734846760 REGISTERED URLS:
+INFO 2025-02-13 05:24:01,998 urls 13 140479640025896 REGISTERED URLS:
+INFO 2025-02-13 05:24:01,998 urls 13 140479640025896 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 05:24:01,998 urls 12 140350734846760 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 05:24:01,998 urls 13 140479640025896 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 05:24:01,999 urls 13 140479640025896 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 05:24:01,999 urls 13 140479640025896 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 05:24:01,999 urls 12 140350734846760 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 05:24:01,999 urls 13 140479640025896 ==================================================
+INFO 2025-02-13 05:24:01,999 urls 12 140350734846760 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 05:24:02,000 urls 12 140350734846760 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 05:24:02,000 urls 12 140350734846760 ==================================================
+DEBUG 2025-02-13 05:47:37,358 _opentelemetry_tracing 8 139940962425640 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:47:37,389 urls 8 139940962425640 ==================================================
+INFO 2025-02-13 05:47:37,389 urls 8 139940962425640 REGISTERED URLS:
+INFO 2025-02-13 05:47:37,390 urls 8 139940962425640 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 05:47:37,391 urls 8 139940962425640 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 05:47:37,391 urls 8 139940962425640 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 05:47:37,391 urls 8 139940962425640 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 05:47:37,392 urls 8 139940962425640 ==================================================
+INFO 2025-02-13 05:47:39,200 autoreload 10 140025463954216 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:47:39,406 _opentelemetry_tracing 10 140025463954216 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:47:39,428 urls 10 140025463954216 ==================================================
+INFO 2025-02-13 05:47:39,428 urls 10 140025463954216 REGISTERED URLS:
+INFO 2025-02-13 05:47:39,429 urls 10 140025463954216 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 05:47:39,429 urls 10 140025463954216 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 05:47:39,430 urls 10 140025463954216 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 05:47:39,430 urls 10 140025463954216 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 05:47:39,430 urls 10 140025463954216 ==================================================
+DEBUG 2025-02-13 05:49:26,887 _opentelemetry_tracing 8 139978876873512 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:49:26,916 urls 8 139978876873512 ==================================================
+INFO 2025-02-13 05:49:26,916 urls 8 139978876873512 REGISTERED URLS:
+INFO 2025-02-13 05:49:26,917 urls 8 139978876873512 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 05:49:26,917 urls 8 139978876873512 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 05:49:26,918 urls 8 139978876873512 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 05:49:26,918 urls 8 139978876873512 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 05:49:26,918 urls 8 139978876873512 ==================================================
+INFO 2025-02-13 05:49:28,776 autoreload 10 140183150209832 Watching for file changes with StatReloader
+DEBUG 2025-02-13 05:49:28,982 _opentelemetry_tracing 10 140183150209832 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 05:49:29,002 urls 10 140183150209832 ==================================================
+INFO 2025-02-13 05:49:29,002 urls 10 140183150209832 REGISTERED URLS:
+INFO 2025-02-13 05:49:29,003 urls 10 140183150209832 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 05:49:29,003 urls 10 140183150209832 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 05:49:29,004 urls 10 140183150209832 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 05:49:29,004 urls 10 140183150209832 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 05:49:29,004 urls 10 140183150209832 ==================================================
+INFO 2025-02-13 06:01:21,801 autoreload 10 140183150209832 /app/config/urls.py changed, reloading.
+INFO 2025-02-13 06:01:21,826 autoreload 12 140350734846760 /app/config/urls.py changed, reloading.
+INFO 2025-02-13 06:01:23,770 autoreload 14 140584431799080 Watching for file changes with StatReloader
+INFO 2025-02-13 06:01:23,771 autoreload 12 140566663449384 Watching for file changes with StatReloader
+DEBUG 2025-02-13 06:01:24,182 _opentelemetry_tracing 14 140584431799080 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 06:01:24,182 _opentelemetry_tracing 12 140566663449384 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 06:01:24,222 urls 12 140566663449384 ==================================================
+INFO 2025-02-13 06:01:24,223 urls 14 140584431799080 ==================================================
+INFO 2025-02-13 06:01:24,223 urls 14 140584431799080 REGISTERED URLS:
+INFO 2025-02-13 06:01:24,223 urls 12 140566663449384 REGISTERED URLS:
+INFO 2025-02-13 06:01:24,224 urls 14 140584431799080 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 06:01:24,225 urls 12 140566663449384 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 06:01:24,225 urls 14 140584431799080 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 06:01:24,225 urls 14 140584431799080 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 06:01:24,225 urls 12 140566663449384 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 06:01:24,226 urls 14 140584431799080 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 06:01:24,226 urls 12 140566663449384 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 06:01:24,226 urls 14 140584431799080 ==================================================
+INFO 2025-02-13 06:01:24,226 urls 12 140566663449384 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 06:01:24,227 urls 12 140566663449384 ==================================================
+INFO 2025-02-13 06:05:45,624 autoreload 12 140566663449384 /app/config/settings.py changed, reloading.
+INFO 2025-02-13 06:05:45,641 autoreload 14 140584431799080 /app/config/settings.py changed, reloading.
+INFO 2025-02-13 06:05:47,598 autoreload 16 140600834366248 Watching for file changes with StatReloader
+INFO 2025-02-13 06:05:47,599 autoreload 14 140357099776808 Watching for file changes with StatReloader
+DEBUG 2025-02-13 06:05:48,066 _opentelemetry_tracing 14 140357099776808 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 06:05:48,066 _opentelemetry_tracing 16 140600834366248 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 06:05:48,115 urls 16 140600834366248 ==================================================
+INFO 2025-02-13 06:05:48,116 urls 14 140357099776808 ==================================================
+INFO 2025-02-13 06:05:48,116 urls 16 140600834366248 REGISTERED URLS:
+INFO 2025-02-13 06:05:48,116 urls 14 140357099776808 REGISTERED URLS:
+INFO 2025-02-13 06:05:48,117 urls 16 140600834366248 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 06:05:48,117 urls 14 140357099776808 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 06:05:48,118 urls 16 140600834366248 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 06:05:48,118 urls 14 140357099776808 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 06:05:48,119 urls 16 140600834366248 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 06:05:48,119 urls 14 140357099776808 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 06:05:48,120 urls 16 140600834366248 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 06:05:48,120 urls 14 140357099776808 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 06:05:48,120 urls 14 140357099776808 ==================================================
+INFO 2025-02-13 06:05:48,120 urls 16 140600834366248 ==================================================
+INFO 2025-02-13 06:06:03,702 basehttp 14 140357014977336 "GET / HTTP/1.1" 302 0
+INFO 2025-02-13 06:06:03,754 basehttp 14 140357014977336 "GET /validate-gcs-uri-page/ HTTP/1.1" 200 1251
+DEBUG 2025-02-13 06:06:21,365 _opentelemetry_tracing 8 139984268589864 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 06:06:21,368 _opentelemetry_tracing 8 140439395220264 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 06:06:21,434 urls 8 139984268589864 ==================================================
+INFO 2025-02-13 06:06:21,435 urls 8 139984268589864 REGISTERED URLS:
+INFO 2025-02-13 06:06:21,435 urls 8 139984268589864 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 06:06:21,436 urls 8 139984268589864 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 06:06:21,436 urls 8 139984268589864 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 06:06:21,437 urls 8 139984268589864 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 06:06:21,437 urls 8 139984268589864 ==================================================
+INFO 2025-02-13 06:06:21,440 urls 8 140439395220264 ==================================================
+INFO 2025-02-13 06:06:21,441 urls 8 140439395220264 REGISTERED URLS:
+INFO 2025-02-13 06:06:21,441 urls 8 140439395220264 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 06:06:21,442 urls 8 140439395220264 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 06:06:21,443 urls 8 140439395220264 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 06:06:21,443 urls 8 140439395220264 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 06:06:21,444 urls 8 140439395220264 ==================================================
+INFO 2025-02-13 06:06:23,754 autoreload 10 139802204240680 Watching for file changes with StatReloader
+INFO 2025-02-13 06:06:23,783 autoreload 10 139694050966312 Watching for file changes with StatReloader
+DEBUG 2025-02-13 06:06:24,039 _opentelemetry_tracing 10 139802204240680 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 06:06:24,058 _opentelemetry_tracing 10 139694050966312 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 06:06:24,066 urls 10 139802204240680 ==================================================
+INFO 2025-02-13 06:06:24,067 urls 10 139802204240680 REGISTERED URLS:
+INFO 2025-02-13 06:06:24,068 urls 10 139802204240680 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 06:06:24,068 urls 10 139802204240680 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 06:06:24,069 urls 10 139802204240680 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 06:06:24,069 urls 10 139802204240680 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 06:06:24,070 urls 10 139802204240680 ==================================================
+INFO 2025-02-13 06:06:24,088 urls 10 139694050966312 ==================================================
+INFO 2025-02-13 06:06:24,088 urls 10 139694050966312 REGISTERED URLS:
+INFO 2025-02-13 06:06:24,089 urls 10 139694050966312 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 06:06:24,090 urls 10 139694050966312 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 06:06:24,090 urls 10 139694050966312 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 06:06:24,091 urls 10 139694050966312 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 06:06:24,091 urls 10 139694050966312 ==================================================
+INFO 2025-02-13 06:08:14,863 basehttp 10 139802119510840 "GET / HTTP/1.1" 302 0
+INFO 2025-02-13 06:08:14,891 basehttp 10 139802119510840 "GET /validate-gcs-uri-page/ HTTP/1.1" 200 1251
+WARNING 2025-02-13 06:08:16,175 log 10 139802119510840 Not Found: /favicon.ico
+WARNING 2025-02-13 06:08:16,177 basehttp 10 139802119510840 "GET /favicon.ico HTTP/1.1" 404 5000
+ERROR 2025-02-13 06:09:29,295 views 10 139802119580472 Invalid GCS URI pattern: gs://pubsite_prod_rev_17712529971520156702
+INFO 2025-02-13 06:09:29,301 basehttp 10 139802119580472 "POST /validate-gcs-uri/ HTTP/1.1" 302 0
+INFO 2025-02-13 06:09:29,310 basehttp 10 139802119580472 "GET /validate-gcs-uri-page/ HTTP/1.1" 200 1381
+ERROR 2025-02-13 06:09:35,800 views 10 139802119580472 Invalid GCS URI pattern: gs://pubsite_prod_rev_17712529971520156702
+INFO 2025-02-13 06:09:35,802 basehttp 10 139802119580472 "POST /validate-gcs-uri/ HTTP/1.1" 302 0
+INFO 2025-02-13 06:09:35,810 basehttp 10 139802119580472 "GET /validate-gcs-uri-page/ HTTP/1.1" 200 1381
+ERROR 2025-02-13 06:09:44,131 views 10 139802119580472 Invalid GCS URI pattern: gs://pubsite_prod_rev_17712529971520156702
+INFO 2025-02-13 06:09:44,134 basehttp 10 139802119580472 "POST /validate-gcs-uri/ HTTP/1.1" 302 0
+INFO 2025-02-13 06:09:44,143 basehttp 10 139802119580472 "GET /validate-gcs-uri-page/ HTTP/1.1" 200 1381
+INFO 2025-02-13 06:10:36,544 autoreload 10 139802204240680 /app/play_reports/views.py changed, reloading.
+INFO 2025-02-13 06:10:36,572 autoreload 10 139694050966312 /app/play_reports/views.py changed, reloading.
+INFO 2025-02-13 06:10:37,577 autoreload 12 140336329141032 Watching for file changes with StatReloader
+INFO 2025-02-13 06:10:37,578 autoreload 15 140322402847528 Watching for file changes with StatReloader
+DEBUG 2025-02-13 06:10:37,852 _opentelemetry_tracing 15 140322402847528 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+DEBUG 2025-02-13 06:10:37,864 _opentelemetry_tracing 12 140336329141032 This service is instrumented using OpenTelemetry. OpenTelemetry or one of its components could not be imported; please add compatible versions of opentelemetry-api and opentelemetry-instrumentation packages in order to get Storage Tracing data.
+INFO 2025-02-13 06:10:37,874 urls 15 140322402847528 ==================================================
+INFO 2025-02-13 06:10:37,875 urls 15 140322402847528 REGISTERED URLS:
+INFO 2025-02-13 06:10:37,876 urls 15 140322402847528 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 06:10:37,877 urls 15 140322402847528 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 06:10:37,877 urls 15 140322402847528 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 06:10:37,879 urls 15 140322402847528 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 06:10:37,879 urls 15 140322402847528 ==================================================
+INFO 2025-02-13 06:10:37,890 urls 12 140336329141032 ==================================================
+INFO 2025-02-13 06:10:37,891 urls 12 140336329141032 REGISTERED URLS:
+INFO 2025-02-13 06:10:37,891 urls 12 140336329141032 <URLResolver <URLPattern list> (admin:admin) 'admin/'>
+INFO 2025-02-13 06:10:37,892 urls 12 140336329141032 <URLResolver <module 'play_reports.urls' from '/app/play_reports/urls.py'> (None:None) ''>
+INFO 2025-02-13 06:10:37,893 urls 12 140336329141032 <URLPattern '^static/(?P<path>.*)$'>
+INFO 2025-02-13 06:10:37,893 urls 12 140336329141032 <URLPattern '^media/(?P<path>.*)$'>
+INFO 2025-02-13 06:10:37,894 urls 12 140336329141032 ==================================================
+INFO 2025-02-13 06:10:51,821 autoreload 12 140336329141032 /app/config/settings.py changed, reloading.
+INFO 2025-02-13 06:10:51,828 autoreload 15 140322402847528 /app/config/settings.py changed, reloading.

@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Afficher toutes les variables d'environnement
+echo "Variables d'environnement :"
+env
+
+# Vérifier le fichier de credentials
+echo "Contenu du fichier de credentials :"
+cat $GOOGLE_APPLICATION_CREDENTIALS || echo "Fichier de credentials introuvable"
+
+# Vérifier les fichiers de templates
+echo "Liste des fichiers de templates :"
+find /app/play_reports/templates -type f
+
+# Wait for PostgreSQL
+echo "Waiting for PostgreSQL..."
+while ! nc -z db 5432; do
+    sleep 0.1
+done
+echo "PostgreSQL started"
+
+# Apply database migrations
+echo "Applying database migrations..."
+python manage.py migrate
+
+# Vérifier les URLs enregistrées
+echo "URLs enregistrées :"
+python manage.py show_urls
+
+# Start server
+echo "Starting server..."
+python manage.py runserver 0.0.0.0:8000 --verbosity 2
