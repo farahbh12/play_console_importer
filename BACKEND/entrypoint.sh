@@ -27,6 +27,5 @@ python manage.py migrate
 echo "URLs enregistrées :"
 python manage.py show_urls
 
-# Start server
-echo "Starting server..."
-python manage.py runserver 0.0.0.0:8000 --verbosity 2
+# Execute the main command (passed from CMD or docker-compose)
+exec "$@"

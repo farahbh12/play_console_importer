@@ -31,7 +31,7 @@ services:
       - redis
 
   frontend:
-    build: ./FRONTEND
+    build: ./frontend
     ports:
       - "3000:80"
     depends_on:
