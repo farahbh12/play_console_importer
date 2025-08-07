@@ -249,21 +249,6 @@ GOOGLE_APPLICATION_CREDENTIALS = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 GCS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME', 'pubsite_prod_rev_17712529971520156702')
 GCP_PROJECT_ID = os.getenv('GCP_PROJECT_ID', 'pc-api-4722596725443039036-618')
 
-# Logique pour gérer les credentials Google Cloud en production (Railway/Render)
-GOOGLE_CREDENTIALS_JSON = os.getenv('GOOGLE_CREDENTIALS_JSON')
-GOOGLE_APPLICATION_CREDENTIALS_PATH = os.path.join(BASE_DIR, 'credentials.json')
-
-if GOOGLE_CREDENTIALS_JSON:
-    # En production, créer le fichier credentials.json à partir de la variable d'environnement
-    with open(GOOGLE_APPLICATION_CREDENTIALS_PATH, 'w') as f:
-        f.write(GOOGLE_CREDENTIALS_JSON)
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = GOOGLE_APPLICATION_CREDENTIALS_PATH
-
-elif not os.path.exists(GOOGLE_APPLICATION_CREDENTIALS_PATH):
-    # En développement, si le fichier est manquant, afficher un avertissement
-    print("\n!!! ATTENTION : Le fichier 'credentials.json' est manquant. !!!")
-    print("L'application ne pourra pas s'authentifier auprès des services Google Cloud.")
-    print(f"Veuillez le placer dans le répertoire : {BASE_DIR}\n")
-else:
-    # En développement, si le fichier existe, définir la variable d'environnement
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = GOOGLE_APPLICATION_CREDENTIALS_PATH
+# Assurez-vous que le fichier de credentials est accessible
+if GOOGLE_APPLICATION_CREDENTIALS and not os.path.exists(GOOGLE_APPLICATION_CREDENTIALS):
+    logger.warning(f"Fichier de credentials Google Cloud non trouvé à l'emplacement: {GOOGLE_APPLICATION_CREDENTIALS}")
