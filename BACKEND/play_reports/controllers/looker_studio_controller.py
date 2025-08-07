@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.db import connection
 from play_reports.serializers.looker_studio_serializers import TableDataRequestSerializer
-from .authentication import LookerStudioKeyAuthentication # Nouveau système d'authentification
+from play_reports.authentication import LookerStudioKeyAuthentication # Nouveau système d'authentification
 from rest_framework.permissions import AllowAny # Permissions simplifiées
 import logging
 import datetime

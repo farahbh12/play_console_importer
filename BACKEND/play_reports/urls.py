@@ -13,8 +13,7 @@ from play_reports.controllers.gcs_controlleur import (
     get_data_source_details,
     display_gcs_files,
 )
-# Les vues pour Looker Studio
-from play_reports.controllers.google_play_controller import google_play_data
+
 from play_reports.controllers.looker_studio_controller import (
     TableListView,
     TableSchemaView,

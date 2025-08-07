@@ -23,18 +23,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 # Render définit automatiquement la variable d'environnement RENDER.
 DEBUG = os.getenv('RENDER') != 'True'
 
-# En production, Render (ou Railway) définit la variable d'environnement RENDER_EXTERNAL_HOSTNAME.
-# Nous l'ajoutons aux hôtes autorisés.
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-
-RAILWAY_STATIC_HOSTNAME = os.getenv('RAILWAY_STATIC_URL')
-if RAILWAY_STATIC_HOSTNAME:
-    ALLOWED_HOSTS.append('.' + RAILWAY_STATIC_HOSTNAME)
-
-# S'assurer que le domaine de base est également autorisé
-RENDER_EXTERNAL_HOSTNAME = os.getenv('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+ALLOWED_HOSTS = []
 
 # Récupère le nom d'hôte externe fourni par Render.
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
@@ -129,14 +118,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Configuration de la base de données pour la production (Render) et le développement local.
-DATABASES = {
-    'default': dj_database_url.config(
-        # Fallback sur votre configuration locale si DATABASE_URL n'est pas définie.
-        default=f"postgres://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}:{os.getenv('POSTGRES_PORT')}/{os.getenv('POSTGRES_DB')}",
-        conn_max_age=600
-    )
-}
+
 
 
 # JWT settings
