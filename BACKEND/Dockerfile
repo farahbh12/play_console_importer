@@ -21,8 +21,9 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --default-timeout=300 --retries 5 -r requirements.txt
 
-# Copier le reste du code
-COPY . .
+# Copier les scripts d'entrée pour les rendre exécutables
+COPY entrypoint.sh .
+COPY start-backend.sh .
 
 # Rendre le script d'entrée exécutable
 RUN chmod +x entrypoint.sh && chmod +x start-backend.sh
