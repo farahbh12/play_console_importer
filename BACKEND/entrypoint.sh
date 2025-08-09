@@ -11,13 +11,13 @@ fi
 echo "Variables d'environnement :"
 env
 
-# Vérifier le fichier de credentials
-echo "Contenu du fichier de credentials :"
-cat $GOOGLE_APPLICATION_CREDENTIALS || echo "Fichier de credentials introuvable"
+# Vérifier le fichier de credentials si la variable est définie
+if [ -n "$GOOGLE_APPLICATION_CREDENTIALS_JSON" ]; then
+  echo "Contenu du fichier de credentials :"
+  cat $GOOGLE_APPLICATION_CREDENTIALS || echo "Fichier de credentials introuvable"
+fi
 
-# Vérifier les fichiers de templates
-echo "Liste des fichiers de templates :"
-find /app/play_reports/templates -type f
+
 
 
 
