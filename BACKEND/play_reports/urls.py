@@ -52,6 +52,7 @@ from play_reports.controllers.client_controller import (
     ClientActivateController,
     set_client_status
 )
+from play_reports.controllers.report_controller import get_report_data, list_report_types
 
 
 
@@ -104,5 +105,8 @@ urlpatterns = [
     path('employees/<int:pk>/activate/', EmployeeActivateController.as_view(), name='employee_activate'),
    
        
- 
+
+    # Dynamic Report API
+    path('api/reports/types/', list_report_types, name='list_report_types'),
+    path('api/reports/<str:report_type>/', get_report_data, name='get_report_data'),
 ]
