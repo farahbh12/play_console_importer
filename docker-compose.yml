@@ -8,7 +8,7 @@ services:
 
   backend:
     build: ./BACKEND
-    command: ./start-backend.sh
+
     volumes:
       - ./BACKEND:/app
     env_file:
