@@ -5,7 +5,6 @@ from datetime import timedelta
 from dotenv import load_dotenv
 import dj_database_url
 
-
 # Chemin de base du projet (le dossier BACKEND)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -119,24 +118,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-# Configuration de la base de données
-# On essaie de construire DATABASE_URL à partir des autres variables d'environnement si elle n'existe pas.
-if 'DATABASE_URL' not in os.environ:
-    db_user = os.getenv('POSTGRES_USER')
-    db_password = os.getenv('POSTGRES_PASSWORD')
-    db_host = os.getenv('POSTGRES_HOST')
-    db_port = os.getenv('POSTGRES_PORT')
-    db_name = os.getenv('POSTGRES_DB')
-
-    if all([db_user, db_password, db_host, db_port, db_name]):
-        os.environ['DATABASE_URL'] = f"postgres://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
-
+# Configuration de la base de données pour la production (Render) et le développement local.
 DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600, ssl_require=False, default='sqlite:///db.sqlite3')
+    'default': dj_database_url.config(
+        # Fallback sur votre configuration locale si DATABASE_URL n'est pas définie.
+        default=f"postgres://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}:{os.getenv('POSTGRES_PORT')}/{os.getenv('POSTGRES_DB')}",
+        conn_max_age=600
+    )
 }
+
 
 # JWT settings
 REST_FRAMEWORK = {
