@@ -21,9 +21,7 @@ find /app/play_reports/templates -type f
 
 
 
-# Apply database migrations
-echo "Applying database migrations..."
-python manage.py migrate
+# The main command (from docker-compose) will handle migrations.
 
 
 
