@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 # Custom user model
 AUTH_USER_MODEL = 'play_reports.User'
 
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "a_default_secret_key_for_development_only")
 # Le mode DEBUG est activé localement, mais sera désactivé en production sur Render.
 # Render définit automatiquement la variable d'environnement RENDER.
 DEBUG = os.getenv('RENDER') != 'True'
