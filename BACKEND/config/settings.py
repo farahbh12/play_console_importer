@@ -8,9 +8,7 @@ import dj_database_url
 # Chemin de base du projet (le dossier BACKEND)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Charger les variables d'environnement depuis le fichier .env situé à la racine du BACKEND.
-# C'est la première chose à faire pour que les variables soient disponibles partout.
-load_dotenv(os.path.join(BASE_DIR, '.env'))
+
 
 # Initialisation du logger
 logger = logging.getLogger(__name__)
@@ -119,14 +117,22 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # Configuration de la base de données pour la production (Render) et le développement local.
-DATABASES = {
-    'default': dj_database_url.config(
-        # Fallback sur votre configuration locale si DATABASE_URL n'est pas définie.
-        default=f"postgres://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}:{os.getenv('POSTGRES_PORT')}/{os.getenv('POSTGRES_DB')}",
-        conn_max_age=600
-    )
-}
+# Determine the database host
+db_host = os.getenv('POSTGRES_HOST', 'localhost')
+if os.path.exists('/.dockerenv'):  # Check if running inside a Docker container
+    db_host = 'host.docker.internal'
 
+# Database configuration
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': db_host,
+        'PORT': os.getenv('POSTGRES_PORT', '5432'),
+    }
+}
 
 # JWT settings
 REST_FRAMEWORK = {

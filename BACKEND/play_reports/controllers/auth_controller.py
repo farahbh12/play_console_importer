@@ -121,8 +121,10 @@ class ClientLoginController(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
+        print(f"Client login request data: {request.data}")  # Log incoming data
         serializer = ClientLoginSerializer(data=request.data)
         if not serializer.is_valid():
+            print(f"Client login validation errors: {serializer.errors}")  # Log validation errors
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         user = serializer.validated_data['user']

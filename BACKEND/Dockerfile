@@ -11,12 +11,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 # Installer les dépendances système
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    gcc \
-    python3-dev \
-    libpq-dev \
-    netcat-openbsd \
-    && rm -rf /var/lib/apt/lists/*
+    apt-get install -y --no-install-recommends gcc python3-dev libpq-dev netcat-openbsd dnsutils && \
+    rm -rf /var/lib/apt/lists/*
 
 # Définir le répertoire de travail
 WORKDIR /app
@@ -29,7 +25,7 @@ RUN pip install --default-timeout=300 --retries 5 -r requirements.txt
 COPY . .
 
 # Rendre le script d'entrée exécutable
-RUN chmod +x entrypoint.sh
+RUN chmod +x entrypoint.sh && chmod +x start-backend.sh
 
 # Créer un utilisateur non-root
 RUN groupadd -r celery && \

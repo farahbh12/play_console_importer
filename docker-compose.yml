@@ -1,17 +1,6 @@
 version: '3.8'
 
 services:
-  db:
-    image: postgres:13
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_DB=play_console_importer
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - "5432:5432"
-
   redis:
     image: redis:alpine
     ports:
@@ -19,15 +8,14 @@ services:
 
   backend:
     build: ./BACKEND
-    command: sh -c "while ! nc -z db 5432; do echo 'Waiting for the database to be ready...'; sleep 2; done; echo 'Database is ready!'; python manage.py migrate; gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+    command: ./start-backend.sh
     volumes:
       - ./BACKEND:/app
     env_file:
-      - .env
+      - ./BACKEND/.env
     ports:
       - "8000:8000"
     depends_on:
-      - db
       - redis
 
   frontend:
@@ -36,6 +24,3 @@ services:
       - "3000:80"
     depends_on:
       - backend
-
-volumes:
-  postgres_data:
