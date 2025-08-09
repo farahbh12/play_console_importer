@@ -5,13 +5,7 @@ set -e
 # This script is the single entrypoint for the container.
 # It waits for the database, runs migrations, and starts the application.
 
-# Wait for the database to be ready.
-# The `db` hostname is from the docker-compose service name.
-echo "Waiting for PostgreSQL..."
-while ! nc -z db 5432; do
-  sleep 0.1
-done
-echo "PostgreSQL started"
+# The database is running on the host, so we don't wait for a 'db' container.
 
 # Change ownership of the app directory to the non-root user.
 # This is necessary because the volume is mounted as root.
@@ -21,8 +15,7 @@ chown -R celery:celery /app
 # The 'gosu' command is a lightweight 'sudo' alternative.
 # The 'exec' command replaces the shell process, making Gunicorn the main process (PID 1).
 
-# Apply database migrations
-gosu celery python manage.py migrate
+# Migrations will be run manually after the server starts.
 
 # Start Gunicorn server
 # The --chdir flag tells Gunicorn to run from the /app directory.
