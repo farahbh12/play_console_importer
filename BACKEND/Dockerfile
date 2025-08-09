@@ -17,6 +17,9 @@ RUN apt-get update && \
 # Définir le répertoire de travail
 WORKDIR /app
 
+# Ajouter le répertoire de l'application au PYTHONPATH
+ENV PYTHONPATH /app
+
 # Copier et installer les dépendances Python
 COPY requirements.txt .
 RUN pip install --default-timeout=300 --retries 5 -r requirements.txt

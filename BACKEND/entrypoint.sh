@@ -20,4 +20,4 @@ chown -R celery:celery /app
 # Start Gunicorn server
 # The --chdir flag tells Gunicorn to run from the /app directory.
 echo "Starting Gunicorn server..."
-exec gosu celery gunicorn --chdir /app config.wsgi:application --bind 0.0.0.0:8000
+exec gosu celery gunicorn config.wsgi:application --bind 0.0.0.0:8000
