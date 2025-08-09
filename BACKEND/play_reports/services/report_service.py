@@ -2,13 +2,27 @@ from django.apps import apps
 
 # Dictionnaire central pour mapper les noms de rapports aux modèles Django
 REPORT_MODEL_MAPPING = {
-    'installs': 'google_play_installs_overview',
-    'revenue': 'google_play_earnings',
-    'subscriptions': 'google_play_subscriptions_overview',
+    'installs_overview': 'google_play_installs_overview',
+    'installs_dimensioned': 'google_play_installs_dimensioned',
+    'subscriptions_overview': 'google_play_subscriptions_overview',
+    'subscriptions_dimensioned': 'google_play_subscriptions_dimensioned',
+    'retained_installers_overview': 'google_play_retained_installers_overview',
+    'retained_installers_dimensioned': 'google_play_retained_installers_dimensioned',
+    'crashes_overview': 'google_play_crashes_overview',
+    'crashes_dimensioned': 'google_play_crashes_dimensioned',
+    'buyers_7d_overview': 'google_play_buyers_7d_overview',
+    'buyers_7d_dimensioned': 'google_play_buyers_7d_dimensioned',
+    'earnings': 'google_play_earnings',
+    'estimated_sales': 'google_play_estimatedSales',
+    'subscription_cancellations': 'google_play_subscription_cancellation_reasons',
+    'store_performance_overview': 'google_play_store_performance_overview',
+    'store_performance_dimensioned': 'google_play_store_performance_dimensioned',
+    'ratings_overview': 'google_play_ratings_overview',
+    'ratings_dimensioned': 'google_play_ratings_dimensioned',
     'reviews': 'google_play_reviews',
+    'promotional_content': 'google_play_promotional_content',
     'sales': 'google_play_sales',
-    'crashes': 'google_play_crashes_overview',
-    'ratings': 'google_play_ratings_overview',
+    'invoice': 'google_play_invoice',
 }
 
 def list_available_reports():
