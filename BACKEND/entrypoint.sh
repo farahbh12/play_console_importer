@@ -1,5 +1,12 @@
 #!/bin/sh
 
+# Créer le fichier de credentials à partir de la variable d'environnement si elle existe
+if [ -n "$GOOGLE_APPLICATION_CREDENTIALS_JSON" ]; then
+  echo "Création du fichier credentials.json à partir de la variable d'environnement..."
+  echo "$GOOGLE_APPLICATION_CREDENTIALS_JSON" > /app/credentials.json
+  export GOOGLE_APPLICATION_CREDENTIALS=/app/credentials.json
+fi
+
 # Afficher toutes les variables d'environnement
 echo "Variables d'environnement :"
 env
@@ -18,9 +25,7 @@ find /app/play_reports/templates -type f
 echo "Applying database migrations..."
 python manage.py migrate
 
-# Vérifier les URLs enregistrées
-echo "URLs enregistrées :"
-python manage.py show_urls
+
 
 # Execute the main command (passed from CMD or docker-compose)
 exec "$@"
