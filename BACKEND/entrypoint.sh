@@ -12,12 +12,7 @@ cat $GOOGLE_APPLICATION_CREDENTIALS || echo "Fichier de credentials introuvable"
 echo "Liste des fichiers de templates :"
 find /app/play_reports/templates -type f
 
-# Wait for PostgreSQL
-echo "Waiting for PostgreSQL..."
-while ! nc -z db 5432; do
-    sleep 0.1
-done
-echo "PostgreSQL started"
+
 
 # Apply database migrations
 echo "Applying database migrations..."
