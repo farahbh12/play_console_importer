@@ -11,7 +11,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 # Installer les dépendances système
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends gcc python3-dev libpq-dev netcat-openbsd dnsutils && \
+    apt-get install -y --no-install-recommends gcc python3-dev libpq-dev netcat-openbsd dnsutils gosu && \
     rm -rf /var/lib/apt/lists/*
 
 # Définir le répertoire de travail
@@ -33,8 +33,7 @@ RUN groupadd -r celery && \
     useradd -r -g celery celery && \
     chown -R celery:celery /app
 
-# Passer à l'utilisateur non-root
-USER celery
+# L'utilisateur sera changé dans le script entrypoint.sh en utilisant gosu
 
 # Point d'entrée
 ENTRYPOINT ["./entrypoint.sh"]

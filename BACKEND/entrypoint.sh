@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 # Créer le fichier de credentials à partir de la variable d'environnement si elle existe
 if [ -n "$GOOGLE_APPLICATION_CREDENTIALS_JSON" ]; then
   echo "Création du fichier credentials.json à partir de la variable d'environnement..."
@@ -17,13 +19,9 @@ if [ -n "$GOOGLE_APPLICATION_CREDENTIALS_JSON" ]; then
   cat $GOOGLE_APPLICATION_CREDENTIALS || echo "Fichier de credentials introuvable"
 fi
 
+# Change ownership of the app directory
+echo "Fixing file permissions..."
+chown -R celery:celery /app
 
-
-
-
-# The main command (from docker-compose) will handle migrations.
-
-
-
-# Execute the main command (passed from CMD or docker-compose)
-exec "$@"
+# Execute the command as the celery user
+exec gosu celery "$@"
