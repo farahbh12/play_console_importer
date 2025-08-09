@@ -234,10 +234,13 @@ STATICFILES_DIRS = [
 os.makedirs(os.path.join(BASE_DIR, 'static'), exist_ok=True)
 
 # Google Cloud Configuration
-GOOGLE_APPLICATION_CREDENTIALS = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+# Google Cloud Configuration
+# Le chemin est défini via une variable d'environnement, mais le fichier n'est requis qu'en production.
+GOOGLE_APPLICATION_CREDENTIALS = os.getenv('GOOGLE_APPLICATION_CREDENTIALS', 'credentials.json')
 GCS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME', 'pubsite_prod_rev_17712529971520156702')
 GCP_PROJECT_ID = os.getenv('GCP_PROJECT_ID', 'pc-api-4722596725443039036-618')
 
-# Assurez-vous que le fichier de credentials est accessible
-if GOOGLE_APPLICATION_CREDENTIALS and not os.path.exists(GOOGLE_APPLICATION_CREDENTIALS):
-    logger.warning(f"Fichier de credentials Google Cloud non trouvé à l'emplacement: {GOOGLE_APPLICATION_CREDENTIALS}")
+# En développement, il est normal que ce fichier n'existe pas.
+# La logique qui l'utilise doit gérer ce cas.
+if not os.path.exists(GOOGLE_APPLICATION_CREDENTIALS):
+    logger.info(f"Le fichier de credentials '{GOOGLE_APPLICATION_CREDENTIALS}' n'a pas été trouvé. C'est normal en développement.")
