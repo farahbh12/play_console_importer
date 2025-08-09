@@ -9,4 +9,4 @@ python manage.py migrate
 
 # Start Gunicorn server
 echo "Starting Gunicorn server..."
-exec gunicorn config.wsgi:application --bind 0.0.0.0:8000
+exec gunicorn --chdir /app config.wsgi:application --bind 0.0.0.0:8000
