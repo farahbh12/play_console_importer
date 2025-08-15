@@ -34,16 +34,9 @@ const AdminNavbar = () => {
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
         <Container className="px-4">
-          <NavbarBrand to="/" tag={Link} className="d-flex align-items-center">
-            <span
-              className="d-inline-flex align-items-center justify-content-center rounded"
-              style={{ width: 28, height: 28, border: '1px solid currentColor', fontSize: 12, marginRight: 10 }}
-            >
-              DD
-            </span>
-            <span style={{ fontWeight: 700, letterSpacing: 0.4 }}>DataDock</span>
-            <span className="mx-2" aria-hidden style={{ opacity: 0.5 }}>/</span>
-            <span className="text-uppercase" style={{ fontSize: 12, opacity: 0.8, letterSpacing: 1 }}>ReportApp</span>
+          <NavbarBrand to="/" tag={Link} className="pt-0" style={{ textDecoration: 'none' }}>
+            <span className="font-weight-bold" style={{ fontSize: 34, fontWeight: 800, letterSpacing: 0.4, lineHeight: 1 }}>DataDock</span>
+            <small className="text-uppercase ml-2" style={{ opacity: 0.92, fontSize: 18, fontWeight: 700, letterSpacing: 1.2 }}>ReportApp</small>
           </NavbarBrand>
           <button className="navbar-toggler" id="navbar-collapse-main">
             <span className="navbar-toggler-icon" />
@@ -53,15 +46,8 @@ const AdminNavbar = () => {
               <Row>
                 <Col className="collapse-brand" xs="6">
                   <Link to="/" style={{ textDecoration: 'none' }}>
-                    <span
-                      className="d-inline-flex align-items-center justify-content-center rounded"
-                      style={{ width: 24, height: 24, border: '1px solid currentColor', fontSize: 10, marginRight: 8 }}
-                    >
-                      DD
-                    </span>
-                    <span style={{ fontWeight: 700, letterSpacing: 0.4 }}>DataDock</span>
-                    <span className="mx-1" aria-hidden style={{ opacity: 0.5 }}>/</span>
-                    <span className="text-uppercase" style={{ fontSize: 11, opacity: 0.8, letterSpacing: 1 }}>ReportApp</span>
+                    <span className="font-weight-bold" style={{ fontSize: 28, fontWeight: 800, lineHeight: 1 }}>DataDock</span>
+                    <small className="text-uppercase ml-1" style={{ opacity: 0.92, fontSize: 15, fontWeight: 700, letterSpacing: 1.1 }}>ReportApp</small>
                   </Link>
                 </Col>
                 <Col className="collapse-close" xs="6">
