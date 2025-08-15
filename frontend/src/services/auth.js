@@ -1,68 +1,43 @@
 // src/services/auth.js
 import api from './api';
 
-// Configuration de l'intercepteur pour ajouter le token aux requêtes
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+
+
+
+
+// Helper to set tokens in storage and axios
+const setSession = (access, refresh) => {
+  if (access) {
+    localStorage.setItem('token', access);
+    localStorage.setItem('access_token', access);
+    api.defaults.headers.common['Authorization'] = `Bearer ${access}`;
   }
-);
-
-// Gestion du rafraîchissement du token
-api.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    const originalRequest = error.config;
-
-    // Si l'erreur est 401 et que ce n'est pas une tentative de rafraîchissement
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-
-      try {
-        const refreshToken = localStorage.getItem('refresh_token');
-        if (!refreshToken) {
-          // Pas de refresh token, déconnexion
-          logout();
-          return Promise.reject(error);
-        }
-
-        // Rafraîchir le token
-        const response = await api.post('/token/refresh/', {
-          refresh: refreshToken
-        });
-
-        const { access, refresh } = response.data;
-
-        // Mettre à jour les tokens
-        localStorage.setItem('token', access);
-        if (refresh) {
-          localStorage.setItem('refresh_token', refresh);
-        }
-
-        // Mettre à jour le header d'autorisation
-        api.defaults.headers.common['Authorization'] = `Bearer ${access}`;
-
-        // Renvoyer la requête originale avec le nouveau token
-        originalRequest.headers['Authorization'] = `Bearer ${access}`;
-        return api(originalRequest);
-      } catch (error) {
-        // En cas d'échec du rafraîchissement, déconnecter l'utilisateur
-        console.error('Erreur de rafraîchissement du token:', error);
-        logout();
-        return Promise.reject(error);
-      }
-    }
-    return Promise.reject(error);
+  if (refresh) {
+    localStorage.setItem('refresh', refresh);
+    localStorage.setItem('refresh_token', refresh);
   }
-);
+};
 
+// Helper to set user in storage
+const setUser = (user) => {
+  if (user) {
+    localStorage.setItem('user', JSON.stringify(user));
+  } else {
+    localStorage.removeItem('user');
+  }
+};
+
+// Clear session without redirect
+const clearSession = () => {
+  try {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    localStorage.removeItem('refresh');
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    delete api.defaults.headers.common['Authorization'];
+  } catch (_) {}
+};
 /**
  * Effectue une tentative de connexion
  * @param {string} email - L'email de l'utilisateur
@@ -98,7 +73,7 @@ const login = async (email, password, userType = 'client') => {
     localStorage.setItem('token', access);
     localStorage.setItem('user', JSON.stringify(user)); // Stocker les données utilisateur
     if (refresh) {
-      localStorage.setItem('refresh_token', refresh);
+      localStorage.setItem('refresh', refresh);
     }
     
     const userData = {
@@ -106,8 +81,7 @@ const login = async (email, password, userType = 'client') => {
       user_type: userType
     };
     
-    localStorage.setItem('user', JSON.stringify(userData));
-    api.defaults.headers.common['Authorization'] = `Bearer ${access}`;
+    setUser(userData);
     
     return userData;
     
@@ -255,12 +229,7 @@ const hasRole = (roles) => {
  */
 const logout = () => {
   // Supprimer les informations d'authentification
-  localStorage.removeItem('user');
-  localStorage.removeItem('token');
-  localStorage.removeItem('refresh_token');
-  
-  // Supprimer le header d'autorisation
-  delete api.defaults.headers.common['Authorization'];
+  clearSession();
   
   // Rediriger vers la page de connexion
   window.location.href = '/auth/login';
@@ -272,7 +241,10 @@ const authService = {
   logout,
   getCurrentUser,
   isAuthenticated,
-  hasRole
+  hasRole,
+  setSession,
+  setUser,
+  clearSession
 };
 
 export default authService;

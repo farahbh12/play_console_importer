@@ -2,24 +2,24 @@
 * Argon Dashboard React - v1.2.4
 * Client Layout
 */
-import React, { useEffect, useMemo, useState, useContext } from "react";
+import React, { useState, useEffect, useMemo } from 'react';
 import { useLocation, Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import { Container, Spinner } from "reactstrap";
+import {   Spinner } from "reactstrap";
 
 // Components
 import ClientNavbar from "../components/Navbars/ClientNavbar";
 import SidebarSwitcher from "../components/Sidebar/SidebarSwitcher";
 import ClientFooter from "../components/Footers/ClientFooter";
 
-// Context
-import { useAuth } from "../contexts/AuthContext";
+
+
 
 // Routes
 import { routes } from "../routes";
 import auth from "../services/auth";
 
 const Client = (props) => {
-  const { user, loading: authLoading } = useAuth();
+ 
   const location = useLocation();
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(null);
@@ -49,12 +49,27 @@ const Client = (props) => {
 
   // Logs de débogage
   useEffect(() => {
-    console.log('Client layout - État utilisateur:', { 
-      currentUser, 
+    console.group('Client layout - État utilisateur');
+    console.log({
+      currentUser: currentUser, 
       isClient: currentUser?.user_type === 'client',
       currentPath: location.pathname 
     });
+    console.groupEnd();
   }, [currentUser, location.pathname]);
+
+  // Forcer les membres invités à rester sur /client/source ou /client/destination
+  useEffect(() => {
+    // Toujours déclarer le hook, conditionner la logique à l'intérieur
+    if (!currentUser) return;
+    const role = currentUser?.role;
+    if (role === 'MEMBRE_INVITE') {
+      const allowed = ['/client/source', '/client/destination', '/client/profile'];
+      if (!allowed.includes(location.pathname)) {
+        navigate('/client/source', { replace: true });
+      }
+    }
+  }, [currentUser, location.pathname, navigate]);
 
   // Mémoriser les routes pour éviter des recalculs inutiles
   const clientRoutes = useMemo(() => {
@@ -73,13 +88,7 @@ const Client = (props) => {
         
         // Nettoyer le chemin en enlevant le préfixe /client s'il existe
         const cleanPath = prop.path.replace(/^\/client\/?/, '');
-        
-        console.log('Enregistrement de la route client:', { 
-          original: prop.path, 
-          cleanPath,
-          component: prop.component?.name || 'Anonymous',
-          exact: prop.exact
-        });
+
         
         const RouteComponent = prop.component;
         return (
@@ -106,36 +115,34 @@ const Client = (props) => {
 
   // Vérifier l'authentification et le type d'utilisateur
   if (!currentUser) {
-    console.log('ClientLayout: Aucun utilisateur connecté, redirection vers /auth/login');
+
     return <Navigate to="/auth/login" state={{ from: location }} replace />;
   }
 
-  // Vérifier si l'utilisateur est un client
-  const isClient = currentUser?.role === 'client';
-  
-  // Déterminer si l'utilisateur peut accéder à l'interface client
-  // Les Owner peuvent accéder à toutes les interfaces
-  const canAccessClientInterface = isClient || 
-    currentUser?.role === 'Owner' || 
-    currentUser?.role === 'owner' || 
-    currentUser?.is_superuser;
-  
-  // Si l'utilisateur est connecté mais ne peut pas accéder à l'interface client, rediriger vers l'interface admin
+  // Normaliser le rôle utilisateur
+  const role = currentUser?.role;
+  const userType = currentUser?.user_type;
+  const isClient = role === 'client' || role === 'Owner' || role === 'owner' || role === 'MEMBRE_INVITE' || userType === 'client';
+
+  // Autoriser l'interface client pour Owner et Membre Invité (et clients en général)
+  const canAccessClientInterface = isClient || currentUser?.is_superuser;
+
+  // Si l'utilisateur ne peut pas accéder à l'interface client, rediriger vers l'interface admin
   if (currentUser && !canAccessClientInterface) {
-    console.log(`ClientLayout: L'utilisateur est un ${currentUser.role}, redirection vers /admin/index`);
     return <Navigate to="/admin/index" replace />;
   }
+
 
   return (
     <div className="g-sidenav-show g-sidenav-pinned">
       <SidebarSwitcher />
       <div className="main-content" id="panel">
         <ClientNavbar user={currentUser} onLogout={() => {
-          console.log('Déconnexion depuis ClientLayout');
+
           auth.logout();
           navigate('/auth/login');
         }} />
-        <div className="container-fluid mt-4">
+        <div>
           <Routes>
             {clientRoutes}
           </Routes>

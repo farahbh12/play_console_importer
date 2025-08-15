@@ -34,11 +34,16 @@ const AdminNavbar = () => {
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
         <Container className="px-4">
-          <NavbarBrand to="/" tag={Link}>
-            <img
-              alt="..."
-              src={require("../../assets/img/brand/argon-react-white.png")}
-            />
+          <NavbarBrand to="/" tag={Link} className="d-flex align-items-center">
+            <span
+              className="d-inline-flex align-items-center justify-content-center rounded"
+              style={{ width: 28, height: 28, border: '1px solid currentColor', fontSize: 12, marginRight: 10 }}
+            >
+              DD
+            </span>
+            <span style={{ fontWeight: 700, letterSpacing: 0.4 }}>DataDock</span>
+            <span className="mx-2" aria-hidden style={{ opacity: 0.5 }}>/</span>
+            <span className="text-uppercase" style={{ fontSize: 12, opacity: 0.8, letterSpacing: 1 }}>ReportApp</span>
           </NavbarBrand>
           <button className="navbar-toggler" id="navbar-collapse-main">
             <span className="navbar-toggler-icon" />
@@ -47,11 +52,16 @@ const AdminNavbar = () => {
             <div className="navbar-collapse-header d-md-none">
               <Row>
                 <Col className="collapse-brand" xs="6">
-                  <Link to="/">
-                    <img
-                      alt="..."
-                      src={require("../../assets/img/brand/argon-react.png")}
-                    />
+                  <Link to="/" style={{ textDecoration: 'none' }}>
+                    <span
+                      className="d-inline-flex align-items-center justify-content-center rounded"
+                      style={{ width: 24, height: 24, border: '1px solid currentColor', fontSize: 10, marginRight: 8 }}
+                    >
+                      DD
+                    </span>
+                    <span style={{ fontWeight: 700, letterSpacing: 0.4 }}>DataDock</span>
+                    <span className="mx-1" aria-hidden style={{ opacity: 0.5 }}>/</span>
+                    <span className="text-uppercase" style={{ fontSize: 11, opacity: 0.8, letterSpacing: 1 }}>ReportApp</span>
                   </Link>
                 </Col>
                 <Col className="collapse-close" xs="6">

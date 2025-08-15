@@ -116,7 +116,7 @@ const MainLayout = ({ children }) => {
         
         {/* Contenu principal */}
         <div className="content">
-          <div className="container-fluid">
+          <div>
             {children}
           </div>
         </div>

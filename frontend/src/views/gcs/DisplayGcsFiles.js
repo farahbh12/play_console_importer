@@ -79,11 +79,11 @@ const DisplayGcsFiles = () => {
   return (
     <>
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
-        <Container fluid>
+        <Container>
           <div className="header-body">
             <Row className="align-items-center">
               <Col>
-                <h1 className="text-white mb-0">Reports</h1>
+                <h1 className="text-white mb-0">Source de données</h1>
               </Col>
               <Col className="text-right">
                 <Button color="primary" onClick={handleSync} disabled={syncing} className="mb-3">
@@ -102,24 +102,24 @@ const DisplayGcsFiles = () => {
           </div>
         </Container>
       </div>
-      <Container className="mt--7" fluid>
+      <Container className="mt--7">
         {syncMessage && <Alert color={syncMessage.includes('failed') ? 'danger' : 'info'}>{syncMessage}</Alert>}
         {loading ? (
-          <p>Loading...</p>
+          <p>Chargement...</p>
         ) : error ? (
           <Alert color="danger">{error}</Alert>
         ) : (
           <Card className="shadow">
             <CardHeader className="border-0">
-              <h3 className="mb-0">Report Status</h3>
+              <h3 className="mb-0">Statut des rapports</h3>
             </CardHeader>
             <Table className="align-items-center table-flush" responsive>
               <thead className="thead-light">
                 <tr>
-                  <th scope="col">Reports</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Most recent data available on this report</th>
-                  <th scope="col">Details</th>
+                  <th scope="col">Rapports</th>
+                  <th scope="col">Statut</th>
+                  <th scope="col">Dernières données disponibles</th>
+                  <th scope="col">Détails</th>
                 </tr>
               </thead>
               <tbody>

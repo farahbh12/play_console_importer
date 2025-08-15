@@ -7,22 +7,36 @@ import AdminLayout from './layouts/Admin';
 import ClientLayout from './layouts/Client';
 import AuthLayout from './layouts/Auth';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
+import AcceptInvitation from './views/auth/AcceptInvitation';
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
+          {/* Route d'acceptation d'invitation - accessible sans authentification */}
+          <Route path="/accept-invitation" element={<AcceptInvitation />}>
+            <Route path="" element={<AcceptInvitation />} />
+            <Route path=":token" element={<AcceptInvitation />} />
+          </Route>
+          
+          {/* Redirection pour les anciens liens */}
+          <Route path="/auth/accept-invitation" element={
+            <Navigate to="/accept-invitation" replace />
+          } />
+          
+          {/* Autres routes d'authentification */}
           <Route path="/auth/*" element={<AuthLayout />} />
           
+          {/* Routes protégées */}
           <Route path="/admin/*" element={
-            <ProtectedRoute allowedRoles={['admin', 'Owner', 'owner']}>
+            <ProtectedRoute allowedRoles={['admin', 'manager']}>
               <AdminLayout />
             </ProtectedRoute>
           } />
           
           <Route path="/client/*" element={
-            <ProtectedRoute allowedRoles={['client', 'Owner', 'owner']}>
+            <ProtectedRoute allowedRoles={['owner', 'membre_invite']}>
               <ClientLayout />
             </ProtectedRoute>
           } />

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -49,7 +49,8 @@ from play_reports.controllers.client_controller import (
     ClientUpdateController,
     ClientDeactivateController,
     ClientActivateController,
-    set_client_status
+    set_client_status,
+    ClientChangeAbonnementView
 )
 
 
@@ -84,6 +85,7 @@ urlpatterns = [
     # Gestion des abonnements
     path('abonnements/', AbonnementListView.as_view(), name='abonnement_list'),
     path('abonnements/<int:abonnement_id>/', AbonnementDetailView.as_view(), name='abonnement_detail'),
+    path('abonnements/<int:abonnement_id>/update/', AbonnementDetailView.as_view(), name='abonnement_update'),
     path('abonnements/<int:abonnement_id>/toggle/', AbonnementToggleActiveView.as_view(), name='abonnement_toggle'),
     path('client/subscribe/', ClientSubscriptionView.as_view(), name='client_subscribe'),
 
@@ -94,6 +96,7 @@ urlpatterns = [
     path('clients/<int:pk>/deactivate/', ClientDeactivateController.as_view(), name='client_deactivate'),
     path('clients/<int:pk>/activate/', ClientActivateController.as_view(), name='client_activate'),
     path('clients/<int:user_id>/set-status/', set_client_status, name='set_client_status'),
+    path('clients/<int:user_id>/change-abonnement/', ClientChangeAbonnementView.as_view(), name='client_change_abonnement'),
 
     # Gestion des employés
     path('employees/', EmployeeListView.as_view(), name='employee_list'),
@@ -101,7 +104,8 @@ urlpatterns = [
     path('employees/<int:pk>/update/', EmployeeUpdateView.as_view(), name='employee_update'),
     path('employees/<int:pk>/deactivate/', EmployeeDeactivateController.as_view(), name='employee_deactivate'),
     path('employees/<int:pk>/activate/', EmployeeActivateController.as_view(), name='employee_activate'),
-   
-       
- 
+
+    # Include play_reports urls
+    path('api/', include('play_reports.urls')),
+
 ]

@@ -41,7 +41,7 @@ from play_reports.controllers.abonnement_controller import (
     AbonnementDetailView,
     AbonnementToggleActiveView,
     ClientSubscriptionView,
-
+    AbonnementUpdateRequestView
 )
 
 from play_reports.controllers.client_controller import (
@@ -52,8 +52,7 @@ from play_reports.controllers.client_controller import (
     ClientActivateController,
     set_client_status
 )
-from play_reports.controllers import report_controller
-
+from play_reports.controllers.team_controller import TeamInvitationController, TeamMembersListView, VerifyInvitationView, CheckInvitationView
 
 
 urlpatterns = [
@@ -86,7 +85,9 @@ urlpatterns = [
     # Gestion des abonnements
     path('abonnements/', AbonnementListView.as_view(), name='abonnement_list'),
     path('abonnements/<int:abonnement_id>/', AbonnementDetailView.as_view(), name='abonnement_detail'),
+    path('abonnements/<int:abonnement_id>/update/', AbonnementDetailView.as_view(), name='abonnement_update'),
     path('abonnements/<int:abonnement_id>/toggle/', AbonnementToggleActiveView.as_view(), name='abonnement_toggle'),
+    path('abonnements/update-request/', AbonnementUpdateRequestView.as_view(), name='abonnement_update_request'),
     path('client/subscribe/', ClientSubscriptionView.as_view(), name='client_subscribe'),
 
     # Gestion des clients
@@ -103,11 +104,11 @@ urlpatterns = [
     path('employees/<int:pk>/update/', EmployeeUpdateView.as_view(), name='employee_update'),
     path('employees/<int:pk>/deactivate/', EmployeeDeactivateController.as_view(), name='employee_deactivate'),
     path('employees/<int:pk>/activate/', EmployeeActivateController.as_view(), name='employee_activate'),
-   
-       
 
     # Dynamic Report API
-    path('api/sources/', report_controller.list_sources, name='list-sources'),
-    path('api/reports/types/', report_controller.list_report_types, name='list-report-types'),
-    path('api/reports/<str:report_type>/', report_controller.get_report_data, name='get-report-data'),
+    path('team/invite/', TeamInvitationController.as_view(), name='team-invite'),
+    path('team/members/', TeamMembersListView.as_view(), name='team-members-list'),
+    path('team/verify-invitation/<str:token>/', VerifyInvitationView.as_view(), name='verify-invitation'),
+path('team/check-invitation/<str:token>/', CheckInvitationView.as_view(), name='check-invitation'),
+  
 ]

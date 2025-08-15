@@ -1,7 +1,7 @@
 
 from .user import User
 from .client import Client
-from .client import RoleClient
+from .client import RoleClient, ClientStatus
 from .employee import Employee,RoleEmploye
 from .invitation import Invitation,InvitationStatus
 from .tenant import Tenant
@@ -44,7 +44,7 @@ from .FileTracking import FileTracking
 __all__ = [
     # Utilisateurs et authentification
     'User',
-    'Client', 'RoleClient',
+    'Client', 'RoleClient', 'ClientStatus',
     'Employee', 'RoleEmploye',
     'Tenant',
     'Report','Permission',

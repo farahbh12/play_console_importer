@@ -1,123 +1,83 @@
-// src/services/api.js
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import authService from './auth';
 
-// Configuration de base de l'API
+// Cette fonction est séparée pour être appelée par l'intercepteur
+// et éviter les dépendances circulaires avec authService.
+const refreshToken = async () => {
+    try {
+        const refresh = localStorage.getItem('refresh_token');
+        if (!refresh) throw new Error("No refresh token available");
+
+        const response = await axios.post('http://127.0.0.1:8000/api/token/refresh/', { refresh });
+        
+        if (response.data.access) {
+            localStorage.setItem('access_token', response.data.access);
+            return response.data;
+        }
+        return null; // Retourne null si le token n'est pas rafraîchi
+    } catch (error) {
+        console.error("Failed to refresh token", error);
+        // Nettoyer le stockage local et rediriger vers la page de connexion
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        localStorage.removeItem('user');
+        // Rediriger seulement si on n'est pas déjà sur une page d'authentification
+        if (!window.location.pathname.startsWith('/auth')) {
+            window.location.href = '/auth/login';
+        }
+        return null;
+    }
+};
+
+// 1. Configuration de base d'Axios
 const api = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: 'http://127.0.0.1:8000', // Assure que toutes les requêtes pointent vers le backend
   headers: {
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
   }
 });
 
-// Variables pour gérer le rafraîchissement du token
-let isRefreshing = false;
-let failedQueue = [];
-
-const processQueue = (error, token = null) => {
-  failedQueue.forEach(prom => {
-    if (error) {
-      prom.reject(error);
-    } else {
-      prom.resolve(token);
-    }
-  });
-  failedQueue = [];
-};
-
-// Intercepteur pour ajouter le token JWT à chaque requête
+// 2. Intercepteur pour ajouter le token JWT à chaque requête
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('access_token');
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers['Authorization'] = `Bearer ${token}`;
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
-// Gestion des erreurs et rafraîchissement du token
+// 3. Gestion des erreurs et rafraîchissement du token
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    
-    // Si l'erreur est 401 et que ce n'est pas une tentative de rafraîchissement
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      // Si on est déjà en train de rafraîchir le token, on met en file d'attente
-      if (isRefreshing) {
-        return new Promise((resolve, reject) => {
-          failedQueue.push({ resolve, reject });
-        })
-        .then(token => {
-          originalRequest.headers['Authorization'] = `Bearer ${token}`;
-          return api(originalRequest);
-        })
-        .catch(err => {
-          return Promise.reject(err);
-        });
-      }
 
-      originalRequest._retry = true;
-      isRefreshing = true;
+    const publicUrls = [
+      '/api/team/check-invitation',
+      '/api/team/verify-invitation',
+      '/api/token/', // JWT token login
+      '/client/login/', // application login (client)
+      '/employee/login/' // application login (employee)
+    ];
 
-      try {
-        const refreshToken = localStorage.getItem('refresh');
-        if (!refreshToken) {
-          authService.logout();
-          return Promise.reject(error);
-        }
+    // Si l'URL n'est pas publique et que l'erreur est 401, on tente de rafraîchir
+    if (error.response.status === 401 && !originalRequest._retry && !publicUrls.some(url => originalRequest.url.includes(url))) {
+      originalRequest._retry = true; // Marquer comme nouvelle tentative
 
-        // Rafraîchir le token
-        const response = await axios.post(
-          'http://localhost:8000/token/refresh/',
-          { refresh: refreshToken }
-        );
-
-        const { access } = response.data;
-        
-        // Mettre à jour le token
-        localStorage.setItem('token', access);
-        api.defaults.headers.common['Authorization'] = `Bearer ${access}`;
-        
-        // Mettre à jour la requête originale
-        originalRequest.headers['Authorization'] = `Bearer ${access}`;
-        
-        // Traiter les requêtes en attente
-        processQueue(null, access);
-        
-        // Renvoyer la requête originale
+      const newTokens = await refreshToken();
+      if (newTokens && newTokens.access) {
+        // Mettre à jour le token et rejouer la requête originale
+        originalRequest.headers['Authorization'] = `Bearer ${newTokens.access}`;
         return api(originalRequest);
-      } catch (refreshError) {
-        // En cas d'échec du rafraîchissement, déconnecter l'utilisateur
-        processQueue(refreshError, null);
-        authService.logout();
-        window.location.href = '/login';
-        return Promise.reject(refreshError);
-      } finally {
-        isRefreshing = false;
       }
     }
 
-    // Gestion des autres erreurs
-    if (error.response) {
-      // Erreur 403 - Accès refusé
-      if (error.response.status === 403) {
-        toast.error("Accès refusé. Vous n'avez pas les droits nécessaires.");
-      }
-      // Erreur 404 - Non trouvé
-      else if (error.response.status === 404) {
-        console.error('Ressource non trouvée:', error.config.url);
-      }
-      // Erreur 500+ - Erreur serveur
-      else if (error.response.status >= 500) {
-        toast.error('Erreur serveur. Veuillez réessayer plus tard.');
-      }
+    // Gérer les erreurs serveur génériques
+    if (error.response && error.response.status >= 500) {
+      toast.error("Une erreur serveur s'est produite. Veuillez réessayer plus tard.");
     } else if (error.request) {
       // La requête a été faite mais aucune réponse n'a été reçue
       toast.error('Impossible de se connecter au serveur. Vérifiez votre connexion internet.');

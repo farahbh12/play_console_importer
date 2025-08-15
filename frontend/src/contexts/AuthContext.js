@@ -19,6 +19,34 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+
+
+  const loginWithTokens = async (access, refresh, user) => {
+    try {
+      // 1. Set the session in the auth service (e.g., save tokens to localStorage)
+      authService.setSession(access, refresh);
+      authService.setUser(user);
+
+      // 2. Update the application's state with the new user
+      // We wrap this in a promise to ensure the state is updated before we proceed
+      await new Promise(resolve => {
+        setCurrentUser(user);
+        resolve();
+      });
+
+      // 3. The user is now officially logged in. The component that called this
+      //    function can now safely navigate.
+
+
+    } catch (err) {
+      console.error('Error during token login:', err);
+      // If something goes wrong, clear the session
+      authService.logout();
+      setCurrentUser(null);
+      throw new Error('Failed to log in with token.');
+    }
+  };
   
   // Au lieu de gérer la navigation ici, nous allons retourner le chemin de redirection
   // et laisser le composant qui utilise le contexte gérer la navigation
@@ -93,24 +121,32 @@ export const AuthProvider = ({ children }) => {
       
       // Déterminer le rôle principal de l'utilisateur
       const userRole = user.role || user.user_type;
-      console.log('Rôle utilisateur détecté:', userRole);
+
       
       // Déterminer le chemin de redirection
-      if (user.is_superuser || userRole === 'administrateur' || 
-          userRole === 'employee' || userRole === 'gestionnaire' || 
-          userRole === 'admin' || userRole === 'manager') {
-        // Tous les rôles admin/manager/employee
-        redirectPath = '/admin/index';
-      } else if (userRole === 'client' || userRole === 'Owner' || userRole === 'owner') {
-        // Client et Owner (propriétaire client)
-        redirectPath = '/client/dashboard';
+      // Rediriger tout compte employé (y compris si le backend expose employee_profile) vers le profil admin
+      const isEmployee = !!user.employee_profile ||
+                         userRole === 'employee' ||
+                         userRole === 'gestionnaire' ||
+                         userRole === 'administrateur' ||
+                         userRole === 'admin' ||
+                         userRole === 'manager' ||
+                         user.is_staff === true ||
+                         user.is_superuser === true;
+
+      if (isEmployee) {
+        // Tous les rôles admin/manager/employee -> profil admin
+        redirectPath = '/admin/profile';
+      } else if (userRole === 'client' || userRole === 'Owner' || userRole === 'owner' || userRole === 'MEMBRE_INVITE') {
+        // Client (Owner ou Membre invité) -> profil client
+        redirectPath = '/client/profile';
       } else {
         // Par défaut, utiliser le type d'utilisateur de la connexion
-        redirectPath = userType === 'client' ? '/client/dashboard' : '/admin/index';
-        console.log('Utilisation du type de connexion pour la redirection:', userType);
+        redirectPath = userType === 'client' ? '/client/profile' : '/admin/profile';
+
       }
       
-      console.log('Rôle utilisateur:', user.role, 'Redirection vers:', redirectPath);
+
       
       // Retourner les informations nécessaires pour la redirection
       return {
@@ -121,8 +157,8 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       console.error('Erreur lors de la connexion:', err);
       
-      // Nettoyer les données en cas d'erreur
-      authService.logout();
+      // Nettoyer les données en cas d'erreur sans rediriger
+      authService.clearSession();
       setCurrentUser(null);
       
       // Préparer un message d'erreur approprié
@@ -159,7 +195,7 @@ export const AuthProvider = ({ children }) => {
   // Fonction d'inscription
   const register = async (userData) => {
     try {
-      console.log('AuthContext: Tentative d\'inscription pour:', userData);
+
       setLoading(true);
       setError(null);
       
@@ -210,6 +246,7 @@ export const AuthProvider = ({ children }) => {
     loading,
     error,
     login,
+    loginWithTokens,
     register,
     logout,
     refreshUser,
@@ -219,7 +256,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };

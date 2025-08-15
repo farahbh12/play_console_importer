@@ -11,7 +11,6 @@ import {
   FormGroup,
   Form,
   Input,
-  InputGroupAddon,
   InputGroupText,
   InputGroup,
   Row,
@@ -19,7 +18,8 @@ import {
   Alert,
   Nav,
   NavItem,
-  NavLink
+  NavLink,
+  FormFeedback
 } from 'reactstrap';
 
 const Register = () => {
@@ -35,6 +35,14 @@ const Register = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    roleEmploye: ''
+  });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -46,12 +54,20 @@ const Register = () => {
     e.preventDefault();
     setErrorMsg('');
     setSuccessMsg('');
+    setFieldErrors({ firstName: '', lastName: '', email: '', password: '', confirmPassword: '', roleEmploye: '' });
     const { firstName, lastName, email, password, confirmPassword, userType, roleEmploye } = formData;
 
-    if (!firstName || !lastName || !email || !password || !confirmPassword) {
-      setErrorMsg("Tous les champs sont obligatoires");
-      return;
-    }
+    // Validation côté client
+    let hasClientError = false;
+    const nextFE = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', roleEmploye: '' };
+    if (!firstName) { nextFE.firstName = 'Prénom requis.'; hasClientError = true; }
+    if (!lastName) { nextFE.lastName = 'Nom requis.'; hasClientError = true; }
+    if (!email) { nextFE.email = 'Email requis.'; hasClientError = true; }
+    if (!password) { nextFE.password = 'Mot de passe requis.'; hasClientError = true; }
+    if (!confirmPassword) { nextFE.confirmPassword = 'Confirmation requise.'; hasClientError = true; }
+    if (password && password.length < 8) { nextFE.password = 'Minimum 8 caractères.'; hasClientError = true; }
+    if (password && confirmPassword && password !== confirmPassword) { nextFE.confirmPassword = 'Les mots de passe ne correspondent pas.'; hasClientError = true; }
+    if (hasClientError) { setFieldErrors(nextFE); setErrorMsg('Veuillez corriger les erreurs.'); return; }
 
     if (password !== confirmPassword) {
       setErrorMsg("Les mots de passe ne correspondent pas.");
@@ -92,39 +108,26 @@ const Register = () => {
       console.error('Erreur lors de l\'inscription:', error);
       
       // Afficher les erreurs détaillées du backend si disponibles
-      if (error.response?.data) {
-        const { data } = error.response;
-        
-        // Si c'est un objet d'erreurs (comme un serializer error de Django)
-        if (typeof data === 'object' && !Array.isArray(data) && data !== null) {
-          const errorMessages = Object.entries(data)
-            .map(([field, errors]) => {
-              // Si c'est une liste d'erreurs pour un champ
-              if (Array.isArray(errors)) {
-                return `${field}: ${errors.join(', ')}`;
-              }
-              // Si c'est une erreur simple
-              return `${field}: ${errors}`;
-            })
-            .join('\n');
-          setErrorMsg(errorMessages);
-        } 
-        // Si c'est une chaîne simple
-        else if (typeof data === 'string') {
-          setErrorMsg(data);
+      const backend = error.response?.data;
+      if (backend) {
+        // Mapper champs connus
+        const fe = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', roleEmploye: '' };
+        if (backend.first_name) fe.firstName = Array.isArray(backend.first_name) ? backend.first_name[0] : String(backend.first_name);
+        if (backend.last_name) fe.lastName = Array.isArray(backend.last_name) ? backend.last_name[0] : String(backend.last_name);
+        if (backend.email) fe.email = Array.isArray(backend.email) ? backend.email[0] : String(backend.email);
+        if (backend.password) fe.password = Array.isArray(backend.password) ? backend.password[0] : String(backend.password);
+        if (backend.password_confirm) fe.confirmPassword = Array.isArray(backend.password_confirm) ? backend.password_confirm[0] : String(backend.password_confirm);
+        if (backend.role_employe) fe.roleEmploye = Array.isArray(backend.role_employe) ? backend.role_employe[0] : String(backend.role_employe);
+
+        // Message global
+        if (backend.detail) setErrorMsg(backend.detail);
+        else if (backend.message) setErrorMsg(backend.message);
+        else if (Object.keys(backend).length && !fe.email && !fe.password && !fe.firstName && !fe.lastName) {
+          // Concaténer en message lisible en plus
+          const msg = Object.entries(backend).map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : String(v)}`).join('\n');
+          setErrorMsg(msg);
         }
-        // Si c'est un tableau d'erreurs
-        else if (Array.isArray(data)) {
-          setErrorMsg(data.join('\n'));
-        }
-        // Si c'est un objet avec un champ 'detail' ou 'message'
-        else if (data.detail || data.message) {
-          setErrorMsg(data.detail || data.message);
-        }
-        // Autre format inattendu
-        else {
-          setErrorMsg('Une erreur inattendue est survenue lors de l\'inscription.');
-        }
+        setFieldErrors(fe);
       } else {
         setErrorMsg(error.message || "Une erreur est survenue lors de l'inscription");
       }
@@ -176,9 +179,9 @@ const Register = () => {
                   <Col md="6">
                     <FormGroup>
                       <InputGroup className="input-group-alternative mb-3">
-                        <InputGroupAddon addonType="prepend">
+                        <InputGroupText addonType="prepend">
                           <InputGroupText><i className="ni ni-single-02" /></InputGroupText>
-                        </InputGroupAddon>
+                        </InputGroupText>
                         <Input
                           placeholder="Prénom"
                           type="text"
@@ -186,7 +189,9 @@ const Register = () => {
                           value={formData.firstName}
                           onChange={handleChange}
                           required
+                          invalid={!!fieldErrors.firstName}
                         />
+                        {fieldErrors.firstName ? (<FormFeedback>{fieldErrors.firstName}</FormFeedback>) : null}
                       </InputGroup>
                     </FormGroup>
                   </Col>
@@ -200,7 +205,9 @@ const Register = () => {
                           value={formData.lastName}
                           onChange={handleChange}
                           required
+                          invalid={!!fieldErrors.lastName}
                         />
+                        {fieldErrors.lastName ? (<FormFeedback>{fieldErrors.lastName}</FormFeedback>) : null}
                       </InputGroup>
                     </FormGroup>
                   </Col>
@@ -208,9 +215,9 @@ const Register = () => {
 
                 <FormGroup>
                   <InputGroup className="input-group-alternative mb-3">
-                    <InputGroupAddon addonType="prepend">
+                    <InputGroupText addonType="prepend">
                       <InputGroupText><i className="ni ni-email-83" /></InputGroupText>
-                    </InputGroupAddon>
+                    </InputGroupText>
                     <Input
                       placeholder="Email"
                       type="email"
@@ -218,7 +225,9 @@ const Register = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
+                      invalid={!!fieldErrors.email}
                     />
+                    {fieldErrors.email ? (<FormFeedback>{fieldErrors.email}</FormFeedback>) : null}
                   </InputGroup>
                 </FormGroup>
 
@@ -226,9 +235,9 @@ const Register = () => {
                   <Col md="6">
                     <FormGroup>
                       <InputGroup className="input-group-alternative">
-                        <InputGroupAddon addonType="prepend">
+                        <InputGroupText addonType="prepend">
                           <InputGroupText><i className="ni ni-lock-circle-open" /></InputGroupText>
-                        </InputGroupAddon>
+                        </InputGroupText>
                         <Input
                           placeholder="Mot de passe"
                           type="password"
@@ -236,7 +245,9 @@ const Register = () => {
                           value={formData.password}
                           onChange={handleChange}
                           required
+                          invalid={!!fieldErrors.password}
                         />
+                        {fieldErrors.password ? (<FormFeedback>{fieldErrors.password}</FormFeedback>) : null}
                       </InputGroup>
                       <small className="text-muted">Minimum 8 caractères</small>
                     </FormGroup>
@@ -251,7 +262,9 @@ const Register = () => {
                           value={formData.confirmPassword}
                           onChange={handleChange}
                           required
+                          invalid={!!fieldErrors.confirmPassword}
                         />
+                        {fieldErrors.confirmPassword ? (<FormFeedback>{fieldErrors.confirmPassword}</FormFeedback>) : null}
                       </InputGroup>
                     </FormGroup>
                   </Col>
@@ -260,18 +273,20 @@ const Register = () => {
                 {formData.userType === 'employee' && (
                   <FormGroup>
                     <InputGroup className="input-group-alternative mb-3">
-                      <InputGroupAddon addonType="prepend">
+                      <InputGroupText addonType="prepend">
                         <InputGroupText><i className="ni ni-badge" /></InputGroupText>
-                      </InputGroupAddon>
+                      </InputGroupText>
                       <Input
                         type="select"
                         name="roleEmploye"
                         value={formData.roleEmploye}
                         onChange={handleChange}
+                        invalid={!!fieldErrors.roleEmploye}
                       >
                         <option value="Administrateur">Administrateur</option>
                         <option value="Gestionnaire">Gestionnaire</option>
                       </Input>
+                      {fieldErrors.roleEmploye ? (<FormFeedback>{fieldErrors.roleEmploye}</FormFeedback>) : null}
                     </InputGroup>
                   </FormGroup>
                 )}

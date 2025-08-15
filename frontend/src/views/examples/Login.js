@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
+import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
+import classnames from 'classnames';
 import {
   Button,
   Card,
@@ -9,13 +11,16 @@ import {
   FormGroup,
   Form,
   Input,
-  InputGroupAddon,
   InputGroupText,
   InputGroup,
   Row,
   Col,
   Alert,
-  CardFooter
+  Nav,
+  NavItem,
+  NavLink,
+  CardFooter,
+  FormFeedback
 } from "reactstrap";
 
 const Login = () => {
@@ -23,6 +28,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState('client');
   const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
@@ -30,33 +36,46 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    
-    // Validation des champs
-    if (!email || !password) {
-      setError('Veuillez remplir tous les champs');
+    const form = e.currentTarget;
+    // Déclencher la validation HTML5 native si des champs requis sont vides/invalides
+    if (form && typeof form.checkValidity === 'function' && !form.checkValidity()) {
+      form.reportValidity?.();
+      // Mettre à jour les erreurs locales également
+      setFieldErrors({
+        email: !email ? 'Email requis.' : '',
+        password: !password ? 'Mot de passe requis.' : ''
+      });
       return;
     }
+    setError('');
+    setFieldErrors({ email: '', password: '' });
+    
+    // Validation des champs
+    let hasClientError = false;
+    const nextFieldErrors = { email: '', password: '' };
+    if (!email) { nextFieldErrors.email = 'Email requis.'; hasClientError = true; }
+    if (!password) { nextFieldErrors.password = 'Mot de passe requis.'; hasClientError = true; }
+    if (hasClientError) { setFieldErrors(nextFieldErrors); setError('Veuillez corriger les erreurs.'); return; }
     
     setLoading(true);
 
     try {
-      console.log('Tentative de connexion avec:', { email, userType });
+
       
       // Appel à la fonction de connexion du contexte
       const result = await login(email, password, userType);
       
-      console.log('Résultat de la connexion:', result);
+
       
       // Le contexte retourne un objet avec user et redirectPath
       if (result && result.redirectPath) {
-        console.log('Redirection vers:', result.redirectPath);
+
         // Utiliser navigate au lieu de window.location pour une navigation SPA propre
         navigate(result.redirectPath, { replace: true });
       } else {
         // Fallback: déterminer la redirection basée sur le type d'utilisateur
-        const redirectPath = userType === 'client' ? '/client/dashboard' : '/admin/index';
-        console.log('Redirection fallback vers:', redirectPath);
+        const redirectPath = userType === 'client' ? '/client/profile' : '/admin/profile';
+
         navigate(redirectPath, { replace: true });
       }
       
@@ -69,23 +88,85 @@ const Login = () => {
       
       // Gestion des erreurs spécifiques
       let errorMessage = 'Erreur lors de la connexion';
-      
-      if (err.response?.data) {
-        const { data } = err.response;
-        
-        // Erreurs de validation du backend
-        if (data.non_field_errors) {
-          errorMessage = data.non_field_errors.join(' ');
-        } else if (data.detail) {
-          errorMessage = data.detail;
-        } else if (data.email) {
-          errorMessage = `Email: ${data.email[0]}`;
-        } else if (data.password) {
-          errorMessage = `Mot de passe: ${data.password[0]}`;
+      const backend = err.response?.data;
+      const fe = { email: '', password: '' };
+
+      if (backend) {
+        // 1) Normaliser les erreurs génériques
+        const nonFieldRaw = backend.non_field_errors;
+        let nfDetail = '';
+        let nfCode = '';
+        if (nonFieldRaw && typeof nonFieldRaw === 'object' && !Array.isArray(nonFieldRaw)) {
+          nfDetail = nonFieldRaw.detail || '';
+          nfCode = nonFieldRaw.code || nonFieldRaw.error_code || '';
+        } else if (Array.isArray(nonFieldRaw)) {
+          nfDetail = nonFieldRaw.join(' ');
+        } else if (typeof nonFieldRaw === 'string') {
+          nfDetail = nonFieldRaw;
+        }
+
+        const detailText = backend.detail ? String(backend.detail) : nfDetail || '';
+        const code = backend.code || backend.error_code || nfCode;
+
+        const invalidCred =
+          /unable to log in/i.test(detailText)
+          || /invalid credentials/i.test(detailText)
+          || code === 'invalid_credentials';
+
+        if (invalidCred) {
+          fe.password = 'Mot de passe incorrect.';
+          errorMessage = 'Email ou mot de passe incorrect.';
+        }
+
+        // 2) Mapping mismatch type de compte (client vs employé)
+        const roleMismatch = backend.role_mismatch === true
+          || backend.user_type_mismatch === true
+          || code === 'ROLE_MISMATCH'
+          || /type d'utilisateur/i.test(detailText)
+          || /employee|employé|client/i.test(detailText) && /incorrect|mismatch|n'appartient pas|not/i.test(detailText);
+
+        if (roleMismatch) {
+          if (userType === 'client') {
+            errorMessage = "Ce compte n'appartient pas à l'espace Client. Sélectionnez 'Employé'.";
+          } else {
+            errorMessage = "Ce compte n'appartient pas à l'espace Employé. Sélectionnez 'Client'.";
+          }
+        }
+
+        if (backend.email) {
+          fe.email = Array.isArray(backend.email) ? backend.email[0] : String(backend.email);
+        }
+        if (backend.password) {
+          fe.password = Array.isArray(backend.password) ? backend.password[0] : String(backend.password);
+        }
+      } else if (err.message) {
+        errorMessage = err.message;
+        const msg = (err.message || '').toLowerCase();
+        if (msg.includes('mot de passe') || msg.includes('password')) {
+          fe.password = 'Mot de passe incorrect.';
+          if (!errorMessage || !errorMessage.trim()) {
+            errorMessage = 'Email ou mot de passe incorrect.';
+          }
         }
       }
-      
-      setError(errorMessage);
+
+      // Fallbacks si aucun message n'a été déterminé
+      const status = err.response?.status;
+      if (!errorMessage || typeof errorMessage !== 'string' || errorMessage.trim() === '') {
+        if (status === 401) {
+          errorMessage = 'Email ou mot de passe incorrect.';
+          if (!fe.password) fe.password = 'Mot de passe incorrect.';
+        } else if (status === 400) {
+          errorMessage = 'Requête invalide. Veuillez vérifier les champs.';
+        } else {
+          errorMessage = 'Erreur lors de la connexion. Veuillez réessayer.';
+        }
+      }
+
+      setFieldErrors(fe);
+      setError(String(errorMessage));
+      try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch {}
+      try { toast.error(String(errorMessage)); } catch {}
     } finally {
       setLoading(false);
     }
@@ -99,30 +180,39 @@ const Login = () => {
             <CardHeader className="bg-transparent pb-4">
               <div className="text-center">
                 <h2 className="text-dark">Connexion</h2>
-                
                 <p className="text-muted">Choisissez votre type d'utilisateur</p>
               </div>
-              <div className="text-center">
-                <Button
-                  color={userType === 'client' ? 'primary' : 'secondary'}
-                  onClick={() => setUserType('client')}
-                  className="mr-2"
-                >
-                  Client
-                </Button>
-                <Button
-                  color={userType === 'employee' ? 'primary' : 'secondary'}
-                  onClick={() => setUserType('employee')}
-                >
-                  Employé
-                </Button>
-              </div>
+              <Nav className="nav-fill mt-3" pills>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: userType === 'client' })}
+                    href="#pablo"
+                    onClick={e => {
+                      e.preventDefault();
+                      setUserType('client');
+                    }}
+                  >
+                    Client
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={classnames({ active: userType === 'employee' })}
+                    href="#pablo"
+                    onClick={e => {
+                      e.preventDefault();
+                      setUserType('employee');
+                    }}
+                  >
+                    Employé
+                  </NavLink>
+                </NavItem>
+              </Nav>
             </CardHeader>
             
             <CardBody className="px-lg-5 py-lg-4">
               {error && (
                 <Alert color="danger" className="alert-dismissible fade show" role="alert">
-                  <span className="alert-icon"><i className="ni ni-notification-70"></i></span>
                   <span className="alert-text">{error}</span>
                   <button type="button" className="close" onClick={() => setError('')}>
                     <span aria-hidden="true">&times;</span>
@@ -131,40 +221,58 @@ const Login = () => {
               )}
               
               <Form role="form" onSubmit={handleSubmit}>
-                <FormGroup className="mb-3">
-                  <InputGroup className="input-group-alternative">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="ni ni-email-83" />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      placeholder="Email"
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      autoComplete="email"
-                      required
-                    />
-                  </InputGroup>
-                </FormGroup>
+              <FormGroup className="mb-3">
+  <InputGroup className="input-group-alternative">
+    <InputGroupText>
+      <i className="ni ni-email-83" />
+    </InputGroupText>
+    <Input
+      placeholder="Email"
+      type="email"
+      value={email}
+      onChange={(e) => {
+        setEmail(e.target.value);
+        if (e.target.value) {
+          setFieldErrors(prev => ({ ...prev, email: '' }));
+        }
+      }}
+      onBlur={() => {
+        if (!email) {
+          setFieldErrors(prev => ({ ...prev, email: 'Email requis.' }));
+        }
+      }}
+      autoComplete="email"
+      required
+      invalid={!!fieldErrors.email}
+      aria-invalid={!!fieldErrors.email}
+    />
+  </InputGroup>
+  {fieldErrors.email ? (
+    <FormFeedback className="d-block small mb-0">{fieldErrors.email}</FormFeedback>
+  ) : null}
+</FormGroup>
+
                 
                 <FormGroup>
                   <InputGroup className="input-group-alternative">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="ni ni-lock-circle-open" />
-                      </InputGroupText>
-                    </InputGroupAddon>
+                    <InputGroupText>
+                      <i className="ni ni-lock-circle-open" />
+                    </InputGroupText>
                     <Input
                       placeholder="Mot de passe"
                       type="password"
                       value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      onChange={(e) => { setPassword(e.target.value); if (e.target.value) setFieldErrors(prev => ({ ...prev, password: '' })); }}
+                      onBlur={() => { if (!password) setFieldErrors(prev => ({ ...prev, password: 'Mot de passe requis.' })); }}
                       autoComplete="current-password"
                       required
+                      invalid={!!fieldErrors.password}
+                      aria-invalid={!!fieldErrors.password}
                     />
                   </InputGroup>
+                  {fieldErrors.password ? (
+                    <FormFeedback className="d-block small mb-0">{fieldErrors.password}</FormFeedback>
+                  ) : null}
                 </FormGroup>
                 
                 <div className="custom-control custom-control-alternative custom-checkbox mb-3">

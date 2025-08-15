@@ -4,19 +4,25 @@ import authService from '../services/auth';
 
 const clientService = {
   // Récupérer le client actuel
-  getCurrent: async () => {
-    try {
-      const user = authService.getCurrentUser();
-      if (!user) {
-        throw new Error('Aucun utilisateur connecté');
-      }
-      
-      const response = await api.get(`clients/${user.id}/`);
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching current client:', error);
-      throw error;
+  getCurrent() {
+    const user = authService.getCurrentUser();
+    if (!user) {
+      return Promise.reject(new Error('Utilisateur non trouvé'));
     }
+
+    // Déduire l'identifiant Client attendu par l'API
+    const clientId = user.client_id || user.clientId || user.client?.id;
+    if (clientId) {
+      return api.get(`/clients/${clientId}/`).then(res => res.data);
+    }
+
+    // Fallback: utiliser l'ID UTILISATEUR (le backend résout par user_id)
+    const userId = user.id || user.user?.id;
+    if (userId) {
+      return api.get(`/clients/${userId}/`).then(res => res.data);
+    }
+
+    return Promise.reject(new Error("Identifiant client introuvable dans l'objet utilisateur (client_id) et aucun user_id disponible."));
   },
 
   // Récupérer la liste des clients
@@ -67,6 +73,17 @@ const clientService = {
     } catch (error) {
       console.error('Erreur lors de la mise à jour du statut du client:', error);
       throw error;
+    }
+  },
+
+  // Changer l'abonnement d'un client (par user_id) vers un type donné
+  changeAbonnement: async (userId, type_abonnement) => {
+    try {
+      const response = await api.post(`clients/${userId}/change-abonnement/`, { type_abonnement });
+      return response.data;
+    } catch (error) {
+      console.error("Erreur lors du changement d'abonnement du client:", error);
+      throw error.response?.data || { message: "Erreur lors du changement d'abonnement" };
     }
   },
 };

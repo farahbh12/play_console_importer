@@ -1,20 +1,34 @@
 import React, { useState } from 'react';
-import { Button, Card, CardBody, FormGroup, Form, Input, InputGroup, InputGroupText, Container, Col, Row } from 'reactstrap';
+import { Button, Card, CardBody, FormGroup, Form, Input, InputGroup, InputGroupText, Container, Col, Row, FormFeedback, Alert } from 'reactstrap';
 import { toast } from 'react-toastify';
 import authService from '../../services/authService';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
+  const [fieldError, setFieldError] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFieldError('');
+    setErrorMsg('');
+    setSuccessMsg('');
+    if (!email) {
+      setFieldError('Email requis.');
+      return;
+    }
     setLoading(true);
     try {
       await authService.requestPasswordReset(email);
-      toast.success('Un email de réinitialisation a été envoyé. Veuillez vérifier votre boîte de réception.');
+      setSuccessMsg('Un email de réinitialisation a été envoyé. Veuillez vérifier votre boîte de réception.');
     } catch (error) {
-      toast.error(error.detail || 'Une erreur est survenue.');
+      const backend = error.response?.data;
+      if (backend?.email) {
+        setFieldError(Array.isArray(backend.email) ? backend.email[0] : String(backend.email));
+      }
+      setErrorMsg(backend?.detail || backend?.message || 'Une erreur est survenue.');
     } finally {
       setLoading(false);
     }
@@ -29,6 +43,8 @@ const ForgotPassword = () => {
               <div className="text-center text-muted mb-4">
                 <small>Réinitialiser le mot de passe</small>
               </div>
+              {errorMsg && <Alert color="danger">{errorMsg}</Alert>}
+              {successMsg && <Alert color="success">{successMsg}</Alert>}
               <Form role="form" onSubmit={handleSubmit}>
                 <FormGroup>
                   <InputGroup className="input-group-merge input-group-alternative">
@@ -42,7 +58,9 @@ const ForgotPassword = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
+                      invalid={!!fieldError}
                     />
+                    {fieldError ? <FormFeedback className="d-block small mb-0">{fieldError}</FormFeedback> : null}
                   </InputGroup>
                 </FormGroup>
                 <div className="text-center">

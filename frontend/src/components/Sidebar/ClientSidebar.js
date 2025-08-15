@@ -29,19 +29,36 @@ const ClientSidebar = ({ user, logo }) => {
     setCollapseOpen(false);
   };
 
-  const clientRoutes = sidebarRoutes.filter(route => route.layout === '/client');
+  const mainRoutes = sidebarRoutes.filter(route => route.layout === '/client' && !route.path.includes('profile') && !route.path.includes('manage-team') && !route.path.includes('subscription'));
+  const managementRoutes = sidebarRoutes.filter(route => route.path.includes('manage-team'));
+  const accountRoutes = sidebarRoutes.filter(route => route.path.includes('profile') || route.path.includes('subscription'));
+
+  const isInvited = user?.role === 'MEMBRE_INVITE';
+  const invitedAllowed = ['/client/source', '/client/destination', '/client/profile'];
 
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
+      const isBlockedForInvited = isInvited && !invitedAllowed.includes(prop.path);
+      const commonProps = {
+        onClick: (e) => {
+          if (isBlockedForInvited) {
+            e.preventDefault();
+            return;
+          }
+          closeCollapse();
+        },
+        className: ({ isActive }) => {
+          const base = isActive ? 'active' : '';
+          return isBlockedForInvited ? base + ' disabled' : base;
+        },
+        end: true,
+        title: isBlockedForInvited ? 'Accès restreint' : undefined,
+        style: isBlockedForInvited ? { opacity: 0.6, cursor: 'not-allowed' } : undefined,
+      };
+
       return (
         <NavItem key={key}>
-          <NavLink
-            to={prop.path}
-            tag={NavLinkRRD}
-            onClick={closeCollapse}
-            className={({ isActive }) => isActive ? "active" : ""}
-            end
-          >
+          <NavLink to={prop.path} tag={NavLinkRRD} {...commonProps}>
             <i className={prop.icon} />
             {prop.name}
           </NavLink>
@@ -65,15 +82,10 @@ const ClientSidebar = ({ user, logo }) => {
           <span className="navbar-toggler-icon" />
         </button>
         
-        {logo && (
-          <NavbarBrand className="pt-0" to="/client/dashboard" tag={Link}>
-            <img
-              alt={logo.imgAlt}
-              className="navbar-brand-img"
-              src={logo.imgSrc}
-            />
-          </NavbarBrand>
-        )}
+        <NavbarBrand className="pt-0 d-flex align-items-baseline" to="/client/dashboard" tag={Link}>
+          <span className="fw-bold" style={{ fontSize: '1.25rem' }}>DataDock</span>
+          <small className="text-uppercase ms-2" style={{ opacity: 0.8 }}>ReportApp</small>
+        </NavbarBrand>
         
         <Nav className="align-items-center d-md-none">
           <UncontrolledDropdown nav>
@@ -84,7 +96,7 @@ const ClientSidebar = ({ user, logo }) => {
                 </span>
               </Media>
             </DropdownToggle>
-            <DropdownMenu className="dropdown-menu-arrow" right>
+            <DropdownMenu className="dropdown-menu-arrow" end>
               <DropdownItem className="noti-title" header tag="div">
                 <h6 className="text-overflow m-0">Bienvenue !</h6>
               </DropdownItem>
@@ -104,13 +116,12 @@ const ClientSidebar = ({ user, logo }) => {
         <Collapse navbar isOpen={collapseOpen}>
           <div className="navbar-collapse-header d-md-none">
             <Row>
-              {logo && (
-                <Col className="collapse-brand" xs="6">
-                  <Link to="/client/dashboard">
-                    <img alt={logo.imgAlt} src={logo.imgSrc} />
-                  </Link>
-                </Col>
-              )}
+              <Col className="collapse-brand" xs="6">
+                <Link to="/client/dashboard" style={{ textDecoration: 'none' }}>
+                  <span className="fw-bold">DataDock</span>
+                  <small className="text-uppercase ms-1" style={{ opacity: 0.8 }}>ReportApp</small>
+                </Link>
+              </Col>
               <Col className="collapse-close" xs="6">
                 <button
                   className="navbar-toggler"
@@ -124,10 +135,20 @@ const ClientSidebar = ({ user, logo }) => {
             </Row>
           </div>
           
-          <Nav navbar>{createLinks(clientRoutes)}</Nav>
-          
+          <h6 className="navbar-heading text-muted">Navigation</h6>
+          <Nav navbar>{createLinks(mainRoutes)}</Nav>
+
           <hr className="my-3" />
-          
+          <h6 className="navbar-heading text-muted">Gestion</h6>
+          <Nav className="mb-md-3" navbar>
+            {createLinks(managementRoutes)}
+          </Nav>
+
+          <hr className="my-3" />
+          <h6 className="navbar-heading text-muted">Mon Compte</h6>
+          <Nav className="mb-md-3" navbar>
+            {createLinks(accountRoutes)}
+          </Nav>
           <NavLink 
             to="/client/profile" 
             tag={NavLinkRRD} 

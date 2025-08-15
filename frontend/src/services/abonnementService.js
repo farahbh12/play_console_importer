@@ -1,15 +1,13 @@
 // src/services/abonnementService.js
 import api from './api';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
-
 const abonnementService = {
   /**
    * Récupère tous les abonnements
    */
   getAll: async () => {
     try {
-      const response = await api.get(`${API_BASE_URL}/abonnements/`);
+      const response = await api.get('/abonnements/');
       return response.data;
     } catch (error) {
       console.error('Erreur lors de la récupération des abonnements:', error);
@@ -34,10 +32,9 @@ const abonnementService = {
    */
   update: async (id, data) => {
     try {
-      const response = await api.put(
-        `${API_BASE_URL}/abonnements/${id}/update/`, 
-        data
-      );
+      const url = `/abonnements/${id}/update/`;
+      console.log(`Sending PUT request to: ${api.defaults.baseURL}${url}`);
+      const response = await api.put(url, data);
       return response.data;
     } catch (error) {
       console.error('Erreur lors de la mise à jour de l\'abonnement:', error);
@@ -51,7 +48,7 @@ const abonnementService = {
   toggle: async (id) => {
     try {
       const response = await api.patch(
-        `${API_BASE_URL}/abonnements/${id}/toggle/`
+        `/abonnements/${id}/toggle/`
       );
       return response.data;
     } catch (error) {
@@ -65,7 +62,7 @@ const abonnementService = {
    */
   getById: async (id) => {
     try {
-      const response = await api.get(`${API_BASE_URL}/abonnements/${id}/`);
+      const response = await api.get(`/abonnements/${id}/`);
       return response.data;
     } catch (error) {
       console.error('Erreur lors de la récupération de l\'abonnement:', error);

@@ -29,8 +29,6 @@ class LookerStudioKeyAuthentication(BaseAuthentication):
             # En production, il est crucial d'avoir un utilisateur pour les permissions.
             raise AuthenticationFailed('Aucun utilisateur admin configuré pour l''authentification API.')
             
-        return (user, None) # Authentification réussie
-        # On peut retourner un utilisateur par défaut ou anonyme, car l'accès est accordé par la clé.
         try:
             # Utilisons le premier superutilisateur comme utilisateur par défaut pour la session
             user = User.objects.filter(is_superuser=True).first()

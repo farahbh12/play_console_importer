@@ -14,6 +14,8 @@ import { useLocation, Route, Routes, Navigate } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 
 // core components
+import AcceptInvitation from "../views/examples/AcceptInvitation";  // Ajoutez cette ligne
+
 import AuthNavbar from "../components/Navbars/AuthNavbar";
 import AuthFooter from "../components/Footers/AuthFooter";
 
@@ -22,6 +24,7 @@ import Login from "../views/examples/Login";
 import Register from "../views/examples/Register";
 import ForgotPassword from "../views/examples/ForgotPassword";
 import ResetPassword from "../views/examples/ResetPassword";
+
 
 const Auth = () => {
   const mainContent = React.useRef(null);
@@ -81,6 +84,7 @@ const Auth = () => {
               <Route path="register" element={<Register />} />
               <Route path="forgot-password" element={<ForgotPassword />} />
               <Route path="reset-password/:uidb64/:token" element={<ResetPassword />} />
+              <Route path="activation" element={<AcceptInvitation />} />
               <Route path="*" element={<Navigate to="/auth/login" replace />} />
             </Routes>
           </Row>

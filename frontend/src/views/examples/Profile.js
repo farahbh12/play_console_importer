@@ -11,10 +11,12 @@ import {
   Col,
   Alert
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../../contexts/AuthContext';
 import employeeService from '../../services/employeeService';
+import clientService from '../../services/clientService'; // Importer le service client
+import authService from '../../services/auth';
 
 // Composant réutilisable pour afficher un champ
 const ProfileField = ({ label, value, isBadge, color }) => (
@@ -38,50 +40,99 @@ const Profile = () => {
   const [userType, setUserType] = useState(''); // 'client' ou 'employee'
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
- // Récupération des données de l'employé
-useEffect(() => {
-  const fetchEmployeeData = async () => {
-    try {
-      setLoading(true);
-      
-      // Récupérer les données de l'employé connecté
-      const employeeData = await employeeService.getCurrent();
-      
-      // Afficher les données dans la console pour débogage
-      console.log('Données employé reçues:', employeeData);
-      
-      // Mettre à jour l'état avec les données de l'employé
-      setUserData({
-        // Données de base
-        id: employeeData.id,
-        first_name: employeeData.first_name || 'Non défini',
-        last_name: employeeData.last_name || 'Non défini',
-        email: employeeData.email || 'Non défini',
-        
-        // Récupération du rôle depuis role_employe
-        role: employeeData.role_employe || 'Employé',
-        
-        // Dates
-        date_joined: employeeData.date_joined,
-        last_login: employeeData.last_login,
-        
-        // Statut
-        is_active: employeeData.is_active !== undefined ? employeeData.is_active : true
-      });
-      
-      setUserType('employee');
-      
-    } catch (error) {
-      console.error('Erreur lors du chargement du profil employé:', error);
-      setError(error.message || 'Impossible de charger le profil employé');
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Récupération des données de l'utilisateur (employé, client owner, ou membre invité)
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (!currentUser) {
+        setError('Type d\'utilisateur non défini.');
+        setLoading(false);
+        return;
+      }
 
-  fetchEmployeeData();
-}, []);
+      try {
+        setLoading(true);
+        let data;
+        const baseUserType = currentUser.user_type;
+
+        // Cas spécial: membre invité -> charger depuis la table Client
+        if (currentUser.role === 'MEMBRE_INVITE') {
+          try {
+            const client = await clientService.getCurrent();
+            console.log('Données membre invité (client) reçues:', client);
+            // Prendre UNIQUEMENT depuis la table Client
+            const resolvedFirstName = client.first_name || client.prenom;
+            const resolvedLastName = client.last_name || client.nom;
+            const resolvedCreatedAt = client.created_at || client.date_joined;
+            data = {
+              ...client,
+              role_client: client.role_client || 'MEMBRE_INVITE',
+              first_name: resolvedFirstName,
+              last_name: resolvedLastName,
+              email: client.email || client.user?.email,
+              created_at: resolvedCreatedAt,
+            };
+            // Aligner avec les champs utilisés par l'affichage
+            data.date_joined = data.created_at || data.date_joined;
+          } catch (e) {
+            console.warn('Impossible de charger le profil client, utilisation des données utilisateur locales.', e);
+            const resolvedFirstName = currentUser.first_name
+              || currentUser.prenom
+              || currentUser.firstName
+              || currentUser?.user?.first_name
+              || currentUser?.user?.firstName;
+            const resolvedLastName = currentUser.last_name
+              || currentUser.nom
+              || currentUser.lastName
+              || currentUser?.user?.last_name
+              || currentUser?.user?.lastName;
+            const resolvedCreatedAt = currentUser.created_at
+              || currentUser.date_joined
+              || currentUser?.user?.date_joined;
+            data = {
+              ...currentUser,
+              role_client: currentUser.role_client || 'MEMBRE_INVITE',
+              first_name: resolvedFirstName,
+              last_name: resolvedLastName,
+              email: currentUser.email || currentUser.user?.email,
+              created_at: resolvedCreatedAt,
+            };
+            data.date_joined = data.created_at || data.date_joined;
+          }
+          setUserData(data);
+          setUserType('client_invite');
+        } else if (baseUserType === 'employee') {
+          data = await employeeService.getCurrent();
+          console.log('Données employé reçues:', data);
+          setUserData({
+            ...data,
+            role: data.role_employe || 'Employé'
+          });
+          setUserType('employee');
+        } else if (baseUserType === 'client') {
+          data = await clientService.getCurrent();
+          console.log('Données client reçues:', data);
+          // La structure client peut être différente, on l'adapte
+          setUserData({
+            ...data,
+            first_name: data.first_name || data.prenom,
+            last_name: data.last_name || data.nom,
+            email: data.user?.email || data.email,
+          });
+          setUserType('client');
+        }
+
+      } catch (error) {
+        console.error(`Erreur lors du chargement du profil ${currentUser.user_type}:`, error);
+        setError(error.message || `Impossible de charger le profil.`);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [currentUser]);
   // Formatage de la date
   const formatDate = (dateString) => {
     if (!dateString) return 'Non disponible';
@@ -125,14 +176,65 @@ useEffect(() => {
     return <Container className="mt--7" fluid><Alert color="warning">Aucune donnée de profil trouvée.</Alert></Container>;
   }
 
-  // Nom et prénom peuvent venir de `user.first_name` ou `first_name`
-  const firstName = userData.first_name || userData.nom;
-  const lastName = userData.last_name || userData.prenom;
+  // Nom/prénom/date peuvent venir de plusieurs champs possibles (Client ou User)
+  const firstName = userData.first_name
+    || userData.prenom
+    || userData.firstName
+    || userData.prenom_client
+    || userData.user?.first_name
+    || userData.user?.firstName;
+  const lastName = userData.last_name
+    || userData.nom
+    || userData.lastName
+    || userData.nom_client
+    || userData.user?.last_name
+    || userData.user?.lastName;
+  const createdAt = userData.created_at
+    || userData.date_joined
+    || userData.created
+    || userData.date_creation
+    || userData.user?.date_joined;
+
+  // Détecter de manière robuste si l'utilisateur est un membre invité
+  const isInvited =
+    userType === 'client_invite' ||
+    (currentUser && (currentUser.role === 'MEMBRE_INVITE' || currentUser.role_client === 'MEMBRE_INVITE')) ||
+    (userData && userData.role_client === 'MEMBRE_INVITE');
+
+  const resolveUserId = () => {
+    if (!currentUser && !userData) return null;
+    // Le backend attend l'ID utilisateur dans l'URL (user_id)
+    return (
+      currentUser?.id ||
+      currentUser?.user?.id ||
+      userData?.user?.id ||
+      userData?.user_id ||
+      null
+    );
+  };
+
+  const handleSelfDeactivate = async (e) => {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    const userId = resolveUserId();
+    if (!userId) {
+      console.error('Impossible de déterminer l\'identifiant utilisateur pour la désactivation.');
+      return;
+    }
+    try {
+      await clientService.setStatus(userId, false);
+    } catch (err) {
+      console.error('Échec de la désactivation du compte:', err);
+      // Même en cas d'erreur, on force la sortie pour éviter l'accès
+    } finally {
+      authService.logout();
+      navigate('/auth/unauthorized', { replace: true });
+    }
+  };
 
   return (
     <>
       <div className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style={{ minHeight: '400px', backgroundSize: 'cover', backgroundPosition: 'center top' }}>
-        <span className="mask bg-gradient-default opacity-8" />
+        <span className="mask bg-gradient-info opacity-8" />
         <Container className="d-flex align-items-center" fluid>
           <Row>
             <Col lg="7" md="10">
@@ -154,14 +256,37 @@ useEffect(() => {
                     <h3 className="mb-0">Mon compte</h3>
                   </Col>
                   <Col className="text-right" xs="4">
-                    <Button 
-                      color="primary" 
-                      tag={Link} 
-                      to="/admin/profile-edit"
-                      size="sm"
-                    >
-                      Modifier
-                    </Button>
+                    {isInvited ? (
+                      <>
+                        <Button
+                          color="secondary"
+                          size="sm"
+                          disabled
+                          onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                          title="Les membres invités ne peuvent pas modifier leur profil."
+                          className="mr-2"
+                        >
+                          Modifier
+                        </Button>
+                        <Button
+                          color="danger"
+                          size="sm"
+                          onClick={handleSelfDeactivate}
+                          title="Désactiver immédiatement votre compte invité et perdre l'accès."
+                        >
+                          Désactiver le compte
+                        </Button>
+                      </>
+                    ) : (
+                      <Button 
+                        color="primary" 
+                        tag={Link} 
+                        to={userType === 'employee' ? '/admin/profile-edit' : '/client/profile-edit'}
+                        size="sm"
+                      >
+                        Modifier
+                      </Button>
+                    )}
                   </Col>
                 </Row>
               </CardHeader>
@@ -170,8 +295,8 @@ useEffect(() => {
                   <h6 className="heading-small text-muted mb-4">Informations utilisateur</h6>
                   <div className="pl-lg-4">
                     <Row>
-                      <ProfileField label="Prénom" value={userData?.first_name} />
-                      <ProfileField label="Nom" value={userData?.last_name} />
+                      <ProfileField label="Prénom" value={firstName} />
+                      <ProfileField label="Nom" value={lastName} />
                     </Row>
                     <Row>
                       <ProfileField label="Email" value={userData?.email} />
@@ -185,7 +310,7 @@ useEffect(() => {
                     <Row>
                       <ProfileField 
                         label="Date de création" 
-                        value={formatDate(userData.date_joined)} 
+                        value={formatDate(createdAt)} 
                       />
                       {userData?.last_login && (
                         <ProfileField 
@@ -195,10 +320,16 @@ useEffect(() => {
                       )}
                     </Row>
                     <Row>
-                      <ProfileField label="Rôle" value={userData.role} />
-                     
+                      {userType === 'employee' && (
+                        <ProfileField label="Rôle" value={userData.role} />
+                      )}
+                      {userType === 'client_invite' && (
+                        <ProfileField label="Rôle client" value={userData.role_client} />
+                      )}
+                      {userType === 'client' && userData.abonnement && (
+                        <ProfileField label="Type d'abonnement" value={userData.abonnement.type} />
+                      )}
                     </Row>
-                    
                   </div>
                 </div>
               </CardBody>

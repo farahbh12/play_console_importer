@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from './api';
 
 const API_URL = 'http://localhost:8000'; // Remplacez par votre URL backend
 

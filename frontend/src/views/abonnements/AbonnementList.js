@@ -6,6 +6,7 @@ import {
 } from 'reactstrap';
 import { toast } from 'react-toastify';
 import abonnementService from '../../services/abonnementService';
+import clientService from '../../services/clientService';
 
 const AbonnementList = () => {
   const [abonnements, setAbonnements] = useState([]);
@@ -59,14 +60,27 @@ const AbonnementList = () => {
     e.preventDefault();
     try {
       if (currentAbonnement) {
-        await abonnementService.update(currentAbonnement.id_abonnement, formData);
-        toast.success('Abonnement mis à jour avec succès');
+        // 1) Changer l'abonnement du client si le type a changé (évite le conflit d'unicité)
+        if (formData.type_abonnement !== currentAbonnement.type_abonnement) {
+          if (!currentAbonnement.user_id) {
+            throw new Error("Impossible d'identifier le client (user_id manquant)");
+          }
+          await clientService.changeAbonnement(currentAbonnement.user_id, formData.type_abonnement);
+          toast.success("Type d'abonnement du client mis à jour");
+        }
+
+        // 2) Mettre à jour uniquement le statut is_active si changé
+        if (formData.is_active !== currentAbonnement.is_active) {
+          await abonnementService.update(currentAbonnement.id_abonnement, { is_active: formData.is_active });
+          toast.success('Statut de l\'abonnement mis à jour');
+        }
         fetchAbonnements();
         toggleModal();
       }
     } catch (error) {
       console.error('Erreur:', error);
-      toast.error(error.response?.data?.message || 'Une erreur est survenue');
+      const apiMsg = error.response?.data?.error || error.response?.data?.message;
+      toast.error(apiMsg || error.message || 'Une erreur est survenue');
     }
   };
 
@@ -193,12 +207,13 @@ const AbonnementList = () => {
                 name="type_abonnement"
                 value={formData.type_abonnement}
                 onChange={handleInputChange}
-                required
+                // Autoriser la modification du type d'abonnement par l'admin/manager
               >
                 <option value="BASIC">Basique</option>
                 <option value="PRO">Professionnel</option>
                 <option value="ENTERPRISE">Entreprise</option>
               </Input>
+              <small className="text-muted">Modifiez le type d'abonnement après la demande du client.</small>
             </FormGroup>
             <FormGroup check className="mt-3">
               <Label check>

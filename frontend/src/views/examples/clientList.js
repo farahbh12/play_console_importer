@@ -35,7 +35,12 @@ const ClientList = () => {
         type_abonnement: client.abonnement_type,
         is_active: client.is_active
       }));
-      setClients(formattedClients);
+      // Ne garder que les comptes Owner (exclure les membres invités)
+      const ownersOnly = formattedClients.filter(c => {
+        const role = (c.role || '').toString().trim().toUpperCase();
+        return role === 'OWNER';
+      });
+      setClients(ownersOnly);
       setError(null);
     } catch (err) {
       console.error('Erreur chargement clients:', err);

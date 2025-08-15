@@ -21,7 +21,11 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "a_default_secret_key_for_developmen
 # Render définit automatiquement la variable d'environnement RENDER.
 DEBUG = os.getenv('RENDER') != 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '.ngrok-free.app',  # Autoriser tous les sous-domaines ngrok
+]
 
 # Récupère le nom d'hôte externe fourni par Render.
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
@@ -44,18 +48,15 @@ CSRF_TRUSTED_ORIGINS = [
 INSTALLED_APPS = [
     # Local apps (must be first to override templates)
     'play_reports',
-
+    'corsheaders',
+    'rest_framework',
+    'rest_framework_simplejwt',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework_simplejwt.token_blacklist',
-    
-    # Third-party apps
-    'rest_framework',
-    'corsheaders',
     'rest_framework.authtoken', # Requis pour la clé API de Looker Studio
     'django_celery_beat',
 ]
@@ -86,22 +87,30 @@ FRONTEND_URL = os.getenv('FRONTEND_URL')
 if FRONTEND_URL:
     CORS_ALLOWED_ORIGINS.append(FRONTEND_URL)
 
-# Expressions régulières pour les domaines Google
-CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^https://.*\.google\.com$",
-]
+
 
 # En-têtes et méthodes autorisés
 CORS_ALLOW_HEADERS = "*"
 CORS_ALLOW_METHODS = ['DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT']
 
-ROOT_URLCONF = 'config.urls' 
+ROOT_URLCONF = 'config.urls'
+
+# CORS Configuration
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]
+
+# Si vous utilisez des cookies ou des en-têtes d'authentification
+CORS_ALLOW_CREDENTIALS = True 
 
 # Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'templates',  # e.g. BACKEND/templates
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -115,6 +124,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+
+
 
 # Configuration de la base de données pour la production (Render) et le développement local.
 # Determine the database host
@@ -206,6 +217,9 @@ EMAIL_PORT = 587  # Common port for TLS
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'benhassen.farah@esprit.tn')  # Your email
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'tvbz qmjg rvis wvnw')  # Your email password
+
+# Use console backend for development to print emails to the console
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Ou 'file' ou 'cache' selon votre configuration
 SESSION_COOKIE_SECURE = True  # En production avec HTTPS
 SESSION_COOKIE_HTTPONLY = True
@@ -226,6 +240,9 @@ LOGOUT_REDIRECT_URL = '/play-reports/'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
+
+# Invitation settings
+INVITATION_EXPIRATION_DAYS = 2  # Durée de validité des invitations en jours
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

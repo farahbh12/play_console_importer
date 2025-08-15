@@ -68,25 +68,3 @@ class ClientUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Client
         fields = ['first_name', 'last_name', 'email', 'password']
-
-    def update(self, instance, validated_data):
-        user = instance.user
-        
-        # Update Client fields (first_name, last_name sont dans Client)
-        if 'first_name' in validated_data:
-            instance.first_name = validated_data.pop('first_name')
-        if 'last_name' in validated_data:
-            instance.last_name = validated_data.pop('last_name')
-        
-        # Update User fields (email, password sont dans User)
-        if 'email' in validated_data:
-            user.email = validated_data.pop('email')
-        
-        password = validated_data.pop('password', None)
-        if password:
-            user.set_password(password)
-        
-        user.save()
-        instance.save()
-        
-        return instance

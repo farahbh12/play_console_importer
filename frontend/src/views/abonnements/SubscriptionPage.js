@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  Card,
-  CardHeader,
-  CardBody,
+import { 
+  Card, 
+  CardHeader, 
+  CardBody, 
+  CardTitle, 
+  CardText,
+  Row, 
+  Col, 
+  Form, 
   FormGroup,
-  Form,
-  Input,
-  Button,
-  Container,
-  Row,
-  Col,
-  Spinner
-} from "reactstrap";
+  Label, 
+  Input, 
+  Button, 
+  Alert, 
+  Spinner, 
+  Container 
+} from 'reactstrap';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import abonnementService from '../../services/abonnementService';
@@ -20,16 +24,21 @@ import abonnementService from '../../services/abonnementService';
 const SubscriptionPage = () => {
   const navigate = useNavigate();
   
-  // États
+  // État du formulaire
   const [formData, setFormData] = useState({
-    type_abonnement: '', 
+    type_abonnement: ''
+  });
+  
+  const [formErrors, setFormErrors] = useState({});
+  const [userData, setUserData] = useState({
     nom: '',
     prenom: '',
     email: ''
   });
-
-  const [loading, setLoading] = useState(false);
-  const [formErrors, setFormErrors] = useState({});
+  
+  const [loading, setLoading] = useState(true);
+  const [isRequestPending, setIsRequestPending] = useState(false);
+  const [currentSubscription, setCurrentSubscription] = useState(null);
 
   // Constantes
   const ABONNEMENT_TYPES = {
@@ -38,18 +47,76 @@ const SubscriptionPage = () => {
     ENTERPRISE: 'ENTERPRISE'
   };
 
-  const abonnementOptions = [
-    { value: '', label: 'Sélectionnez un type d\'abonnement', disabled: true },
-    { value: ABONNEMENT_TYPES.BASIC, label: 'BASIC' },
-    { value: ABONNEMENT_TYPES.PRO, label: 'PRO' },
-    { value: ABONNEMENT_TYPES.ENTERPRISE, label: 'ENTERPRISE' }
-  ];
+  const ABONNEMENT_DESCRIPTIONS = {
+    'BASIC': 'Parfait pour commencer',
+    'PRO': 'Idéal pour les petites équipes',
+    'ENTERPRISE': 'Pour les entreprises en croissance'
+  };
 
-  // Gestion des changements de formulaire
+  const abonnementOptions = [
+    { 
+      value: ABONNEMENT_TYPES.BASIC, 
+      title: 'BASIC',
+      description: 'Parfait pour commencer',
+      features: [
+        'Accès aux fonctionnalités de base',
+        '1 utilisateur',
+        'Support par email',
+        'Pas de membres invités'
+      ],
+      buttonText: 'Sélectionner',
+      popular: false
+    },
+    { 
+      value: ABONNEMENT_TYPES.PRO, 
+      title: 'PRO',
+      description: 'Idéal pour les petites équipes',
+      features: [
+        'Toutes les fonctionnalités BASIC',
+        'Jusqu\'à 3 utilisateurs',
+        'Support prioritaire',
+        'Jusqu\'à 2 membres invités',
+        'Rapports avancés'
+      ],
+      buttonText: 'Sélectionner',
+      popular: true
+    },
+    { 
+      value: ABONNEMENT_TYPES.ENTERPRISE, 
+      title: 'ENTERPRISE',
+      description: 'Pour les entreprises en croissance',
+      features: [
+        'Toutes les fonctionnalités PRO',
+        'Utilisateurs illimités',
+        'Support 24/7',
+        'Membres illimités',
+        'Rapports personnalisés',
+        'Intégrations avancées'
+      ],
+      buttonText: 'Sélectionner',
+      popular: false
+    }
+  ];
+  
+  // Sélection d'un abonnement
+  const selectSubscription = (type) => {
+    setFormData({
+      type_abonnement: type
+    });
+    
+    if (formErrors.type_abonnement) {
+      setFormErrors(prev => ({
+        ...prev,
+        type_abonnement: ''
+      }));
+    }
+  };
+
+  // Gestion des changements du formulaire
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
+    setFormData(prevState => ({
+      ...prevState,
       [name]: value
     }));
     
@@ -64,18 +131,10 @@ const SubscriptionPage = () => {
   // Validation du formulaire
   const validateForm = () => {
     const errors = {};
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!formData.nom.trim()) errors.nom = 'Le nom est requis';
-    if (!formData.prenom.trim()) errors.prenom = 'Le prénom est requis';
-    
-    if (!formData.email) {
-      errors.email = "L'email est requis";
-    } else if (!emailRegex.test(formData.email)) {
-      errors.email = "Veuillez entrer un email valide";
-    }
-    
-    if (!Object.values(ABONNEMENT_TYPES).includes(formData.type_abonnement)) {
+    if (!formData.type_abonnement) {
+      errors.type_abonnement = 'Veuillez sélectionner un type d\'abonnement';
+    } else if (!Object.values(ABONNEMENT_TYPES).includes(formData.type_abonnement)) {
       errors.type_abonnement = 'Veuillez sélectionner un type d\'abonnement valide';
     }
 
@@ -83,50 +142,273 @@ const SubscriptionPage = () => {
     return Object.keys(errors).length === 0;
   };
 
+  useEffect(() => {
+    const fetchUserAndSubscription = async () => {
+      try {
+        setLoading(true);
+        
+        // Récupérer les données de l'utilisateur connecté
+        const token = localStorage.getItem('token');
+        if (token) {
+          try {
+            const decodedToken = parseJwt(token);
+            if (decodedToken) {
+              setUserData({
+                nom: decodedToken.last_name || '',
+                prenom: decodedToken.first_name || '',
+                email: decodedToken.email || ''
+              });
+            }
+          } catch (error) {
+            console.error('Erreur lors du décodage du token:', error);
+          }
+        }
+        
+        // Récupérer l'abonnement actuel via service, filtré par email utilisateur
+        const subscriptions = await abonnementService.getAll();
+        if (Array.isArray(subscriptions) && subscriptions.length > 0) {
+          const emailLower = (userData.email || '').toLowerCase();
+          const mine = subscriptions.find(s => (s.email || '').toLowerCase() === emailLower) || subscriptions[0];
+          if (mine) {
+            setCurrentSubscription({
+              id: mine.id_abonnement,
+              type: mine.type_abonnement,
+              is_active: !!mine.is_active,
+            });
+          }
+        }
+        
+      } catch (error) {
+        console.error('Erreur:', error);
+        toast.error('Impossible de charger les données utilisateur');
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchUserAndSubscription();
+  }, []);
+
+
+  // Fonction utilitaire pour parser le JWT
+  const parseJwt = (token) => {
+    try {
+      return JSON.parse(atob(token.split('.')[1]));
+    } catch (e) {
+      return null;
+    }
+  };
+
+
+  // Styles utilitaires pour un rendu plus moderne
+  const getCardStyle = (option, isSelected, isCurrentPlan) => {
+    const base = {
+      borderRadius: 20,
+      transition: 'transform 0.2s, box-shadow 0.2s, border-color 0.2s, background-color 0.2s',
+      boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
+      cursor: 'pointer',
+      border: '1px solid rgba(0,0,0,0.08)'
+    };
+    const states = {};
+    if (option.popular) {
+      states.borderColor = '#5e72e4';
+      states.boxShadow = '0 10px 28px rgba(94,114,228,0.18)';
+    }
+    if (isCurrentPlan) {
+      states.borderColor = '#28c76f';
+      states.boxShadow = '0 10px 28px rgba(40,199,111,0.18)';
+    }
+    if (isSelected) {
+      states.transform = 'translateY(-6px)';
+      states.boxShadow = '0 14px 32px rgba(0,0,0,0.14)';
+      states.borderColor = '#5e72e4';
+      states.backgroundColor = 'rgba(94,114,228,0.06)';
+    }
+    return { ...base, ...states };
+  };
+
+
+
   // Soumission du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
     setLoading(true);
-
+    
     try {
-      const subscriptionData = {
-        email: formData.email,
-        nom: formData.nom,
-        prenom: formData.prenom,
-        type_abonnement: formData.type_abonnement
-      };
-
-      const response = await abonnementService.souscrireAbonnement(subscriptionData);
-
-      if (response.success) {
-        toast.success(`Abonnement ${response.abonnement_type} créé avec succès pour ${response.prenom} ${response.nom}. Redirection en cours...`);
-        
-        // Réinitialisation du formulaire
-        setFormData({
-          type_abonnement: '',
-          nom: '',
-          prenom: '',
-          email: ''
-        });
-
-        // Redirection après 2 secondes
-        setTimeout(() => {
-          navigate('/admin/gcs/validate');
-        }, 2000);
-      } else {
-        throw new Error(response.error || 'Une erreur est survenue');
+      if (!formData.type_abonnement) {
+        toast.error('Veuillez sélectionner un type d\'abonnement');
+        return;
       }
+
+      const token = localStorage.getItem('token');
+      const endpoint = currentSubscription 
+        ? 'http://localhost:8000/api/abonnements/update-request/'
+        : 'http://localhost:8000/api/client/subscribe/';
+      
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          type_abonnement: formData.type_abonnement,
+          nom: userData.nom,
+          prenom: userData.prenom,
+          email: userData.email
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Erreur lors de la demande');
+      }
+      
+      const result = await response.json();
+      
+      if (currentSubscription) {
+        // Mise à jour d'un abonnement existant
+        setIsRequestPending(true);
+        toast.success('Votre demande de modification a été envoyée à l\'administrateur.');
+      } else {
+        // Nouvel abonnement
+        setCurrentSubscription({
+          type: formData.type_abonnement,
+          status: 'en_attente'
+        });
+        toast.success('Votre abonnement a été créé avec succès !');
+      }
+      
+      setFormData({
+        type_abonnement: ''
+      });
+      
+      // Rediriger vers la page de gestion d'équipe après 1,5 secondes
+      setTimeout(() => {
+        navigate('/client/manage-team');
+      }, 1500);
+      
     } catch (error) {
       console.error('Erreur:', error);
-      toast.error(error.message || 'Une erreur est survenue lors de la souscription');
+      toast.error('Une erreur est survenue. Veuillez réessayer plus tard.');
     } finally {
       setLoading(false);
     }
+  };
+
+  if (loading) {
+    return (
+      <div className="content">
+        <Container>
+          <Row className="justify-content-center">
+            <Col md="8">
+              <Card>
+                <CardBody className="text-center p-5">
+                  <Spinner color="primary" />
+                  <p className="mt-3">Chargement de votre abonnement...</p>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    );
+  }
+
+
+
+  // Rendu des cartes d'abonnement
+  const renderSubscriptionCards = () => {
+    return (
+      <Row className="justify-content-center">
+        {abonnementOptions.map((option) => {
+          const isCurrentPlan = currentSubscription && currentSubscription.type === option.value;
+          const isSelected = formData.type_abonnement === option.value;
+          
+          return (
+            <Col key={option.value} md="4" className="mb-5 d-flex">
+              <Card 
+                className={`h-100 w-100 ${option.popular ? 'border-primary' : ''} ${isCurrentPlan ? 'border-success' : ''}`}
+                style={getCardStyle(option, isSelected, isCurrentPlan)}
+                role="button"
+                aria-pressed={isSelected}
+                onClick={() => !isCurrentPlan && selectSubscription(option.value)}
+              >
+                {option.popular && (
+                  <div className="text-center mt-3">
+                    <span className="badge rounded-pill bg-primary" style={{ padding: '6px 12px' }}>Le plus populaire</span>
+                  </div>
+                )}
+                
+                <CardBody className="text-center p-4 d-flex flex-column">
+                  <CardTitle tag="h4" className="mb-2" style={{ letterSpacing: 0.5 }}>{option.title}</CardTitle>
+                  <CardText className="text-muted mb-4" style={{ minHeight: 24 }}>{option.description}</CardText>
+                  {/* Montant supprimé selon demande */}
+
+                  <ul className="list-unstyled mb-4 text-start mx-auto" style={{ maxWidth: 260 }}>
+                    {option.features.map((feature, index) => (
+                      <li key={index} className="mb-2">
+                        <i className="fas fa-check me-2" style={{ color: '#28c76f' }}></i>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </CardBody>
+              </Card>
+            </Col>
+          );
+        })}
+      </Row>
+    );
+  };
+
+  // Rendu du composant
+  const renderContent = () => {
+    if (isRequestPending) {
+      return (
+        <Alert color="info" className="mb-4">
+          Votre demande de changement d'abonnement est en attente de validation par l'administrateur.
+        </Alert>
+      );
+    }
+
+    return (
+      <div>
+        {currentSubscription && (
+          <Alert className="mb-4" style={{ backgroundColor: '#0a2540', color: '#fff', borderColor: '#0a2540' }}>
+            <h4 className="alert-heading">Votre abonnement actuel</h4>
+            <p>Type: <strong>{currentSubscription.type}</strong></p>
+            <p>Statut: <strong style={{ color: '#ffffff' }}>
+              {currentSubscription.is_active ? 'Actif' : 'Inactif'}
+            </strong></p>
+          </Alert>
+        )}
+        
+        <Form onSubmit={handleSubmit}>
+          {renderSubscriptionCards()}
+          
+          {formData.type_abonnement && (
+            <div className="text-center mt-4">
+              <Button 
+                color="primary" 
+                type="submit" 
+                disabled={loading}
+                size="lg"
+              >
+                {loading ? (
+                  <span>
+                    <Spinner size="sm" className="me-2" />
+                    Traitement en cours...
+                  </span>
+                ) : (
+                  `Changer pour ${formData.type_abonnement}`
+                )}
+              </Button>
+            </div>
+          )}
+        </Form>
+      </div>
+    );
   };
 
   return (
@@ -134,134 +416,29 @@ const SubscriptionPage = () => {
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
         <Container fluid>
           <div className="header-body">
-            <h2 className="text-white">Souscription à un abonnement</h2>
-            <p className="text-white-50">
-              Remplissez le formulaire pour vous abonner à nos services
-            </p>
+            <Row className="align-items-center">
+              <Col>
+                <h2 className="text-white mb-0">Abonnement</h2>
+                <p className="text-white mt-2 mb-0">
+                  {currentSubscription
+                    ? 'Consultez votre abonnement et envoyez une demande de changement si nécessaire.'
+                    : 'Choisissez le plan qui correspond à vos besoins.'}
+                </p>
+              </Col>
+            </Row>
           </div>
         </Container>
       </div>
-
-      <Container className="mt--8 pb-5">
+      <Container className="mt--7" fluid>
         <Row className="justify-content-center">
-          <Col lg="8" md="10">
-            <Card className="bg-secondary shadow">
-              <CardHeader className="bg-white border-0">
-                <h3 className="mb-0">Formulaire d'abonnement</h3>
+          <Col md="8">
+            <Card className="shadow">
+              <CardHeader className="border-0">
+               
+                
               </CardHeader>
               <CardBody>
-                <Form role="form" onSubmit={handleSubmit}>
-                  <Row>
-                    <Col md="6">
-                      <FormGroup className={formErrors.prenom ? "has-danger" : "mb-3"}>
-                        <label className="form-control-label" htmlFor="prenom">
-                          Prénom <span className="text-danger">*</span>
-                        </label>
-                        <Input
-                          className={`form-control-alternative ${formErrors.prenom ? 'is-invalid' : ''}`}
-                          id="prenom"
-                          name="prenom"
-                          placeholder="Votre prénom"
-                          type="text"
-                          value={formData.prenom}
-                          onChange={handleChange}
-                          disabled={loading}
-                        />
-                        {formErrors.prenom && (
-                          <div className="invalid-feedback d-block">{formErrors.prenom}</div>
-                        )}
-                      </FormGroup>
-                    </Col>
-                    <Col md="6">
-                      <FormGroup className={formErrors.nom ? "has-danger" : "mb-3"}>
-                        <label className="form-control-label" htmlFor="nom">
-                          Nom <span className="text-danger">*</span>
-                        </label>
-                        <Input
-                          className={`form-control-alternative ${formErrors.nom ? 'is-invalid' : ''}`}
-                          id="nom"
-                          name="nom"
-                          placeholder="Votre nom"
-                          type="text"
-                          value={formData.nom}
-                          onChange={handleChange}
-                          disabled={loading}
-                        />
-                        {formErrors.nom && (
-                          <div className="invalid-feedback d-block">{formErrors.nom}</div>
-                        )}
-                      </FormGroup>
-                    </Col>
-                  </Row>
-
-                  <FormGroup className={formErrors.email ? "has-danger" : "mb-4"}>
-                    <label className="form-control-label" htmlFor="email">
-                      Email <span className="text-danger">*</span>
-                    </label>
-                    <Input
-                      className={`form-control-alternative ${formErrors.email ? 'is-invalid' : ''}`}
-                      id="email"
-                      name="email"
-                      placeholder="votre@email.com"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      disabled={loading}
-                    />
-                    {formErrors.email && (
-                      <div className="invalid-feedback d-block">{formErrors.email}</div>
-                    )}
-                  </FormGroup>
-
-                  <FormGroup className={formErrors.type_abonnement ? "has-danger" : "mb-4"}>
-                    <label className="form-control-label" htmlFor="type_abonnement">
-                      Type d'abonnement <span className="text-danger">*</span>
-                    </label>
-                    <Input
-                      type="select"
-                      className={`form-control-alternative ${formErrors.type_abonnement ? 'is-invalid' : ''}`}
-                      id="type_abonnement"
-                      name="type_abonnement"
-                      value={formData.type_abonnement}
-                      onChange={handleChange}
-                      disabled={loading}
-                    >
-                      {abonnementOptions.map((option, index) => (
-                        <option 
-                          key={option.value || 'default'} 
-                          value={option.value}
-                          disabled={option.disabled || false}
-                        >
-                          {option.label}
-                        </option>
-                      ))}
-                    </Input>
-                    {formErrors.type_abonnement && (
-                      <div className="invalid-feedback d-block">
-                        {formErrors.type_abonnement}
-                      </div>
-                    )}
-                  </FormGroup>
-
-                  <div className="text-center">
-                    <Button 
-                      className="my-4" 
-                      color="primary" 
-                      type="submit" 
-                      disabled={loading}
-                      size="lg"
-                    >
-                      {loading ? (
-                        <>
-                          <Spinner size="sm" className="mr-2" />
-                          Traitement en cours...
-                        </>
-                      ) : (
-                        "Souscrire maintenant"
-                      )}
-                    </Button>
-                  </div>
-                </Form>
+                {renderContent()}
               </CardBody>
             </Card>
           </Col>

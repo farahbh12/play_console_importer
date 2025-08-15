@@ -1,0 +1,127 @@
+// Styles pour les cartes d'abonnement
+.card-pricing {
+  border: none;
+  transition: all 0.3s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  .card-header {
+    border-bottom: none;
+    padding: 1.5rem 1rem 0.5rem;
+    
+    h4 {
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+  }
+  
+  .card-body {
+    padding: 1.5rem 2rem 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    
+    .display-2 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin: 0;
+      
+      .h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+      }
+      
+      .text-sm {
+        font-size: 1rem;
+        opacity: 0.8;
+      }
+    }
+    
+    ul {
+      text-align: left;
+      margin: 1.5rem 0;
+      flex: 1;
+      
+      li {
+        padding: 0.5rem 0;
+        font-size: 0.9rem;
+        
+        i {
+          font-size: 1.25rem;
+        }
+      }
+    }
+    
+    .btn {
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      transition: all 0.3s;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+  
+  // Style pour le ruban "Populaire"
+  .ribbon {
+    position: absolute;
+    top: 10px;
+    right: -35px;
+    width: 150px;
+    height: 30px;
+    background: #2dce89;
+    transform: rotate(45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    
+    span {
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  }
+  
+  // Effet de survol
+  &:hover:not(.bg-gradient-primary) {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  // Style pour la carte sélectionnée
+  &.bg-gradient-primary {
+    .card-header h4,
+    .card-body .display-2,
+    .card-body p,
+    .card-body ul li span {
+      color: white !important;
+    }
+    
+    .btn-outline-primary {
+      border-color: white;
+      color: white;
+      
+      &:hover {
+        background: white;
+        color: #5e72e4;
+      }
+    }
+  }
+}
+
+// Style pour les écrans mobiles
+@media (max-width: 991px) {
+  .card-pricing {
+    margin-bottom: 2rem;
+  }
+}

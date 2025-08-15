@@ -18,30 +18,35 @@ const RevokeIcon = () => (
   </svg>
 );
 
-const ConnectorCard = ({ title, subtitle, isActive, onOpen, onRevoke }) => {
+const ConnectorCard = ({ title, subtitle, isActive, onOpen, onRevoke, logoSrc }) => {
   return (
     <div className="connector-card">
       <div className="card-header">
-        <div className="card-icon"></div>
+        <div className="card-icon">
+          {logoSrc ? (
+            <img src={logoSrc} alt="logo" className="card-logo-img" />
+          ) : null}
+        </div>
         <div className="card-title-group">
           <h3 className="card-title">{title}</h3>
           <p className="card-subtitle">{subtitle}</p>
         </div>
       </div>
 
+      <hr className="card-separator" />
       <div className="card-status">
         <span className={`status-indicator ${isActive ? 'active' : 'inactive'}`}></span>
-        <p>{isActive ? 'Actived' : 'Deactivated'}</p>
+        <p>{isActive ? 'Activé' : 'Désactivé'}</p>
       </div>
 
       <div className="card-actions">
         <button className="action-button" onClick={onOpen}>
           <LinkIcon />
-          <span>open on Looker</span>
+          <span>ouvrir sur Looker</span>
         </button>
         <button className="action-button revoke" onClick={onRevoke}>
           <RevokeIcon />
-          <span>revoke authorization</span>
+          <span>révoquer l’autorisation</span>
         </button>
       </div>
     </div>

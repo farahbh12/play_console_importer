@@ -103,6 +103,7 @@ class AbonnementClientSerializer(serializers.ModelSerializer):
     nom = serializers.SerializerMethodField()
     prenom = serializers.SerializerMethodField()
     email = serializers.SerializerMethodField()
+    user_id = serializers.SerializerMethodField()
     date_creation = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
     
     class Meta:
@@ -114,7 +115,8 @@ class AbonnementClientSerializer(serializers.ModelSerializer):
             'date_creation',
             'prenom',
             'nom',
-            'email'
+            'email',
+            'user_id'
         ]
         read_only_fields = fields
 
@@ -131,6 +133,12 @@ class AbonnementClientSerializer(serializers.ModelSerializer):
         if client and hasattr(client, 'user') and client.user:
             return client.user.email
         return ''
+
+    def get_user_id(self, obj):
+        client = obj.clients.first()
+        if client and hasattr(client, 'user') and client.user:
+            return client.user.id
+        return None
 
 class UpdateAbonnementSerializer(serializers.ModelSerializer):
     class Meta:

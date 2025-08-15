@@ -26,6 +26,26 @@ const authService = {
       throw error.response?.data || new Error('Une erreur est survenue.');
     }
   },
+
+  setSession: (accessToken, refreshToken) => {
+    if (accessToken) {
+      localStorage.setItem('accessToken', accessToken);
+      if (refreshToken) {
+        localStorage.setItem('refreshToken', refreshToken);
+      }
+    } else {
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+    }
+  },
+
+  setUser: (user) => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }
 };
 
 export default authService;

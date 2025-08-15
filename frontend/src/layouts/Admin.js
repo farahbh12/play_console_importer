@@ -58,7 +58,7 @@ const Admin = (props) => {
       userRole = 'client';
     }
     
-    console.log('Admin Layout - getFilteredRoutes - Rôle utilisateur:', userRole, 'Données:', currentUser);
+
     
     return routes.filter(route => {
       // Inclure les routes sans allowedRoles
@@ -111,12 +111,6 @@ const Admin = (props) => {
 
   // Vérifier si l'utilisateur a le droit d'accéder à l'administration
   const getUserRole = () => {
-    console.log('Admin Layout - Détection du rôle:', {
-      is_superuser: currentUser.is_superuser,
-      role: currentUser.role,
-      user_type: currentUser.user_type,
-      employee_id: currentUser.employee_id
-    });
 
     // Administrateurs (accès complet)
     if (currentUser.is_superuser || currentUser.role === 'administrateur' || currentUser.role === 'admin') {
@@ -144,16 +138,16 @@ const Admin = (props) => {
   };
   
   const userRole = getUserRole();
-  console.log('Admin Layout - Rôle déterminé:', userRole);
+
   
   // Rediriger les clients (y compris Owner) vers leur tableau de bord
   if (userRole === 'client') {
-    console.log('Admin Layout - Redirection vers client dashboard');
+
     return <Navigate to="/client/dashboard" replace />;
   }
   
   // Les admin et manager ont accès à l'interface admin
-  console.log('Admin Layout - Accès autorisé à l\'interface admin');
+
 
   return (
     <div className="g-sidenav-show g-sidenav-pinned">
@@ -191,9 +185,9 @@ const Admin = (props) => {
           })}
           <Route path="*" element={<Navigate to="/admin/index" replace />} />
         </Routes>
-        <Container fluid>
+        <div>
           <AdminFooter />
-        </Container>
+        </div>
       </div>
     </div>
   );

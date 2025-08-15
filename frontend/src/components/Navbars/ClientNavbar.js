@@ -49,6 +49,21 @@ const ClientNavbar = ({ onLogout }) => {
     navigate("/client/profile");
   };
 
+  // Détecter si l'utilisateur est un membre invité
+  const invitedGuard = (e) => {
+    const u = authService.getCurrentUser();
+    const isInvited =
+      (u && (u.role === 'MEMBRE_INVITE' || u.role_client === 'MEMBRE_INVITE')) ||
+      (userData && userData.role_client === 'MEMBRE_INVITE');
+    if (isInvited) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      // Optionnel: montrer un feedback simple
+      console.warn("Les membres invités ne peuvent pas modifier le profil.");
+      return true;
+    }
+    return false;
+  };
+
   const displayName = (userData?.first_name && userData?.last_name)
     ? `${userData.first_name} ${userData.last_name}`
     : userData?.email || 'Utilisateur';
@@ -87,7 +102,15 @@ const ClientNavbar = ({ onLogout }) => {
                   <i className="ni ni-single-02" />
                   <span>Mon profil</span>
                 </DropdownItem>
-                <DropdownItem href="#" onClick={() => navigate('/client/profile-edit')}>
+                <DropdownItem
+                  href="#"
+                  onClick={(e) => { if (!invitedGuard(e)) navigate('/client/profile-edit'); }}
+                  disabled={(() => {
+                    const u = authService.getCurrentUser();
+                    return (u && (u.role === 'MEMBRE_INVITE' || u.role_client === 'MEMBRE_INVITE')) || (userData && userData.role_client === 'MEMBRE_INVITE');
+                  })()}
+                  title="Les membres invités ne peuvent pas modifier leur profil."
+                >
                   <i className="ni ni-settings-gear-65" />
                   <span>Modifier profil</span>
                 </DropdownItem>

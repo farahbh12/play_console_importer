@@ -16,15 +16,23 @@ const GcsConnectorPage = () => {
   return (
     <>
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
-        <Container fluid>
+        <Container>
           <div className="header-body">
             <h2 className="text-white">Connecteurs de Données</h2>
             <p className="text-white mt-2 mb-0">Gérez les connexions à vos plateformes de données comme Looker Studio.</p>
           </div>
         </Container>
       </div>
-      <Container className="mt--7" fluid>
-        <Row>
+      <Container className="mt--7">
+        <Row className="justify-content-start" style={{ marginTop: '6rem' }}>
+          <Col lg="8" className="text-left">
+            <h3 className="mb-2">Destinations Looker Studio</h3>
+            <p className="text-muted mb-0">
+              Connecteurs pour l’intelligence d’affaires et la visualisation de données.
+            </p>
+          </Col>
+        </Row>
+        <Row className="justify-content-start" style={{ marginTop: '1rem' }}>
           <Col lg="6">
             <ConnectorCard
               title="Looker Studio Connector"
@@ -32,6 +40,7 @@ const GcsConnectorPage = () => {
               isActive={true} // Statut à dynamiser plus tard
               onOpen={handleOpen}
               onRevoke={handleRevoke}
+              logoSrc="https://www.gstatic.com/analytics-suite/header/suite/v2/ic_data_studio.svg"
             />
           </Col>
         </Row>

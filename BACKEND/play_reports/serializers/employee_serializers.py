@@ -30,33 +30,10 @@ class EmployeeDetailSerializer(serializers.ModelSerializer):
 
 class EmployeeUpdateSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(source='user.email', required=False)
-    first_name = serializers.CharField(required=False)
-    last_name = serializers.CharField(required=False)
-    is_active = serializers.BooleanField(source='user.is_active', required=False)
+    password = serializers.CharField(write_only=True, required=False, style={'input_type': 'password'})
+    first_name = serializers.CharField(required=False, max_length=150)
+    last_name = serializers.CharField(required=False, max_length=150)
 
     class Meta:
         model = Employee
-        fields = ['first_name', 'last_name', 'email', 'is_active']
-    
-    def update(self, instance, validated_data):
-        user_data = validated_data.pop('user', {})
-        
-        # Mise à jour des champs utilisateur
-        user = instance.user
-        for attr, value in user_data.items():
-            if value is not None:
-                setattr(user, attr, value)
-        user.save()
-        
-        # Mise à jour des champs employé
-        instance = super().update(instance, validated_data)
-        return instance
-
-    def to_representation(self, instance):
-        return {
-            'id': instance.id,
-            'email': instance.user.email,
-            'first_name': instance.first_name,
-            'last_name': instance.last_name,
-            'role': instance.get_role_employe_display() if hasattr(instance, 'get_role_employe_display') else None
-        }
+        fields = ('first_name', 'last_name', 'email', 'password')

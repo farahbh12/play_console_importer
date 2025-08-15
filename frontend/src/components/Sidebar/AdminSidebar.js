@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink as NavLinkRRD, Link, useLocation } from "react-router-dom";
+import { NavLink as NavLinkRRD, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   Navbar,
@@ -20,11 +20,9 @@ import {
 
 const AdminSidebar = ({ user, logo }) => {
   const [collapseOpen, setCollapseOpen] = useState(false);
-  const location = useLocation();
 
-  const activeRoute = (routeName) => {
-    return location.pathname === routeName ? "active" : "";
-  };
+
+
 
   const toggleCollapse = () => {
     setCollapseOpen(!collapseOpen);
@@ -61,7 +59,7 @@ const AdminSidebar = ({ user, logo }) => {
     },
     // Gestion des abonnements
     {
-      path: "/admin/subscriptions",
+      path: "/admin/AbonnementList",
       name: "Liste des abonnements",
       icon: "ni ni-credit-card text-green",
       section: "gestion"
@@ -74,7 +72,7 @@ const AdminSidebar = ({ user, logo }) => {
    
   ];
 
-  const allRoutes = [...adminRoutes, ...systemRoutes];
+
 
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
@@ -110,19 +108,10 @@ const AdminSidebar = ({ user, logo }) => {
           <span className="navbar-toggler-icon" />
         </button>
         
-        {logo ? (
-          <NavbarBrand className="pt-0" to="/admin/index" tag={Link}>
-            <img
-              alt={logo.imgAlt}
-              className="navbar-brand-img"
-              src={logo.imgSrc}
-            />
-          </NavbarBrand>
-        ) : (
-          <NavbarBrand className="pt-0" to="/admin/index" tag={Link}>
-            <h2 className="text-primary font-weight-bold">Admin Panel</h2>
-          </NavbarBrand>
-        )}
+        <NavbarBrand className="pt-0 d-flex align-items-baseline" to="/admin/index" tag={Link}>
+          <span className="font-weight-bold" style={{ fontSize: '1.25rem' }}>DataDock</span>
+          <small className="text-uppercase ml-2" style={{ opacity: 0.8 }}>ReportApp</small>
+        </NavbarBrand>
         
         <Nav className="align-items-center d-md-none">
           <UncontrolledDropdown nav>
@@ -153,13 +142,12 @@ const AdminSidebar = ({ user, logo }) => {
         <Collapse navbar isOpen={collapseOpen}>
           <div className="navbar-collapse-header d-md-none">
             <Row>
-              {logo && (
-                <Col className="collapse-brand" xs="6">
-                  <Link to="/admin/index">
-                    <img alt={logo.imgAlt} src={logo.imgSrc} />
-                  </Link>
-                </Col>
-              )}
+              <Col className="collapse-brand" xs="6">
+                <Link to="/admin/index" style={{ textDecoration: 'none' }}>
+                  <span className="font-weight-bold">DataDock</span>
+                  <small className="text-uppercase ml-1" style={{ opacity: 0.8 }}>ReportApp</small>
+                </Link>
+              </Col>
               <Col className="collapse-close" xs="6">
                 <button
                   className="navbar-toggler"

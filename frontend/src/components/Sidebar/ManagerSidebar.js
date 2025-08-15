@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink as NavLinkRRD, Link, useLocation } from "react-router-dom";
+import { NavLink as NavLinkRRD, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   Navbar,
@@ -20,7 +20,7 @@ import {
 
 const ManagerSidebar = ({ user, logo }) => {
   const [collapseOpen, setCollapseOpen] = useState(false);
-  const location = useLocation();
+
 
   const toggleCollapse = () => {
     setCollapseOpen(!collapseOpen);
@@ -47,7 +47,7 @@ const ManagerSidebar = ({ user, logo }) => {
     },
     // Gestion des abonnements
     {
-      path: "/admin/subscriptions",
+      path: "/admin/AbonnementList",
       name: "Liste des abonnements",
       icon: "ni ni-credit-card text-green",
       section: "gestion"
