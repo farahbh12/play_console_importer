@@ -48,10 +48,10 @@ class ClientSerializer(serializers.ModelSerializer):
 
 class ClientRegisterSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
-    password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
-    password_confirm = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
-    first_name = serializers.CharField(required=True, max_length=150, allow_blank=False)
-    last_name = serializers.CharField(required=True, max_length=150, allow_blank=False)
+    password = serializers.CharField(write_only=True, required=True)
+    password_confirm = serializers.CharField(write_only=True, required=True)
+    first_name = serializers.CharField(required=True, max_length=150)
+    last_name = serializers.CharField(required=True, max_length=150)
 
     def validate(self, data):
         if data.get('password') != data.get('password_confirm'):

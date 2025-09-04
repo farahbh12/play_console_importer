@@ -154,7 +154,9 @@ const Sidebar = (props) => {
                 </Media>
                 <Media className="ml-2 d-none d-lg-block">
                   <span className="mb-0 text-sm font-weight-bold">
-                    {currentUser.email}
+                    {currentUser?.first_name && currentUser?.last_name 
+                      ? `${currentUser.first_name} ${currentUser.last_name}`
+                      : currentUser?.name || currentUser?.email || 'Utilisateur'}
                   </span>
                 </Media>
               </Media>

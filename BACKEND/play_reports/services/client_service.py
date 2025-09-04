@@ -13,10 +13,13 @@ class ClientService:
     @staticmethod
     def list_clients(role=None):
         """Retrieve a list of clients, optionally filtered by role."""
-        clients = Client.objects.select_related('user').filter(user__isnull=False).all()
+        # Utiliser select_related pour optimiser les requêtes liées
+        clients = Client.objects.select_related('user', 'abonnement').filter(user__isnull=False)
+        
         if role:
             clients = clients.filter(role_client=role)
-        return clients
+            
+        return clients.order_by('-created_at')
 
     @staticmethod
     def get_client_by_id(client_id):

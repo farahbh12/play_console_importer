@@ -15,8 +15,10 @@ import {
   Button, 
   Alert, 
   Spinner, 
-  Container 
+  Container,
+  Badge
 } from 'reactstrap';
+import subscriptionService from '../../services/subscriptionService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import abonnementService from '../../services/abonnementService';
@@ -31,6 +33,7 @@ const SubscriptionPage = () => {
   
   const [formErrors, setFormErrors] = useState({});
   const [userData, setUserData] = useState({
+    id: '',
     nom: '',
     prenom: '',
     email: ''
@@ -38,7 +41,11 @@ const SubscriptionPage = () => {
   
   const [loading, setLoading] = useState(true);
   const [isRequestPending, setIsRequestPending] = useState(false);
-  const [currentSubscription, setCurrentSubscription] = useState(null);
+  const [currentSubscription, setCurrentSubscription] = useState({
+    type: '',
+    status: '',
+    expiryDate: ''
+  });
 
   // Constantes
   const ABONNEMENT_TYPES = {
@@ -142,6 +149,32 @@ const SubscriptionPage = () => {
     return Object.keys(errors).length === 0;
   };
 
+  // Fonction pour activer/désactiver l'abonnement
+  const handleToggleStatus = async (activate) => {
+    if (!currentSubscription?.id) {
+      toast.error('Impossible de trouver l\'abonnement à modifier');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await abonnementService.toggle(currentSubscription.id);
+      
+      // Mettre à jour l'état local avec le nouveau statut
+      setCurrentSubscription(prev => ({
+        ...prev,
+        is_active: activate
+      }));
+      
+      toast.success(`Abonnement ${activate ? 'activé' : 'désactivé'} avec succès`);
+    } catch (error) {
+      console.error('Erreur lors du changement de statut:', error);
+      toast.error(error.message || 'Une erreur est survenue lors de la mise à jour du statut');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     const fetchUserAndSubscription = async () => {
       try {
@@ -153,31 +186,34 @@ const SubscriptionPage = () => {
           try {
             const decodedToken = parseJwt(token);
             if (decodedToken) {
-              setUserData({
+              const user = {
+                id: decodedToken.user_id || '',
                 nom: decodedToken.last_name || '',
                 prenom: decodedToken.first_name || '',
                 email: decodedToken.email || ''
-              });
+              };
+              setUserData(user);
+              
+              // Récupérer l'abonnement du client
+              if (user.id) {
+                const subscription = await subscriptionService.getClientSubscriptionType(user.id);
+                if (subscription) {
+                  setCurrentSubscription({
+                    id: subscription.id_abonnement || subscription.id, // Utiliser id_abonnement si disponible, sinon id
+                    type: subscription.type_abonnement || 'BASIC',
+                    is_active: subscription.is_active || false, // Ajouter le statut actif
+                    status: subscription.is_active ? 'Actif' : 'Inactif',
+                    expiryDate: subscription.date_expiration || '',
+                    date_creation: subscription.date_creation || ''
+                  });
+                }
+              }
             }
           } catch (error) {
-            console.error('Erreur lors du décodage du token:', error);
+            console.error('Erreur lors du chargement des données:', error);
+            toast.error('Erreur lors du chargement des données de l\'utilisateur');
           }
         }
-        
-        // Récupérer l'abonnement actuel via service, filtré par email utilisateur
-        const subscriptions = await abonnementService.getAll();
-        if (Array.isArray(subscriptions) && subscriptions.length > 0) {
-          const emailLower = (userData.email || '').toLowerCase();
-          const mine = subscriptions.find(s => (s.email || '').toLowerCase() === emailLower) || subscriptions[0];
-          if (mine) {
-            setCurrentSubscription({
-              id: mine.id_abonnement,
-              type: mine.type_abonnement,
-              is_active: !!mine.is_active,
-            });
-          }
-        }
-        
       } catch (error) {
         console.error('Erreur:', error);
         toast.error('Impossible de charger les données utilisateur');
@@ -193,8 +229,17 @@ const SubscriptionPage = () => {
   // Fonction utilitaire pour parser le JWT
   const parseJwt = (token) => {
     try {
-      return JSON.parse(atob(token.split('.')[1]));
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+      return JSON.parse(jsonPayload);
     } catch (e) {
+      console.error('Erreur lors du décodage du token:', e);
       return null;
     }
   };
@@ -242,8 +287,8 @@ const SubscriptionPage = () => {
 
       const token = localStorage.getItem('token');
       const endpoint = currentSubscription 
-        ? 'http://localhost:8000/api/abonnements/update-request/'
-        : 'http://localhost:8000/api/client/subscribe/';
+        ? 'http://localhost:8000/abonnements/update-request/'
+        : 'http://localhost:8000/client/subscribe/';
       
       const response = await fetch(endpoint, {
         method: 'POST',
@@ -252,24 +297,25 @@ const SubscriptionPage = () => {
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
-          type_abonnement: formData.type_abonnement,
-          nom: userData.nom,
-          prenom: userData.prenom,
-          email: userData.email
+          type_abonnement: formData.type_abonnement
         })
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Erreur lors de la demande');
+        throw new Error(errorData.error || 'Erreur lors de l\'envoi de la demande de modification');
       }
+
+      const data = await response.json();
+      toast.success(data.message || 'Votre demande de modification a été envoyée à l\'administrateur');
       
-      const result = await response.json();
-      
+      // Update UI to show pending status
       if (currentSubscription) {
-        // Mise à jour d'un abonnement existant
-        setIsRequestPending(true);
-        toast.success('Votre demande de modification a été envoyée à l\'administrateur.');
+        setCurrentSubscription({
+          ...currentSubscription,
+          status: 'En attente de validation',
+          pendingType: formData.type_abonnement
+        });
       } else {
         // Nouvel abonnement
         setCurrentSubscription({
@@ -341,9 +387,35 @@ const SubscriptionPage = () => {
                 )}
                 
                 <CardBody className="text-center p-4 d-flex flex-column">
-                  <CardTitle tag="h4" className="mb-2" style={{ letterSpacing: 0.5 }}>{option.title}</CardTitle>
+                  <CardTitle tag="h4" className="mb-2" style={{ letterSpacing: 0.5 }}>
+                    {option.title}
+                    {isCurrentPlan && (
+                      <>
+                        <Badge color={currentSubscription.is_active ? "success" : "secondary"} className="ms-2">
+                          {currentSubscription.is_active ? 'Actif' : 'Inactif'}
+                        </Badge>
+                        {currentSubscription.pendingType && (
+                          <Badge color="warning" className="ms-1">
+                            En attente
+                          </Badge>
+                        )}
+                      </>
+                    )}
+                  </CardTitle>
                   <CardText className="text-muted mb-4" style={{ minHeight: 24 }}>{option.description}</CardText>
-                  {/* Montant supprimé selon demande */}
+                  
+                  {isCurrentPlan && (
+                    <>
+                      {currentSubscription.expiryDate && (
+                        <div className="mb-3">
+                          <small className="text-muted">
+                            Valide jusqu'au {new Date(currentSubscription.expiryDate).toLocaleDateString('fr-FR')}
+                          </small>
+                        </div>
+                      )}
+                      {/* Activation/Deactivation buttons removed as per user request */}
+                    </>
+                  )}
 
                   <ul className="list-unstyled mb-4 text-start mx-auto" style={{ maxWidth: 260 }}>
                     {option.features.map((feature, index) => (

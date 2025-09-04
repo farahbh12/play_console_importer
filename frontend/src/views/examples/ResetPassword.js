@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button, Card, CardBody, FormGroup, Form, Input, InputGroup, InputGroupText, Container, Col, Row, FormFeedback, Alert } from 'reactstrap';
-import { toast } from 'react-toastify';
+// toast est importé automatiquement par react-toastify
 import authService from '../../services/authService';
 
 const ResetPassword = () => {

@@ -28,11 +28,14 @@ const clientService = {
   // Récupérer la liste des clients
   getAll: async (params = {}) => {
     try {
-      const response = await api.get('clients/', { params });
+      const response = await api.get('/api/clients/', { params });
       return response.data;
     } catch (error) {
       console.error('Error fetching clients:', error);
-      throw error;
+      const errorMessage = error.response?.data?.error || 
+                         error.response?.data?.detail || 
+                         'Erreur lors de la récupération des clients';
+      throw new Error(errorMessage);
     }
   },
 
@@ -64,15 +67,19 @@ const clientService = {
   // Met à jour le statut (actif/inactif) d'un client
   setStatus: async (userId, isActive) => {
     try {
+      // Utiliser l'endpoint avec le préfixe /api/ pour la cohérence
       const endpoint = isActive 
-        ? `clients/${userId}/activate/` 
-        : `clients/${userId}/deactivate/`;
+        ? `/api/clients/${userId}/activate/`
+        : `/api/clients/${userId}/deactivate/`;
       
       const response = await api.patch(endpoint);
       return response.data;
     } catch (error) {
       console.error('Erreur lors de la mise à jour du statut du client:', error);
-      throw error;
+      const errorMessage = error.response?.data?.error || 
+                         error.response?.data?.detail || 
+                         'Erreur lors de la mise à jour du statut du client';
+      throw new Error(errorMessage);
     }
   },
 

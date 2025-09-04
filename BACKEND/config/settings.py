@@ -3,114 +3,111 @@ import logging
 from pathlib import Path
 from datetime import timedelta
 from dotenv import load_dotenv
-import dj_database_url
+
+# Charger les variables d'environnement depuis .env si existant
+load_dotenv()
+
+# Logger
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Chemin de base du projet (le dossier BACKEND)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Secret key et debug
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "a_default_secret_key_for_development_only")
+DEBUG = os.getenv('RENDER') != 'True'
 
+# Hosts
+ALLOWED_HOSTS = ['*']  # For development only - restrict in production
+RENDER_EXTERNAL_HOSTNAME = os.getenv('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-# Initialisation du logger
-logger = logging.getLogger(__name__)
+# Frontend URL
+FRONTEND_URL = os.getenv('FRONTEND_URL', 'http://localhost:3000')
+logger.info(f"FRONTEND_URL set to: {FRONTEND_URL}")
+
+# CORS Settings
+CORS_ALLOW_ALL_ORIGINS = True  # For development only - restrict in production
+CORS_ALLOW_CREDENTIALS = True
+# settings.py
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'ngrok-skip-browser-warning',
+    'x-forwarded-host',  # Add this line
+]
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
 
 # Custom user model
 AUTH_USER_MODEL = 'play_reports.User'
 
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "a_default_secret_key_for_development_only")
-# Le mode DEBUG est activé localement, mais sera désactivé en production sur Render.
-# Render définit automatiquement la variable d'environnement RENDER.
-DEBUG = os.getenv('RENDER') != 'True'
-
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '.ngrok-free.app',  # Autoriser tous les sous-domaines ngrok
-]
-
-# Récupère le nom d'hôte externe fourni par Render.
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-
-# Configuration CORS
-CORS_ALLOWED_ORIGINS = [
-    "https://datastudio.google.com",
-]
-
-# Si vous voulez être plus permissif (utile pour le développement)
-CORS_ALLOW_ALL_ORIGINS = True # Attention en production
-
-CSRF_TRUSTED_ORIGINS = [
-    'https://*.ngrok-free.app', # Permettre les requêtes POST depuis ngrok
-    'https://datastudio.google.com',
-]
-
-INSTALLED_APPS = [
-    # Local apps (must be first to override templates)
-    'play_reports',
-    'corsheaders',
-    'rest_framework',
-    'rest_framework_simplejwt',
+# Applications
+BASE_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework.authtoken', # Requis pour la clé API de Looker Studio
-    'django_celery_beat',
 ]
+
+THIRD_PARTY_APPS = [
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'rest_framework.authtoken',
+    'django_celery_beat',
+    'corsheaders',
+    'django_filters',
+]
+
+LOCAL_APPS = ['play_reports']
+
+INSTALLED_APPS = BASE_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 # Middleware
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware', # Doit être avant CommonMiddleware
-    'play_reports.middleware.CoepMiddleware', # Ajout pour la politique COEP
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'play_reports.middleware.JWTAuthMiddleware',  # Middleware personnalisé pour JWT
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # Whitenoise doit être placé juste après SecurityMiddleware pour de meilleures performances.
 ]
-
-# Configuration CORS nettoyée et centralisée
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-]
-# Ajoute l'URL du frontend hébergé si elle est définie
-FRONTEND_URL = os.getenv('FRONTEND_URL')
-if FRONTEND_URL:
-    CORS_ALLOWED_ORIGINS.append(FRONTEND_URL)
-
-
-
-# En-têtes et méthodes autorisés
-CORS_ALLOW_HEADERS = "*"
-CORS_ALLOW_METHODS = ['DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT']
-
-ROOT_URLCONF = 'config.urls'
-
-# CORS Configuration
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-]
-
-# Si vous utilisez des cookies ou des en-têtes d'authentification
-CORS_ALLOW_CREDENTIALS = True 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',  # This ensures JSON responses
+    ),
+}
 
 # Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            BASE_DIR / 'templates',  # e.g. BACKEND/templates
-        ],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,92 +120,98 @@ TEMPLATES = [
     },
 ]
 
+ROOT_URLCONF = 'config.urls'
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
-
-# Configuration de la base de données pour la production (Render) et le développement local.
-# Determine the database host
-db_host = os.getenv('POSTGRES_HOST', 'localhost')
-if os.path.exists('/.dockerenv'):  # Check if running inside a Docker container
-    db_host = 'host.docker.internal'
-
-# Database configuration
+# ---------- DATABASE POSTGRESQL ----------
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DB'),
-        'USER': os.getenv('POSTGRES_USER'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': db_host,
+        'NAME': os.getenv('POSTGRES_DB', 'reports_db'),
+        'USER': os.getenv('POSTGRES_USER', 'farahbh'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'FARAH261998'),
+        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
         'PORT': os.getenv('POSTGRES_PORT', '5432'),
     }
 }
 
-# JWT settings
+# ---------- REST FRAMEWORK ----------
 REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer',
-    ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication', # Requis pour la clé API de Looker Studio
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
-    'DEFAULT_PARSER_CLASSES': [
-        'rest_framework.parsers.JSONParser',
-        'rest_framework.parsers.FormParser',
-        'rest_framework.parsers.MultiPartParser',
-    ]
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100,
 }
 
+# JWT
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(
-        minutes=int(os.environ.get('JWT_ACCESS_TOKEN_LIFETIME_MINUTES', 60))
-    ),
-    'REFRESH_TOKEN_LIFETIME': timedelta(
-        days=int(os.environ.get('JWT_REFRESH_TOKEN_LIFETIME_DAYS', 1))
-    ),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=int(os.getenv('JWT_ACCESS_TOKEN_LIFETIME_MINUTES', 60))),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=int(os.getenv('JWT_REFRESH_TOKEN_LIFETIME_DAYS', 1))),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': True,
-    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_HEADER_TYPES': ('Bearer', 'JWT'),
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
 }
 
-# Custom user model
-AUTH_USER_MODEL = 'play_reports.User'
-
-
-# Authentication backends
+# Auth
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'play_reports.backends.EmailBackend',
 ]
 
-# Celery configuration
-CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379/0')
-CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://localhost:6379/0')
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'UTC'
+# ---------- CORS ----------
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+     "https://script.google.com",
+    "https://script.googleusercontent.com",
+    "https://datastudio.google.com",
+    "https://lookerstudio.google.com",
+]
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.ngrok-free.app",
+    "https://votre-serveur-django.com"
+]
 
-# Static and media files
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'x-frame-options',
+    'access-control-allow-origin',
+    'access-control-allow-headers',
+    'access-control-allow-methods',
+]
+
+CORS_ALLOW_METHODS = ['DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT']
+APPEND_SLASH = False
+# ---------- STATIC & MEDIA ----------
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
-# Configuration de Whitenoise pour la production
-if not DEBUG:
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# Frontend
-FRONTEND_URL = "http://localhost:3000"
 
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -216,54 +219,17 @@ EMAIL_HOST = 'smtp.gmail.com'  # Replace with your SMTP server
 EMAIL_PORT = 587  # Common port for TLS
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'benhassen.farah@esprit.tn')  # Your email
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'tvbz qmjg rvis wvnw')  # Your email password
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'tvbz qmjg rvis wvnw')  
 
-# Use console backend for development to print emails to the console
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Ou 'file' ou 'cache' selon votre configuration
-SESSION_COOKIE_SECURE = True  # En production avec HTTPS
-SESSION_COOKIE_HTTPONLY = True
-SESSION_SAVE_EVERY_REQUEST = True
+# ---------- CELERY ----------
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://localhost:6379/0')
 
-# Session settings
+# ---------- SESSION ----------
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True
 SESSION_SAVE_EVERY_REQUEST = True
 
-# Authentication URLs
-LOGIN_URL = '/play-reports/auth/login/'
-LOGIN_REDIRECT_URL = '/play-reports/display-gcs-files/'
-LOGOUT_REDIRECT_URL = '/play-reports/'
-
-# Autoriser le frontend React (tournant sur localhost:3000) à se connecter
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
-
-# Invitation settings
-INVITATION_EXPIRATION_DAYS = 2  # Durée de validité des invitations en jours
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
-# Créer le répertoire static s'il n'existe pas
-os.makedirs(os.path.join(BASE_DIR, 'static'), exist_ok=True)
-
-# Google Cloud Configuration
-# Google Cloud Configuration
-# Le chemin est défini via une variable d'environnement, mais le fichier n'est requis qu'en production.
-GOOGLE_APPLICATION_CREDENTIALS = os.getenv('GOOGLE_APPLICATION_CREDENTIALS', 'credentials.json')
-GCS_BUCKET_NAME = os.getenv('GCS_BUCKET_NAME', 'pubsite_prod_rev_17712529971520156702')
-GCP_PROJECT_ID = os.getenv('GCP_PROJECT_ID', 'pc-api-4722596725443039036-618')
-
-# En développement, il est normal que ce fichier n'existe pas.
-# La logique qui l'utilise doit gérer ce cas.
-if not os.path.exists(GOOGLE_APPLICATION_CREDENTIALS):
-    logger.info(f"Le fichier de credentials '{GOOGLE_APPLICATION_CREDENTIALS}' n'a pas été trouvé. C'est normal en développement.")
+# ---------- INVITATION ----------
+INVITATION_EXPIRATION_DAYS = 2

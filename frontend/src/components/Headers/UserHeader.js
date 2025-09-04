@@ -11,19 +11,38 @@ const UserHeader = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
+      setLoading(true);
       try {
-        if (currentUser?.user_type === 'client') {
-          // Pour les clients, obtenir les données complètes via le service client
-          const clientData = await clientService.getCurrent();
-          setUserData(clientData);
+        if (!currentUser) {
+          console.log('No current user found');
+          setUserData(null);
+          return;
+        }
+
+        console.log('Current user type:', currentUser.user_type);
+        
+        if (currentUser.user_type === 'client') {
+          try {
+            // Pour les clients, essayer d'obtenir les données complètes via le service client
+            const clientData = await clientService.getCurrent();
+            console.log('Client data:', clientData);
+            setUserData({ ...currentUser, ...clientData });
+          } catch (clientError) {
+            console.warn('Could not fetch full client data, using basic auth data', clientError);
+            setUserData(currentUser);
+          }
+        } else if (currentUser.user_type === 'employee' || currentUser.employee_profile) {
+          // Pour les employés, utiliser les données d'authentification de base
+          console.log('Employee user detected, using auth data');
+          setUserData(currentUser);
         } else {
-          // Pour les autres types d'utilisateurs, utiliser les données auth
+          // Pour les autres types d'utilisateurs
+          console.log('Other user type, using auth data');
           setUserData(currentUser);
         }
       } catch (error) {
-        console.error("Error fetching user data:", error);
-        // En cas d'erreur, utiliser les données auth de base
-        setUserData(currentUser);
+        console.error("Error in fetchUserData:", error);
+        setUserData(currentUser || null);
       } finally {
         setLoading(false);
       }

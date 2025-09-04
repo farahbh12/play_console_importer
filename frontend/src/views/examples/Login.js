@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { toast } from 'react-toastify';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
+import { getUserRole } from '../../routes';
 import classnames from 'classnames';
 import {
   Button,
@@ -31,54 +32,79 @@ const Login = () => {
   const [fieldErrors, setFieldErrors] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    // Déclencher la validation HTML5 native si des champs requis sont vides/invalides
-    if (form && typeof form.checkValidity === 'function' && !form.checkValidity()) {
-      form.reportValidity?.();
-      // Mettre à jour les erreurs locales également
+    
+    // Validation des champs
+    if (!email || !password) {
       setFieldErrors({
         email: !email ? 'Email requis.' : '',
         password: !password ? 'Mot de passe requis.' : ''
       });
+      setError('Veuillez remplir tous les champs obligatoires');
       return;
     }
-    setError('');
-    setFieldErrors({ email: '', password: '' });
-    
-    // Validation des champs
-    let hasClientError = false;
-    const nextFieldErrors = { email: '', password: '' };
-    if (!email) { nextFieldErrors.email = 'Email requis.'; hasClientError = true; }
-    if (!password) { nextFieldErrors.password = 'Mot de passe requis.'; hasClientError = true; }
-    if (hasClientError) { setFieldErrors(nextFieldErrors); setError('Veuillez corriger les erreurs.'); return; }
     
     setLoading(true);
+    setError('');
+    setFieldErrors({ email: '', password: '' });
 
     try {
-
-      
-      // Appel à la fonction de connexion du contexte
+      // 1. Authentification de l'utilisateur
+      console.log('Attempting login with:', { email, userType });
       const result = await login(email, password, userType);
+      console.log('Login result:', result);
+      const { user } = result || {};
       
-
-      
-      // Le contexte retourne un objet avec user et redirectPath
-      if (result && result.redirectPath) {
-
-        // Utiliser navigate au lieu de window.location pour une navigation SPA propre
-        navigate(result.redirectPath, { replace: true });
-      } else {
-        // Fallback: déterminer la redirection basée sur le type d'utilisateur
-        const redirectPath = userType === 'client' ? '/client/profile' : '/admin/profile';
-
-        navigate(redirectPath, { replace: true });
+      if (!user) {
+        throw new Error('Aucun utilisateur retourné après connexion');
       }
       
+      // 2. Utiliser la fonction getUserRole pour déterminer le rôle
+      const userRole = getUserRole(user);
+      console.log('User role after login:', userRole, { user });
+      
+      // 3. Déterminer la redirection en fonction du rôle
+      let redirectPath = '/';
+      
+      switch(userRole) {
+        case 'admin':
+        case 'manager':
+          redirectPath = '/admin/profile';
+          break;
+        case 'employee':
+          redirectPath = '/admin/profile';
+          console.log('Employee detected, redirecting to profile');
+          break;
+        case 'client':
+        case 'owner':
+        case 'membre_invite':
+          // Vérifier si la validation GCS est requise
+          if (user.requires_gcs_validation) {
+            console.log('GCS validation required, redirecting to validation page');
+            redirectPath = '/client/validate-gcs-uri';
+          } else {
+            redirectPath = '/client/source';
+          }
+          break;
+        default:
+          // Par défaut, rediriger vers le profil admin
+          redirectPath = '/admin/profile';
+          console.warn('Rôle inconnu, redirection par défaut vers /admin/profile');
+      }
+      
+      console.log('Redirecting to:', redirectPath);
+      
+      // 4. Rediriger vers la page appropriée
+      console.log('Final redirect to:', redirectPath, 'for user type:', userType);
+      
+      // S'assurer que les données sont bien enregistrées avant la redirection
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
+      // Forcer un rechargement complet pour s'assurer que tout est bien initialisé
+      window.location.href = redirectPath;
     } catch (err) {
       console.error('Erreur lors de la connexion:', {
         message: err.message,
@@ -123,7 +149,7 @@ const Login = () => {
           || backend.user_type_mismatch === true
           || code === 'ROLE_MISMATCH'
           || /type d'utilisateur/i.test(detailText)
-          || /employee|employé|client/i.test(detailText) && /incorrect|mismatch|n'appartient pas|not/i.test(detailText);
+          || (/employee|employé|client/i.test(detailText) && /incorrect|mismatch|n'appartient pas|not/i.test(detailText));
 
         if (roleMismatch) {
           if (userType === 'client') {

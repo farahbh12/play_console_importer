@@ -91,7 +91,7 @@ const handleSubmit = async (e) => {
       const successData = response.data.data || response.data;
       
       // Stockez les données dans le state de navigation pour les récupérer sur la page de succès
-      navigate('/admin/gcs/validation-success', { 
+      navigate('/client/validation-success', { 
         state: { 
           success: true,
           data: successData
@@ -156,13 +156,13 @@ const handleSubmit = async (e) => {
           <Col lg="6" md="8">
             <Card className="bg-secondary shadow border-0">
               <CardHeader className="bg-transparent pb-5">
-                <div className="text-muted text-center mt-2 mb-4">
-                  <small>Configuration du stockage Google Cloud</small>
-                </div>
+                
                 <div className="text-center">
-                  <h1>Configuration GCS</h1>
+                  <h1>Configuration du stockage Google Cloud
+                  </h1>
                   <p className="text-lead">
                     Veuillez entrer les informations de votre bucket Google Cloud Storage.
+                    
                   </p>
                 </div>
               </CardHeader>

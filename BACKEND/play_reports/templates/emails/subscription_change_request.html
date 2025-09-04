@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Nouvelle demande de modification d'abonnement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #4a6fdc;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+        .content {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background-color: #4a6fdc;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #777777;
+            text-align: center;
+        }
+        .info-box {
+            background-color: #ffffff;
+            border-left: 4px solid #4a6fdc;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Demande de modification d'abonnement</h1>
+    </div>
+    
+    <div class="content">
+        <p>Bonjour,</p>
+        
+        <p>Le client <strong>{{ client_name }}</strong> ({{ client_email }}) a soumis une demande de modification d'abonnement.</p>
+        
+        <div class="info-box">
+            <p><strong>Ancien forfait :</strong> {{ current_plan }}</p>
+            <p><strong>Nouveau forfait demandé :</strong> {{ new_plan }}</p>
+            <p><strong>Date de la demande :</strong> {{ request_date }}</p>
+            {% if reason %}
+                <p><strong>Raison :</strong> {{ reason }}</p>
+            {% endif %}
+        </div>
+        
+        <p>Veuillez vous connecter à l'administration pour traiter cette demande.</p>
+        
+        <a href="{{ admin_url }}" class="button">Accéder à l'administration</a>
+        
+        <p>Cordialement,<br>L'équipe de support</p>
+    </div>
+    
+    <div class="footer">
+        <p>Ceci est un email automatique, merci de ne pas y répondre.</p>
+    </div>
+</body>
+</html>

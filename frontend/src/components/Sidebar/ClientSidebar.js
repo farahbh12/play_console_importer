@@ -39,26 +39,29 @@ const ClientSidebar = ({ user, logo }) => {
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
       const isBlockedForInvited = isInvited && !invitedAllowed.includes(prop.path);
-      const commonProps = {
-        onClick: (e) => {
-          if (isBlockedForInvited) {
-            e.preventDefault();
-            return;
-          }
-          closeCollapse();
-        },
-        className: ({ isActive }) => {
-          const base = isActive ? 'active' : '';
-          return isBlockedForInvited ? base + ' disabled' : base;
-        },
-        end: true,
-        title: isBlockedForInvited ? 'Accès restreint' : undefined,
-        style: isBlockedForInvited ? { opacity: 0.6, cursor: 'not-allowed' } : undefined,
+      
+      const getClassName = (isActive) => {
+        const base = isActive ? 'active' : '';
+        return isBlockedForInvited ? `${base} disabled` : base;
       };
 
       return (
         <NavItem key={key}>
-          <NavLink to={prop.path} tag={NavLinkRRD} {...commonProps}>
+          <NavLink 
+            to={prop.path} 
+            tag={NavLinkRRD}
+            className={({ isActive }) => getClassName(isActive)}
+            onClick={(e) => {
+              if (isBlockedForInvited) {
+                e.preventDefault();
+                return;
+              }
+              closeCollapse();
+            }}
+            end={true}
+            title={isBlockedForInvited ? 'Accès restreint' : undefined}
+            style={isBlockedForInvited ? { opacity: 0.6, cursor: 'not-allowed' } : undefined}
+          >
             <i className={prop.icon} />
             {prop.name}
           </NavLink>
@@ -169,23 +172,13 @@ const ClientSidebar = ({ user, logo }) => {
   );
 };
 
-ClientSidebar.defaultProps = {
-  user: {
-    name: 'Client'
-  },
-  logo: {
-    imgSrc: require("../../assets/img/brand/argon-react.png"),
-    imgAlt: "Logo"
-  }
-};
-
 ClientSidebar.propTypes = {
   user: PropTypes.shape({
     name: PropTypes.string,
-    email: PropTypes.string,
-    avatar: PropTypes.string
+    role: PropTypes.string
   }),
   logo: PropTypes.shape({
+    innerLink: PropTypes.string,
     imgSrc: PropTypes.string,
     imgAlt: PropTypes.string
   })

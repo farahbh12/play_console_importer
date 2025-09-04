@@ -48,7 +48,8 @@ const abonnementService = {
   toggle: async (id) => {
     try {
       const response = await api.patch(
-        `/abonnements/${id}/toggle/`
+        `/abonnements/${id}/toggle-active/`,
+        {}  // Corps de la requête vide car le backend gère le basculement
       );
       return response.data;
     } catch (error) {

@@ -12,7 +12,7 @@ const teamService = {
    */
   getTeamMembers: async () => {
     try {
-      const response = await api.get('/api/team/members/');
+      const response = await api.get('/team/members/');
       return response.data;
     } catch (error) {
       console.error('Error fetching team members:', error);
@@ -25,7 +25,7 @@ const teamService = {
    */
   inviteMember: async (email, firstName, lastName) => {
     try {
-      const response = await api.post('/api/team/invite/', { email, first_name: firstName, last_name: lastName });
+      const response = await api.post('/team/invite/', { email, first_name: firstName, last_name: lastName });
       return response.data;
     } catch (error) {
       console.error('Error inviting team member:', error);

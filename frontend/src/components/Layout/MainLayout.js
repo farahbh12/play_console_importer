@@ -37,21 +37,39 @@ const MainLayout = ({ children }) => {
     });
   }, [currentUser, userRole]);
 
-  // Charger l'utilisateur depuis le stockage local
+  // Charger l'utilisateur depuis le stockage local et le contexte d'authentification
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
+    const loadUser = () => {
       try {
-        const user = JSON.parse(storedUser);
-        setCurrentUser(user);
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+          const user = JSON.parse(storedUser);
+          setCurrentUser(user);
+        } else if (isAuthenticated) {
+          // Si l'utilisateur est authentifié mais pas dans le localStorage
+          // Rafraîchir la page pour forcer le rechargement des données utilisateur
+          window.location.reload();
+        } else {
+          navigate('/auth/login');
+        }
       } catch (error) {
         console.error('Erreur lors de la récupération des informations utilisateur:', error);
         handleLogout();
       }
-    } else {
-      navigate('/auth/login');
-    }
-  }, [navigate]);
+    };
+    
+    loadUser();
+    
+    // Écouter les changements d'authentification
+    const handleStorageChange = (e) => {
+      if (e.key === 'user' || e.key === 'token') {
+        loadUser();
+      }
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, [navigate, isAuthenticated]);
 
   useEffect(() => {
     const checkAuthAndRedirect = async () => {
@@ -59,13 +77,16 @@ const MainLayout = ({ children }) => {
         try {
           let redirectPath = '/';
           
+          // Vérifier si c'est un employé ou un administrateur
           if (currentUser.is_superuser || 
               currentUser.role === 'administrateur' || 
               currentUser.role === 'gestionnaire' || 
               currentUser.role === 'employee') {
-            redirectPath = '/admin/index';
-          } else {
-            redirectPath = '/client/dashboard';
+            redirectPath = '/admin/profile';
+          } 
+          // Sinon, c'est un client
+          else {
+            redirectPath = '/client/profile';
           }
           
           if (location.pathname !== redirectPath) {
@@ -95,9 +116,7 @@ const MainLayout = ({ children }) => {
     return null;
   }
 
-  // Déterminer si on doit forcer la sidebar client pour la page d'administration
-  const shouldForceClientSidebar = location.pathname === '/admin/index';
-
+  
   return (
     <div className="wrapper">
       {/* Barre latérale */}

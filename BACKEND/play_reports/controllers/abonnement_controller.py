@@ -3,9 +3,19 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
 from rest_framework.exceptions import ValidationError
-from django.http import Http404
+from django.shortcuts import get_object_or_404
+from rest_framework.permissions import IsAuthenticated
 import logging
+from django.http import Http404
+from django.core.exceptions import ValidationError as DjangoValidationError
 
+from play_reports.models import Client, TypeAbonnement, Abonnement
+from play_reports.models.employee import Employee
+from play_reports.serializers.abonnement_serializers import (
+    AbonnementClientSerializer,
+    UpdateAbonnementSerializer,
+    ClientAbonnementSerializer
+)
 from play_reports.services.abonnement_service import AbonnementService
 from django.core.mail import send_mail
 from django.conf import settings
@@ -13,14 +23,61 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.utils import timezone
 
-from play_reports.models import Client, TypeAbonnement
-from play_reports.serializers.abonnement_serializers import (
-    AbonnementClientSerializer,
-    UpdateAbonnementSerializer,
-    ClientAbonnementSerializer
-)
-
 logger = logging.getLogger(__name__)
+
+class ClientSubscriptionDetailView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, client_id):
+        try:
+            from play_reports.models import Client, Abonnement
+            
+            logger.info(f"Attempting to fetch subscription for client_id: {client_id}")
+            
+            # Get the client with their subscription
+            try:
+                client = Client.objects.get(id=client_id)
+                logger.info(f"Found client: {client.id}, email: {getattr(client, 'email', 'No email')}")
+            except Client.DoesNotExist:
+                logger.warning(f"Client with id {client_id} not found")
+                return Response(
+                    {'error': 'Client non trouvé'},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+            
+            # Check if client has an abonnement
+            try:
+                subscription = client.abonnement
+                if not subscription:
+                    logger.warning(f"No subscription found for client {client_id}")
+                    return Response(
+                        {'error': 'Aucun abonnement trouvé pour ce client'},
+                        status=status.HTTP_404_NOT_FOUND
+                    )
+                
+                logger.info(f"Found subscription for client {client_id}: {subscription}")
+                
+                return Response({
+                    'id': subscription.id_abonnement,
+                    'type_abonnement': subscription.type_abonnement,
+                    'is_active': subscription.is_active,
+                    'date_creation': subscription.date_creation,
+                    'date_expiration': getattr(subscription, 'date_expiration', None)
+                })
+                
+            except Abonnement.DoesNotExist:
+                logger.warning(f"Subscription not found for client {client_id}")
+                return Response(
+                    {'error': 'Aucun abonnement trouvé pour ce client'},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+            
+        except Exception as e:
+            logger.error(f"Error in ClientSubscriptionDetailView: {str(e)}", exc_info=True)
+            return Response(
+                {'error': 'Une erreur est survenue lors de la récupération de l\'abonnement'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
 class ClientSubscriptionView(APIView):
     permission_classes = [permissions.AllowAny]
@@ -44,12 +101,57 @@ class AbonnementListView(APIView):
 
     def get(self, request):
         try:
-            abonnements = AbonnementService.list_abonnements()
-            serializer = AbonnementClientSerializer(abonnements, many=True)
-            return Response(serializer.data)
+            # Récupérer les clients propriétaires avec leurs abonnements
+            from play_reports.models.client import Client, ClientStatus
+            from play_reports.models.abonnement import Abonnement
+            
+            # Récupérer tous les clients propriétaires actifs avec leurs abonnements
+            clients = Client.objects.filter(
+                role_client='Owner',
+                status=ClientStatus.ACTIVE,
+                abonnement__isnull=False
+            ).select_related('abonnement', 'user')
+            
+            # Préparer la liste des résultats
+            result = []
+            for client in clients:
+                user = client.user
+                abonnement = client.abonnement
+                
+                if abonnement:  # S'assurer que l'abonnement existe
+                    result.append({
+                        'id': abonnement.id_abonnement,  # For frontend compatibility
+                        'id_abonnement': abonnement.id_abonnement,  # For backend consistency
+                        'type_abonnement': abonnement.type_abonnement,
+                        'is_active': abonnement.is_active,
+                        'date_creation': abonnement.date_creation.isoformat() if abonnement.date_creation else None,
+                        'date_mise_a_jour': abonnement.date_mise_a_jour.isoformat() if abonnement.date_mise_a_jour else None,
+                        'first_name': user.first_name if user and user.first_name else client.first_name or '',
+                        'last_name': user.last_name if user and user.last_name else client.last_name or 'Non spécifié',
+                        'email': user.email if user and user.email else client.email or 'Email non disponible',
+                        'user_id': user.id if user else None,
+                        'client_id': client.id,
+                        'created_at': client.created_at.isoformat() if client.created_at else None,
+                        'updated_at': client.updated_at.isoformat() if hasattr(client, 'updated_at') and client.updated_at else None,
+                        'status': client.status,
+                        'tenant_id': client.tenant_id
+                    })
+            
+            # Trier les résultats par date de création décroissante
+            result_sorted = sorted(
+                result, 
+                key=lambda x: x.get('date_creation') or '', 
+                reverse=True
+            )
+            
+            return Response(result_sorted)
+            
         except Exception as e:
-            logger.error(f"Error retrieving subscriptions: {e}", exc_info=True)
-            return Response({'error': 'An error occurred while retrieving subscriptions.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            logger.error(f"Erreur lors de la récupération des abonnements: {str(e)}", exc_info=True)
+            return Response(
+                {'error': 'Une erreur est survenue lors de la récupération des abonnements.'}, 
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
 class AbonnementDetailView(APIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -77,7 +179,6 @@ class AbonnementDetailView(APIView):
             is_allowed = True
         elif employee is not None:
             try:
-                # is_administrator() et has_permission() sont définies sur le modèle Employee
                 is_allowed = employee.is_administrator() or employee.has_permission('manage_subscriptions')
             except Exception:
                 is_allowed = False
@@ -90,35 +191,126 @@ class AbonnementDetailView(APIView):
                 },
                 status=status.HTTP_403_FORBIDDEN
             )
-        # Valider en mode partiel: seul les champs fournis (p.ex. is_active) seront validés
-        serializer = UpdateAbonnementSerializer(data=request.data, partial=True)
-        if serializer.is_valid():
-            try:
-                updated_abonnement = AbonnementService.update_abonnement(abonnement_id, serializer.validated_data)
-                response_serializer = AbonnementClientSerializer(updated_abonnement)
-                return Response(response_serializer.data)
-            except ValidationError as e:
-                return Response({'error': e.detail}, status=status.HTTP_400_BAD_REQUEST)
-            except Http404:
-                return Response({'error': 'Subscription not found.'}, status=status.HTTP_404_NOT_FOUND)
-            except Exception as e:
-                logger.error(f"Error updating subscription {abonnement_id}: {e}", exc_info=True)
-                return Response({'error': 'An error occurred while updating the subscription.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Ajouter l'ID d'abonnement aux données de la requête pour la validation
+        request_data = request.data.copy()
+        request_data['id_abonnement'] = abonnement_id
+        
+        # Valider les données
+        serializer = UpdateAbonnementSerializer(data=request_data, partial=True)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
+        try:
+            # Mettre à jour l'abonnement avec l'ID fourni
+            updated_abonnement = AbonnementService.update_abonnement(abonnement_id, serializer.validated_data)
+            response_serializer = AbonnementClientSerializer(updated_abonnement)
+            return Response(response_serializer.data)
+        except ValidationError as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        except Http404:
+            return Response({'error': 'Abonnement non trouvé.'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            logger.error(f"Erreur lors de la mise à jour de l'abonnement {abonnement_id}: {e}", exc_info=True)
+            return Response(
+                {'error': 'Une erreur est survenue lors de la mise à jour de l\'abonnement.'}, 
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
 class AbonnementToggleActiveView(APIView):
+    """
+    Vue pour activer, désactiver ou basculer l'état d'un abonnement.
+    """
     permission_classes = [permissions.IsAuthenticated]
 
-    def patch(self, request, abonnement_id):
+    def patch(self, request, pk):
+        """
+        Active, désactive ou bascule l'état d'un abonnement.
+        
+        Paramètres de requête:
+        - action (str, optionnel): 'activate', 'deactivate' ou 'toggle' (par défaut)
+        
+        Retourne:
+        - 200: Abonnement mis à jour avec succès
+        - 400: Requête invalide
+        - 403: Non autorisé
+        - 404: Abonnement non trouvé
+        - 500: Erreur serveur
+        """
         try:
-            abonnement = AbonnementService.toggle_abonnement_status(abonnement_id)
-            serializer = AbonnementClientSerializer(abonnement)
-            return Response(serializer.data)
-        except Http404:
-            return Response({'error': 'Subscription not found.'}, status=status.HTTP_404_NOT_FOUND)
+            # Vérifier que l'ID est valide
+            if not pk or not str(pk).isdigit():
+                return Response(
+                    {'error': 'ID d\'abonnement invalide'}, 
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            # Récupérer l'action depuis les paramètres de requête
+            action = request.query_params.get('action', 'toggle').lower()
+            
+            # Valider l'action
+            if action not in ['activate', 'deactivate', 'toggle']:
+                return Response(
+                    {'error': 'Action non valide. Utilisez \'activate\', \'deactivate\' ou \'toggle\''}, 
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            # Journaliser la tentative de changement d'état
+            logger.info(
+                f"Tentative de changement d'état de l'abonnement {pk}. "
+                f"Action: {action}, Utilisateur: {request.user.id}"
+            )
+            
+            # Déterminer la valeur de active en fonction de l'action
+            active = {
+                'activate': True,
+                'deactivate': False,
+                'toggle': None
+            }[action]
+            
+            # Appeler le service avec la valeur de active appropriée
+            abonnement = AbonnementService.toggle_abonnement_status(
+                abonnement_id=pk,
+                active=active
+            )
+            
+            # Journaliser le succès
+            logger.info(
+                f"Abonnement {pk} mis à jour avec succès. "
+                f"Nouvel état: {'actif' if abonnement.is_active else 'inactif'}"
+            )
+            
+            # Retourner l'abonnement mis à jour
+            from ..serializers.abonnement_serializers import AbonnementSerializer
+            serializer = AbonnementSerializer(abonnement)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+            
+        except Abonnement.DoesNotExist:
+            logger.warning(f"Tentative d'accès à un abonnement inexistant: {pk}")
+            return Response(
+                {'error': 'Abonnement non trouvé'}, 
+                status=status.HTTP_404_NOT_FOUND
+            )
+            
+        except ValidationError as e:
+            logger.error(
+                f"Erreur de validation lors de la mise à jour de l'abonnement {pk}: {e}", 
+                exc_info=True
+            )
+            return Response(
+                {'error': str(e.detail) if hasattr(e, 'detail') else str(e)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+            
         except Exception as e:
-            logger.error(f"Error toggling status for subscription {abonnement_id}: {e}", exc_info=True)
-            return Response({'error': 'An error occurred while updating the status.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            logger.error(
+                f"Erreur inattendue lors de la mise à jour de l'abonnement {pk}: {e}", 
+                exc_info=True
+            )
+            return Response(
+                {'error': 'Une erreur est survenue lors de la mise à jour de l\'abonnement.'}, 
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
 
 class AbonnementUpdateRequestView(APIView):

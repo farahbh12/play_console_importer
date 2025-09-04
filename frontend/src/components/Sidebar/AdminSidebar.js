@@ -34,13 +34,6 @@ const AdminSidebar = ({ user, logo }) => {
 
   // Routes complètes pour les administrateurs (accès total)
   const adminRoutes = [
-    {
-      path: "/admin/index",
-      name: "Tableau de bord",
-      icon: "ni ni-tv-2 text-primary",
-      section: "principal"
-    },
-    // Administration - Routes admin uniquement
    
    
     // Gestion des employés
@@ -108,7 +101,7 @@ const AdminSidebar = ({ user, logo }) => {
           <span className="navbar-toggler-icon" />
         </button>
         
-        <NavbarBrand className="pt-0 d-flex align-items-baseline" to="/admin/index" tag={Link}>
+        <NavbarBrand className="pt-0 d-flex align-items-baseline" to="/admin/profile" tag={Link}>
           <span className="font-weight-bold" style={{ fontSize: '1.25rem' }}>DataDock</span>
           <small className="text-uppercase ml-2" style={{ opacity: 0.8 }}>ReportApp</small>
         </NavbarBrand>

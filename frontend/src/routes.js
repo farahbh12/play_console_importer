@@ -13,6 +13,8 @@ import ResetPassword from './views/examples/ResetPassword';
 import PasswordResetRedirect from './views/examples/PasswordResetRedirect';
 import AcceptInvitation from './views/examples/AcceptInvitation.js';
 import Unauthorized from './views/Unauthorized';
+import Assistant from './views/ai/Assistant';
+
 
 // --- Admin Views ---
 import ClientList from './views/examples/clientList';
@@ -27,6 +29,7 @@ import ManageTeam from './views/examples/ManageTeam';
 import DisplayGcsFiles from './views/gcs/DisplayGcsFiles';
 import GcsConnectorPage from './views/gcs/GcsConnectorPage';
 import ValidateGcsUri from './views/gcs/ValidateGcsUri';
+import ValidationSuccess from './views/gcs/ValidationSuccess';
 import DataSourceDetails from './views/gcs/DataSourceDetails';
 
 // --- Subscription Views ---
@@ -88,10 +91,10 @@ const withRoleCheck = (Component, allowedRoles = []) => {
       if (userRole === 'admin' || userRole === 'manager' || userRole === 'employee') {
         redirectTo = '/admin/index';
       } else if (userRole === 'client' || userRole === 'owner') {
-        redirectTo = '/client/source';
+        redirectTo = '/client/profile';
       } else if (userRole === 'membre_invite') {
         // Invited members: only allow /client/source and /client/destination
-        redirectTo = '/client/source';
+        redirectTo = '/client/profile';
       }
       
       return <Navigate to={redirectTo} replace />;
@@ -158,7 +161,7 @@ const protectedRoutes = [
   // Redirect legacy client dashboard to /client/source
   {
     path: '/client/dashboard',
-    component: () => <Navigate to="/client/source" replace />,
+    component: () => <Navigate to="/client/profile" replace />,
     layout: '/client',
     invisible: true
   },
@@ -184,6 +187,14 @@ const protectedRoutes = [
     layout: '/client'
   },
   {
+    path: '/client/AssistantAi',
+    name: 'Assistant IA',
+    icon: 'ni ni-atom text-purple',  // Icône atome (représente bien l’IA)
+    component: withRoleCheck(Assistant, ['owner', 'membre_invite']),
+    layout: '/client'
+  },
+  
+  {
     path: '/client/destination',
     name: 'Destination',
     icon: 'ni ni-key-25 text-success',
@@ -193,6 +204,12 @@ const protectedRoutes = [
   {
     path: '/client/validate-gcs-uri',
     component: withRoleCheck(ValidateGcsUri, ['owner']),
+    layout: '/client',
+    invisible: true
+  },
+  {
+    path: '/client/validation-success',
+    component: withRoleCheck(ValidationSuccess, ['owner']),
     layout: '/client',
     invisible: true
   },
@@ -273,7 +290,7 @@ export const routes = [
   // Redirection par défaut pour les routes inconnues
   {
     path: "*",
-    component: () => <Navigate to="/client/source" replace />
+    component: () => <Navigate to="/client/profile" replace />
   }
 ];
 

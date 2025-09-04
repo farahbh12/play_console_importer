@@ -261,20 +261,14 @@ def validation_success(request):
     
     logger.info(f"Données de validation: {response_data}")
     
-    # Si c'est une requête AJAX ou une requête API, on retourne les données en JSON
-    if request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.content_type == 'application/json':
-        if not validation_success:
-            logger.warning("Aucune validation réussie trouvée dans la session")
-            return JsonResponse(
-                {'success': False, 'error': 'Aucune validation réussie trouvée'},
-                status=400
-            )
-        return JsonResponse(response_data)
-    
-    # Nettoyage de la session après utilisation (uniquement si on ne renvoie pas de JSON)
-    request.session.pop('validation_success', None)
-    request.session.pop('validation_data', None)
-    request.session.save()
+    # Toujours renvoyer une réponse JSON pour unifier le comportement côté frontend
+    if not validation_success:
+        logger.warning("Aucune validation réussie trouvée dans la session")
+        return JsonResponse(
+            {'success': False, 'error': 'Aucune validation réussie trouvée'},
+            status=400
+        )
+    return JsonResponse(response_data)
     
 @api_view(['GET'])
 @authentication_classes([JWTAuthentication, SessionAuthentication])

@@ -1,26 +1,37 @@
 import api from './api';
 import authService from './auth';
 
-const API_BASE_URL = '/employees/';
+const API_BASE_URL = '/api/employees/';
 
 const employeeService = {
   // ✅ Récupérer l'employé actuel via l'ID de l'utilisateur connecté
   getCurrent: async () => {
     try {
-      const user = authService.getCurrentUser();
+      // Récupérer l'utilisateur de manière asynchrone
+      const user = await authService.getCurrentUser();
+      
       if (!user || !user.id) {
+        console.log('Aucun utilisateur connecté ou ID manquant');
         throw new Error('Utilisateur non connecté');
       }
+      
+      console.log('Récupération des données employé pour user_id:', user.id);
       
       // Récupérer la liste des employés avec le filtre user_id
       const response = await api.get(`employees/?user_id=${user.id}`);
       
       if (!response.data || response.data.length === 0) {
+        console.log('Aucun employé trouvé pour user_id:', user.id);
         throw new Error('Aucun employé trouvé pour cet utilisateur');
       }
       
-      // Retourner le premier employé trouvé
-      return response.data[0];
+      console.log('Données employé récupérées:', response.data[0]);
+      
+      // Retourner le premier employé trouvé avec les données utilisateur fusionnées
+      return {
+        ...response.data[0],
+        user: user // Inclure les données utilisateur complètes
+      };
     } catch (error) {
       console.error("Erreur lors de la récupération de l'employé:", error);
       throw error;

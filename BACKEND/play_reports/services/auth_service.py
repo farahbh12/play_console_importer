@@ -53,14 +53,11 @@ class AuthService:
             is_active=True
         )
 
-        tenant = Tenant.objects.create(name=f"Tenant for {validated_data['first_name']} {validated_data['last_name']}")
-
         client = Client.objects.create(
             user=user,
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
             role_client=RoleClient.OWNER,  # Default role
-            tenant=tenant
         )
         return client
 
@@ -145,6 +142,9 @@ class AuthService:
         user.save(update_fields=['last_login'])
 
         refresh = RefreshToken.for_user(user)
+        # Vérifier si le client a un tenant et une URI GCS valide
+        requires_gcs_validation = not (client.tenant and hasattr(client.tenant, 'gcs_uri') and client.tenant.gcs_uri)
+        
         return {
             'refresh': str(refresh),
             'access': str(refresh.access_token),
@@ -156,6 +156,7 @@ class AuthService:
                 'is_active': user.is_active,
                 'last_login': user.last_login,
                 'tenant_id': client.tenant.id if client.tenant else None,
+                'requires_gcs_validation': requires_gcs_validation
             }
         }
 

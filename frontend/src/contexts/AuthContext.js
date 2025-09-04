@@ -105,52 +105,36 @@ export const AuthProvider = ({ children }) => {
       setLoading(true);
       setError(null);
       
-      // Appel à authService.login avec le type d'utilisateur
+      // 1. Authentifier l'utilisateur via le service d'authentification
       const user = await authService.login(email, password, userType);
       
       if (!user) {
         throw new Error('Aucune donnée utilisateur reçue');
       }
       
-      // Mettre à jour l'état utilisateur
+      // 2. Mettre à jour l'état utilisateur
       setCurrentUser(user);
       setError(null);
       
-      // Déterminer le chemin de redirection en fonction du rôle de l'utilisateur
-      let redirectPath = '/';
+      // 3. Déterminer le chemin de redirection
+      const userRole = (user.role || '').toLowerCase();
+      const isEmployee = [
+        'employee',
+        'gestionnaire',
+        'administrateur',
+        'admin',
+        'manager'
+      ].includes(userRole) || user.is_staff || user.is_superuser;
       
-      // Déterminer le rôle principal de l'utilisateur
-      const userRole = user.role || user.user_type;
-
+      // Toujours rediriger vers le profil
+      const redirectPath = isEmployee ? '/admin/profile' : '/client/profile';
       
-      // Déterminer le chemin de redirection
-      // Rediriger tout compte employé (y compris si le backend expose employee_profile) vers le profil admin
-      const isEmployee = !!user.employee_profile ||
-                         userRole === 'employee' ||
-                         userRole === 'gestionnaire' ||
-                         userRole === 'administrateur' ||
-                         userRole === 'admin' ||
-                         userRole === 'manager' ||
-                         user.is_staff === true ||
-                         user.is_superuser === true;
-
-      if (isEmployee) {
-        // Tous les rôles admin/manager/employee -> profil admin
-        redirectPath = '/admin/profile';
-      } else if (userRole === 'client' || userRole === 'Owner' || userRole === 'owner' || userRole === 'MEMBRE_INVITE') {
-        // Client (Owner ou Membre invité) -> profil client
-        redirectPath = '/client/profile';
-      } else {
-        // Par défaut, utiliser le type d'utilisateur de la connexion
-        redirectPath = userType === 'client' ? '/client/profile' : '/admin/profile';
-
-      }
-      
-
-      
-      // Retourner les informations nécessaires pour la redirection
+      // 4. Retourner les informations utilisateur et le chemin de redirection
       return {
-        user,
+        user: {
+          ...user,
+          isFirstLogin: false
+        },
         redirectPath
       };
       

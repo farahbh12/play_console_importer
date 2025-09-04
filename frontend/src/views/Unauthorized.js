@@ -12,9 +12,9 @@ const Unauthorized = () => {
     if (!user) return '/auth/login';
     
     if (user.is_superuser || user.user_type === 'employee') {
-      return '/admin/index';
+      return '/admin/profile';
     } else if (user.user_type === 'client') {
-      return '/client/dashboard';
+      return '/client/profile';
     }
     
     return '/auth/login';

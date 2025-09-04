@@ -169,11 +169,23 @@ const Profile = () => {
   }
 
   if (error) {
-    return <Container className="mt--7" fluid><Alert color="danger">{error}</Alert></Container>;
+    return (
+      <Container className="mt--7" fluid>
+        <Alert color="danger" toggle={() => setError('')} timeout={5000}>
+          {error}
+        </Alert>
+      </Container>
+    );
   }
 
   if (!userData) {
-    return <Container className="mt--7" fluid><Alert color="warning">Aucune donnée de profil trouvée.</Alert></Container>;
+    return (
+      <Container className="mt--7" fluid>
+        <Alert color="warning" timeout={3000}>
+          Aucune donnée de profil trouvée.
+        </Alert>
+      </Container>
+    );
   }
 
   // Nom/prénom/date peuvent venir de plusieurs champs possibles (Client ou User)

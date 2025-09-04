@@ -33,20 +33,13 @@ const ValidationSuccess = () => {
         }
 
         // Si pas de données dans l'état, essayer de les récupérer depuis l'API
-        const token = localStorage.getItem('token');
-        if (!token) {
-          throw new Error('Non authentifié');
-        }
+        // Token not required for this session-based endpoint; rely on session cookie
 
         console.log('Tentative de récupération des données depuis l\'API...');
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL || ''}/validation-success/`,
           {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
-              'X-Requested-With': 'XMLHttpRequest'
-            },
+            // Keep credentials to send the session cookie; avoid custom headers to prevent CORS preflight
             withCredentials: true
           }
         );
@@ -63,7 +56,7 @@ const ValidationSuccess = () => {
           authService.logout();
           navigate('/auth/login', { 
             state: { 
-              from: '/admin/gcs/validation-success',
+              from: '/client/validation-success',
               error: 'Votre session a expiré. Veuillez vous reconnecter.'
             } 
           });
@@ -97,7 +90,7 @@ const ValidationSuccess = () => {
               <h4 className="alert-heading">Erreur</h4>
               <p>{error}</p>
               <hr />
-              <Button color="primary" onClick={() => navigate('/admin/gcs/validate')}>
+              <Button color="primary" onClick={() => navigate('/client/gcs/validate')}>
                 Retour à la validation
               </Button>
             </Alert>
@@ -155,7 +148,7 @@ const ValidationSuccess = () => {
                 <Button
                   color="primary"
                   size="lg"
-                  onClick={() => navigate('/admin/index')}
+                  onClick={() => navigate('client/destination')}
                   className="me-md-2"
                 >
                   Tableau de bord
@@ -164,7 +157,7 @@ const ValidationSuccess = () => {
                   color="secondary"
                   size="lg"
                   outline
-                  onClick={() => navigate('/admin/gcs/display-files')}
+                  onClick={() => navigate('/client/source')}
                 >
                   Afficher les rapports
                 </Button>

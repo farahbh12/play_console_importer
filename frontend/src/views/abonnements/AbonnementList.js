@@ -7,6 +7,7 @@ import {
 import { toast } from 'react-toastify';
 import abonnementService from '../../services/abonnementService';
 import clientService from '../../services/clientService';
+import api from '../../services/api'; // Même chemin que dans Register.js et Assistant.js
 
 const AbonnementList = () => {
   const [abonnements, setAbonnements] = useState([]);
@@ -71,7 +72,7 @@ const AbonnementList = () => {
 
         // 2) Mettre à jour uniquement le statut is_active si changé
         if (formData.is_active !== currentAbonnement.is_active) {
-          await abonnementService.update(currentAbonnement.id_abonnement, { is_active: formData.is_active });
+          await abonnementService.update(currentAbonnement.id, { is_active: formData.is_active });
           toast.success('Statut de l\'abonnement mis à jour');
         }
         fetchAbonnements();
@@ -85,14 +86,41 @@ const AbonnementList = () => {
   };
 
   const handleToggleStatus = async (abonnement) => {
-    if (window.confirm(`Êtes-vous sûr de vouloir ${abonnement.is_active ? 'désactiver' : 'activer'} cet abonnement ?`)) {
+    console.log('Abonnement reçu dans handleToggleStatus:', abonnement);
+    
+    if (!abonnement.id || !abonnement.client_id) {
+      console.error('ID d\'abonnement ou ID client manquant dans l\'objet:', abonnement);
+      toast.error('Informations manquantes pour effectuer cette action');
+      return;
+    }
+
+    if (window.confirm(`Êtes-vous sûr de vouloir ${abonnement.is_active ? 'désactiver' : 'activer'} l'abonnement de ce client ?`)) {
       try {
-        await abonnementService.toggle(abonnement.id_abonnement);
-        toast.success(`Abonnement ${abonnement.is_active ? 'désactivé' : 'activé'} avec succès`);
-        fetchAbonnements();
+        console.log('Appel de toggle avec ID client:', abonnement.client_id, 'et ID abonnement:', abonnement.id);
+        
+        // Appel à l'API pour mettre à jour le statut de l'abonnement
+        const response = await api.patch(`/abonnements/${abonnement.id}/toggle-active/`, null, {
+          params: {
+            action: abonnement.is_active ? 'deactivate' : 'activate'
+          }
+        });
+        
+        console.log('Réponse du serveur:', response.data);
+        
+        // Mettre à jour l'état local
+        setAbonnements(prevAbonnements => 
+          prevAbonnements.map(item => 
+            item.id === abonnement.id && item.client_id === abonnement.client_id
+              ? { ...item, is_active: !abonnement.is_active }
+              : item
+          )
+        );
+        
+        toast.success(`Abonnement ${abonnement.is_active ? 'désactivé' : 'activé'} avec succès pour ce client`);
       } catch (error) {
-        console.error('Erreur:', error);
-        toast.error(error.response?.data?.message || 'Erreur lors de la modification du statut');
+        console.error('Erreur lors du changement de statut de l\'abonnement:', error);
+        const errorMessage = error.response?.data?.error || 'Erreur lors de la modification du statut';
+        toast.error(errorMessage);
       }
     }
   };
@@ -136,7 +164,6 @@ const AbonnementList = () => {
                 <thead className="thead-light">
                   <tr>
                     <th scope="col">Type d'abonnement</th>
-                    <th scope="col">Client</th>
                     <th scope="col">Email</th>
                     <th scope="col">Statut</th>
                     <th scope="col">Date de création</th>
@@ -146,13 +173,12 @@ const AbonnementList = () => {
                 <tbody>
                   {abonnements.length > 0 ? (
                     abonnements.map((abonnement) => (
-                      <tr key={abonnement.id_abonnement}>
+                      <tr key={abonnement.id}>
                         <td>
                           {abonnement.type_abonnement === 'BASIC' && 'BASIC'}
                           {abonnement.type_abonnement === 'PRO' && 'Professionnel'}
                           {abonnement.type_abonnement === 'ENTERPRISE' && 'ENTERPRISE'}
                         </td>
-                        <td>{abonnement.prenom} {abonnement.nom}</td>
                         <td>{abonnement.email || '-'}</td>
                         <td>
                           <Badge color={abonnement.is_active ? 'success' : 'danger'}>
@@ -181,7 +207,7 @@ const AbonnementList = () => {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="6" className="text-center">
+                      <td colSpan="5" className="text-center">
                         Aucun abonnement trouvé
                       </td>
                     </tr>

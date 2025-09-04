@@ -154,6 +154,8 @@ class Client(models.Model):
     def can_invite_guest(self):
         """
         Vérifie si le client (Owner) peut inviter un nouveau membre.
+       
+        - BASIC: pas d'autorisation d'inviter des membres
         Retourne un tuple (bool, str): (peut_inviter, message_erreur)
         """
         if not self.is_owner:
@@ -163,10 +165,11 @@ class Client(models.Model):
             return False, "Aucun abonnement actif."
 
         if self.abonnement.type_abonnement == TypeAbonnement.BASIC:
-            return False, "Votre abonnement BASIC ne permet pas d’inviter des membres."
+            return False, "Votre abonnement BASIC ne permet pas d'inviter des membres."
 
+        # Vérification pour l'abonnement PROFESSIONNEL
         if self.abonnement.type_abonnement == TypeAbonnement.PRO:
-            # Compter les membres invités actifs (excluant le propriétaire lui-même)
+            # Compter les membres invités actifs
             active_members_count = Client.objects.filter(
                 tenant=self.tenant,
                 role_client=RoleClient.MEMBRE_INVITE,

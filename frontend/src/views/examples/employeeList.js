@@ -8,6 +8,7 @@ import {
 } from 'reactstrap';
 import employeeService from '../../services/employeeService';
 
+// Composant pour afficher la liste des employés
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);

@@ -60,6 +60,12 @@ const ProtectedRoute = ({
   // Vérifier si l'utilisateur est authentifié
   const userIsAuthenticated = isAuthenticated();
   
+  // Récupérer les informations utilisateur depuis le localStorage
+  const user = currentUser || JSON.parse(localStorage.getItem('user') || '{}');
+  
+  // Vérifier si c'est la première connexion (pas d'abonnement)
+  const isFirstLogin = user?.isFirstLogin === true;
+  
   // Rediriger vers la page de connexion si non authentifié
   if (!userIsAuthenticated) {
     console.log('ProtectedRoute: Utilisateur non authentifié, redirection vers /auth/login');
@@ -73,6 +79,18 @@ const ProtectedRoute = ({
             hash: location.hash
           } 
         }} 
+        replace 
+      />
+    );
+  }
+  
+  // Rediriger vers la page d'abonnement si c'est la première connexion
+  // et que l'utilisateur n'est pas déjà sur la page d'abonnement
+  if (isFirstLogin && !currentPath.includes('/client/subscription')) {
+    console.log('ProtectedRoute: Première connexion, redirection vers /client/subscription?firstLogin=true');
+    return (
+      <Navigate 
+        to="/client/subscription?firstLogin=true" 
         replace 
       />
     );

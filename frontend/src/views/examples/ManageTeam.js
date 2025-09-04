@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Button,
   Card,
@@ -20,8 +20,10 @@ import {
 } from 'reactstrap';
 import teamService from '../../services/teamService';
 import clientService from '../../services/clientService';
+import { useAuth } from '../../contexts/AuthContext';
 
 const ManageTeam = () => {
+  const { currentUser } = useAuth();
   const [teamMembers, setTeamMembers] = useState([]);
   const [actionLoadingId, setActionLoadingId] = useState(null);
 
@@ -35,27 +37,101 @@ const ManageTeam = () => {
 
   const toggleModal = () => setModal(!modal);
 
-  const fetchMembers = async () => {
+  const fetchMembers = useCallback(async () => {
     try {
       // Call the correct service (returns data directly)
       const membersData = await teamService.getTeamMembers();
+      // Load connected client (owner) to override Owner row accurately
+      let ownerClient = null;
+      try {
+        ownerClient = await clientService.getCurrent();
+      } catch (e) {
+        console.warn('Unable to load connected client for owner override:', e);
+      }
       console.log('API Response Data:', membersData); // Debugging line
+      const resolveOwnerName = () => {
+        const src = ownerClient || currentUser || null;
+        if (!src) return null;
+        const fn =
+          src.first_name ||
+          src.prenom ||
+          src.prenom_client ||
+          src.firstName ||
+          src?.user?.first_name ||
+          src?.user?.firstName;
+        const ln =
+          src.last_name ||
+          src.nom ||
+          src.nom_client ||
+          src.lastName ||
+          src?.user?.last_name ||
+          src?.user?.lastName;
+        const composed = `${fn || ''} ${ln || ''}`.trim();
+        // If composed empty, consider provided name fields or derive from email
+        return (
+          composed ||
+          src.name ||
+          src.full_name ||
+          src.display_name ||
+          src?.user?.name ||
+          src?.user?.full_name ||
+          nameFromEmail(src.email || src?.user?.email || '') ||
+          null
+        );
+      };
+      const resolveOwnerEmail = () => {
+        const src = ownerClient || currentUser || null;
+        if (!src) return null;
+        return (
+          src.email ||
+          src?.user?.email ||
+
+          null
+        );
+      };
+
+      // Derive a readable name from an email local-part
+      const nameFromEmail = (email) => {
+        if (!email || typeof email !== 'string') return '';
+        const local = email.split('@')[0];
+        if (!local) return '';
+        return local
+          .replace(/[._-]+/g, ' ')
+          .split(' ')
+          .filter(Boolean)
+          .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+          .join(' ');
+      };
+
       const formattedMembers = membersData.map(m => {
-        if (m.user && m.role_client) { // This is an active member or owner (Client model)
+        if (m.user && (m.role_client || m.role)) { // Active member or owner (Client model)
+          const roleRaw = (m.role_client || m.role || '').toString();
+          const isOwner = roleRaw.toLowerCase() === 'owner';
+          const ownerName = isOwner ? resolveOwnerName() : null;
+          const ownerEmail = isOwner ? resolveOwnerEmail() : null;
+          // Prefer top-level client fields, then nested user fields, then email
+          const fallbackFirst = m.first_name || m.prenom || m.firstName || m.user?.first_name || m.user?.firstName || '';
+          const fallbackLast = m.last_name || m.nom || m.lastName || m.user?.last_name || m.user?.lastName || '';
+          const fallbackComposed = `${fallbackFirst} ${fallbackLast}`.trim();
+          const fallbackName = fallbackComposed || m.name || m.full_name || m.user?.name || m.user?.full_name || '';
+          const fallbackEmail = m.email || m.user?.email;
           return {
             id: m.id,
             userId: m.user?.id,
-            name: `${m.user.first_name || ''} ${m.user.last_name || ''}`.trim() || m.user.email,
-            email: m.user.email,
-            status: m.role_client === 'Owner' ? 'Owner' : (m.status || 'Active'),
-            role: m.role_client
+            name: ownerName || fallbackName || nameFromEmail(fallbackEmail) || fallbackEmail,
+            email: ownerEmail || fallbackEmail,
+            // Status should not be 'Owner'; keep actual status or default Active
+            status: m.status || 'Active',
+            role: m.role_client || m.role
           };
-        } else { // This is a pending invitation (Invitation model)
+        } else { // Pending invitation (Invitation model)
+          const pendingEmail = m.email;
+          const pendingName = `${m.first_name || ''} ${m.last_name || ''}`.trim();
           return {
             id: m.id,
             userId: null,
-            name: `${m.first_name || ''} ${m.last_name || ''}`.trim() || m.email,
-            email: m.email,
+            name: pendingName || nameFromEmail(pendingEmail) || pendingEmail,
+            email: pendingEmail,
             status: 'Pending',
             role: 'MEMBRE_INVITE'
           };
@@ -65,13 +141,14 @@ const ManageTeam = () => {
     } catch (err) {
       console.error('Failed to fetch team members:', err);
     } finally {
-
+      // no-op
     }
-  };
+  }, [currentUser]);
 
   useEffect(() => {
     fetchMembers();
-  }, []);
+    // Re-fetch when currentUser is set to ensure Owner row uses connected owner's data
+  }, [fetchMembers]);
 
   const handleToggleActive = async (member) => {
     // Le backend attend l'ID UTILISATEUR (user_id) dans l'URL
@@ -188,7 +265,6 @@ const ManageTeam = () => {
                 <strong>Info&nbsp;!</strong> accédez à cette source de données et à Looker Studio avec votre compte Google.
               </span>
             </Alert>
-
             <FormGroup>
               <Label htmlFor="firstName">First Name</Label>
               <Input

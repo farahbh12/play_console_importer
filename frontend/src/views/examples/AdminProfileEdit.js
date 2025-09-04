@@ -4,7 +4,7 @@ import {
   Container, Form, FormGroup, Input, Label
 } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-import authService from "../../services/auth";
+// authService n'est pas utilisé dans ce composant
 import employeeService from "../../services/employeeService";
 
 const AdminProfileEdit = () => {

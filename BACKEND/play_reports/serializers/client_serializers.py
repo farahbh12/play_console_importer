@@ -17,18 +17,31 @@ class ClientSerializer(serializers.ModelSerializer):
     role = serializers.CharField(source='get_role_client_display', read_only=True)
     is_active = serializers.BooleanField(source='user.is_active', read_only=True)
     abonnement_type = serializers.SerializerMethodField()
+    abonnement_details = serializers.SerializerMethodField()
 
     class Meta:
         model = Client
         fields = [
             'id', 'user_id', 'first_name', 'last_name', 'email', 
-            'role', 'is_active', 'abonnement_type'
+            'role', 'is_active', 'abonnement_type', 'abonnement_details',
+            'created_at', 'updated_at'
         ]
 
     def get_abonnement_type(self, obj):
         if hasattr(obj, 'abonnement') and obj.abonnement:
             return obj.abonnement.get_type_abonnement_display()
         return 'Aucun'
+        
+    def get_abonnement_details(self, obj):
+        if hasattr(obj, 'abonnement') and obj.abonnement:
+            return {
+                'id': obj.abonnement.id_abonnement,
+                'type': obj.abonnement.get_type_abonnement_display(),
+                'is_active': obj.abonnement.is_active,
+                'date_creation': obj.abonnement.date_creation,
+                'date_mise_a_jour': obj.abonnement.date_mise_a_jour
+            }
+        return None
 
 class ClientDetailSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
